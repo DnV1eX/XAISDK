@@ -5,6 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "XAISDK",
+    platforms: [
+        .macOS(.v15),
+        .iOS(.v18),
+        .watchOS(.v11),
+        .tvOS(.v18),
+        .visionOS(.v2)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -13,7 +20,9 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/grpc/grpc-swift-protobuf.git", .upToNextMajor(from: "2.2.0")),
+        .package(url: "https://github.com/grpc/grpc-swift-2.git", from: "2.0.0"),
+        .package(url: "https://github.com/grpc/grpc-swift-nio-transport.git", from: "2.0.0"),
+        .package(url: "https://github.com/grpc/grpc-swift-protobuf.git", from: "2.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -21,7 +30,9 @@ let package = Package(
         .target(
             name: "XAISDK",
             dependencies: [
-                .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf")
+                .product(name: "GRPCCore", package: "grpc-swift-2"),
+                .product(name: "GRPCNIOTransportHTTP2TransportServices", package: "grpc-swift-nio-transport"),
+                .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf"),
             ]
         ),
         .testTarget(
