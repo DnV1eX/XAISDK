@@ -1,3 +1,14 @@
+//
+//  XAISDKTests.swift
+//  XAISDK
+//
+//  Created by Alexey Demin on 2026-03-10.
+//  Copyright © 2026 DnV1eX. All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//
+
 import Testing
 import XAISDK
 import GRPCCore
@@ -47,4 +58,16 @@ import GRPCNIOTransportHTTP2TransportServices
         return "success"
     }
     #expect(result == "success")
+}
+
+/// Verifies the behavior of the start and close extension methods on GRPCClient.
+@Test func clientStartAndClose() async throws {
+    let clientInstance = try client(apiKey: "test-key")
+    
+    let connectionTask = clientInstance.start()
+    
+    // Give the background task a moment to actually start running connections.
+    try await Task.sleep(nanoseconds: 10_000_000)
+    
+    try await clientInstance.close(connectionTask)
 }
