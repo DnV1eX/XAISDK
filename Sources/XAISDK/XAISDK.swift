@@ -12,21 +12,29 @@
 import GRPCCore
 import GRPCNIOTransportHTTP2TransportServices
 
-/// The base url for all xAI services.
-public let baseURL = "api.x.ai"
+/// The host for all xAI services.
+public let host = "api.x.ai"
 
-/// Interceptor to add an xAI API key to the 'Authorization' header.
-public struct AuthInterceptor: ClientInterceptor {
-    public let apiKey: String
+/// Helper function to create an authorization header dictionary.
+///
+/// - Parameter apiKey: The xAI API key.
+/// - Returns: A dictionary containing the Authorization header.
+public func authHeader(apiKey: String) -> [String: String] {
+    ["authorization": "Bearer \(apiKey)"]
+}
 
-    /// Initializes the interceptor with the provided API key.
+/// Interceptor to add metadata to the request headers.
+public struct MetadataInterceptor: ClientInterceptor {
+    public let metadata: [String: String]
+
+    /// Initializes the interceptor with the provided metadata.
     ///
-    /// - Parameter apiKey: The xAI API key to use for authentication.
-    public init(apiKey: String) {
-        self.apiKey = apiKey
+    /// - Parameter metadata: The metadata dictionary to use for the request headers.
+    public init(metadata: [String: String]) {
+        self.metadata = metadata
     }
 
-    /// Intercepts the outgoing request to inject the Authorization header.
+    /// Intercepts the outgoing request to inject the metadata.
     ///
     /// - Parameters:
     ///   - request: The outgoing client request.
@@ -39,26 +47,60 @@ public struct AuthInterceptor: ClientInterceptor {
         next: (StreamingClientRequest<Input>, ClientContext) async throws -> StreamingClientResponse<Output>
     ) async throws -> StreamingClientResponse<Output> {
         var request = request
-        request.metadata.addString("Bearer \(apiKey)", forKey: "authorization")
+        for (key, value) in metadata {
+            request.metadata.addString(value, forKey: key)
+        }
         return try await next(request, context)
     }
 }
 
-/// Returns a gRPC client for xAI services.
+/// Returns a gRPC client for xAI services through a proxy.
+///
+/// - Parameters:
+///   - proxy: The proxy host to use for the connection.
+///   - metadata: The metadata dictionary to use for the request headers.
+/// - Returns: A configured `GRPCClient` instance.
+public func client(proxy: String, metadata: [String: String]) throws -> GRPCClient<HTTP2ClientTransport.TransportServices> {
+    try GRPCClient(
+        transport: .http2NIOTS(
+            target: .dns(host: proxy),
+            transportSecurity: .tls
+        ),
+        interceptors: [MetadataInterceptor(metadata: metadata)]
+    )
+}
+
+/// Returns a gRPC client for direct access to xAI services.
 ///
 /// - Parameter apiKey: The xAI API key to use for authentication.
 /// - Returns: A configured `GRPCClient` instance.
 public func client(apiKey: String) throws -> GRPCClient<HTTP2ClientTransport.TransportServices> {
-    try GRPCClient(
+    try client(proxy: host, metadata: authHeader(apiKey: apiKey))
+}
+
+/// A convenience variant of 'withGRPCClient' for xAI services through a proxy.
+///
+/// - Parameters:
+///   - proxy: The proxy host to use for the connection.
+///   - metadata: The metadata dictionary to use for the request headers.
+///   - body: A closure that takes the configured client and performs requests. The client is automatically shut down when this closure returns.
+/// - Returns: The result of the closure.
+public func withClient<Result: Sendable>(
+    proxy: String,
+    metadata: [String: String],
+    _ body: (GRPCClient<HTTP2ClientTransport.TransportServices>) async throws -> Result
+) async throws -> Result {
+    try await withGRPCClient(
         transport: .http2NIOTS(
-            target: .dns(host: baseURL),
+            target: .dns(host: proxy),
             transportSecurity: .tls
         ),
-        interceptors: [AuthInterceptor(apiKey: apiKey)]
+        interceptors: [MetadataInterceptor(metadata: metadata)],
+        handleClient: body
     )
 }
 
-/// A convenience variant of 'withGRPCClient' for xAI services.
+/// A convenience variant of 'withGRPCClient' for direct access to xAI services.
 ///
 /// - Parameters:
 ///   - apiKey: The xAI API key to use for authentication.
@@ -68,14 +110,7 @@ public func withClient<Result: Sendable>(
     apiKey: String,
     _ body: (GRPCClient<HTTP2ClientTransport.TransportServices>) async throws -> Result
 ) async throws -> Result {
-    try await withGRPCClient(
-        transport: .http2NIOTS(
-            target: .dns(host: baseURL),
-            transportSecurity: .tls
-        ),
-        interceptors: [AuthInterceptor(apiKey: apiKey)],
-        handleClient: body
-    )
+    try await withClient(proxy: host, metadata: authHeader(apiKey: apiKey), body)
 }
 
 extension GRPCClient {
