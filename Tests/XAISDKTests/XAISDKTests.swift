@@ -12,7 +12,7 @@
 import Testing
 import XAISDK
 import GRPCCore
-import GRPCNIOTransportHTTP2TransportServices
+import GRPCInProcessTransport
 
 /// Verifies that the host for xAI services is correctly configured.
 @Test func hostValue() {
@@ -53,18 +53,18 @@ import GRPCNIOTransportHTTP2TransportServices
 /// Verifies that the gRPC client is successfully initialized for direct access.
 @Test func clientInitDirect() throws {
     let clientInstance = try client(apiKey: "xai-TestKey")
-    #expect(type(of: clientInstance) == GRPCClient<HTTP2ClientTransport.TransportServices>.self)
+    #expect(type(of: clientInstance) == GRPCClient<DefaultTransport>.self)
 }
 
 /// Verifies that the gRPC client is successfully initialized for proxy access.
 @Test func clientInitProxy() throws {
     let clientInstance = try client(proxy: "test.proxy.host", metadata: ["test-header": "Test Value"])
-    #expect(type(of: clientInstance) == GRPCClient<HTTP2ClientTransport.TransportServices>.self)
+    #expect(type(of: clientInstance) == GRPCClient<DefaultTransport>.self)
 }
 
 /// Verifies the behavior of the convenience 'withClient' wrapper for direct access.
 @Test func withClientWrapperDirect() async throws {
-    let result = try await withClient(apiKey: "xai-TestKey") { client in
+    let result = try await withClient(apiKey: "xai-TestKey", transport: { _ in InProcessTransport().client }) { client in
         // Small delay to ensure the client stays alive during the test block.
         try await Task.sleep(nanoseconds: 10_000_000)
         return "success"
@@ -74,7 +74,7 @@ import GRPCNIOTransportHTTP2TransportServices
 
 /// Verifies the behavior of the convenience 'withClient' wrapper for proxy access.
 @Test func withClientWrapperProxy() async throws {
-    let result = try await withClient(proxy: "test.proxy.host", metadata: ["test-header": "Test Value"]) { client in
+    let result = try await withClient(proxy: "test.proxy.host", metadata: ["test-header": "Test Value"], transport: { _ in InProcessTransport().client }) { client in
         // Small delay to ensure the client stays alive during the test block.
         try await Task.sleep(nanoseconds: 10_000_000)
         return "success"
@@ -84,7 +84,7 @@ import GRPCNIOTransportHTTP2TransportServices
 
 /// Verifies the behavior of the start and close extension methods on GRPCClient.
 @Test func clientStartAndClose() async throws {
-    let clientInstance = try client(apiKey: "xai-TestKey")
+    let clientInstance = try client(apiKey: "xai-TestKey", transport: { _ in InProcessTransport().client })
     
     let connectionTask = clientInstance.start()
     

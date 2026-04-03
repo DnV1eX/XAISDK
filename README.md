@@ -1,6 +1,6 @@
 # xAI Swift SDK
 
-The xAI Swift SDK is a gRPC-based Swift library for interacting with xAI's APIs. It provides a native, high-performance interface to interact with xAI APIs from Swift code, allowing you to easily generate text, images, and utilize other xAI services directly within your Apple ecosystem applications.
+The xAI Swift SDK is a gRPC-based Swift library for interacting with xAI's APIs. It provides a native, high-performance interface to interact with xAI APIs from Swift code, allowing you to easily generate text, images, and utilize other xAI services directly within your Apple ecosystem applications, as well as in Swift client and server applications on other platforms.
 
 For more details on the underlying API, see the [xAI gRPC API Reference](https://docs.x.ai/developers/grpc-api-reference).
 
@@ -22,9 +22,13 @@ dependencies: [
 
 ## Usage
 
-The SDK provides two primary ways to interact with the API: using a managed client for multiple requests, or a convenience wrapper for one-time requests.
+The SDK provides two primary variants of usage: direct connection to xAI services and connection through an API proxy. For both variants, you can interact with the API using a managed `client` for multiple requests, or a convenience `withClient` wrapper for one-time requests.
 
-### 1. Using `client` (Recommended for multiple requests)
+### Direct Connection
+
+Direct connection to xAI services using your API key is the primary method for use on a server or during development.
+
+#### 1. Using `client` (Recommended for multiple requests)
 
 If you need to make multiple requests over time (e.g., in a long-lived application or a chat interface), you should create a single client instance and manage its connection manually using the `start()` and `close(_:)` functions. This avoids the overhead of establishing a new HTTP/2 connection for every request.
 
@@ -67,7 +71,7 @@ do {
 try? await xaiClient.close(connectionTask)
 ```
 
-### 2. Using `withClient` (Recommended for one-time requests)
+#### 2. Using `withClient` (Recommended for one-time requests)
 
 The `withClient(apiKey:)` function automatically manages the lifecycle of the gRPC connection. It opens the connection, executes your closure, and gracefully shuts down the connection when the closure completes. This is ideal for single, isolated requests.
 
@@ -91,11 +95,31 @@ do {
 }
 ```
 
-> [!IMPORTANT]
-> I hope you enjoy the project and find it useful. Please bookmark it with ⭐️ and feel free to share your feedback. Thank you!
+### Connection Through an API Proxy
+
+When the SDK is used in a production client app, connecting through an API proxy is a safer option that prevents your xAI API key from leaking. Instead of embedding the API key in your app, you connect to your own proxy server, which then securely attaches the API key and forwards the request to xAI.
+
+You can use the `metadata` parameter to send time-based tokens, Apple's App Attest signatures, or other custom authorization headers to authenticate the client with your proxy server.
+
+```swift
+import XAISDK
+
+let proxyHost = "proxy.yourdomain.com"
+
+// Generate your App Attest signature or time-based token.
+let appAttestSignature = "..."
+
+// Initialize the client with the proxy host and custom metadata for your proxy's auth.
+guard let xaiClient = try? client(proxy: proxyHost, metadata: ["x-app-attest": appAttestSignature]) else {
+    return
+}
+
+// Start the client, use it as normal, and then close it. Alternatively, use `withClient(proxy:metadata:)`.
+```
 
 ## Supported Platforms
 
+**Apple Platforms (using Network framework transport):**
 The SDK requires the following minimum platform versions:
 - macOS 15.0+
 - iOS 18.0+
@@ -105,6 +129,13 @@ The SDK requires the following minimum platform versions:
 
 > [!TIP]
 > If you need to support earlier platform versions, you can build the SDK by changing the major versions of the gRPC dependencies in `Package.swift` from `2.0.0` down to `1.0.0` (and adjusting the code to match the `grpc-swift` v1 API).
+
+**Non-Apple Platforms (using POSIX transport):**
+- Linux
+- Windows
+- Android
+- WASI
+- OpenBSD
 
 ## Advanced: Updating the SDK
 
@@ -129,3 +160,6 @@ swift package --allow-writing-to-package-directory generate-grpc-code-from-proto
 
 ## License
 Copyright © 2026 DnV1eX. All rights reserved. Licensed under the Apache License, Version 2.0.
+
+> [!IMPORTANT]
+> I appreciate your interest in this project and hope you find it useful. Please bookmark it with a ⭐️ for further reference and updates. I welcome your feedback and thank you for your support!

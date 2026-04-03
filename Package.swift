@@ -31,13 +31,25 @@ let package = Package(
             name: "XAISDK",
             dependencies: [
                 .product(name: "GRPCCore", package: "grpc-swift-2"),
-                .product(name: "GRPCNIOTransportHTTP2TransportServices", package: "grpc-swift-nio-transport"),
+                .product(
+                    name: "GRPCNIOTransportHTTP2TransportServices",
+                    package: "grpc-swift-nio-transport",
+                    condition: .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS, .macCatalyst])
+                ),
+                .product(
+                    name: "GRPCNIOTransportHTTP2Posix",
+                    package: "grpc-swift-nio-transport",
+                    condition: .when(platforms: [.linux, .windows, .android, .wasi, .openbsd])
+                ),
                 .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf"),
             ]
         ),
         .testTarget(
             name: "XAISDKTests",
-            dependencies: ["XAISDK"]
+            dependencies: [
+                "XAISDK",
+                .product(name: "GRPCInProcessTransport", package: "grpc-swift-2")
+            ]
         ),
     ]
 )
