@@ -29,7 +29,8 @@ public enum XaiApi_Embedder: Sendable {
             /// Descriptor for "Embed".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Embedder"),
-                method: "Embed"
+                method: "Embed",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Embedder" service.

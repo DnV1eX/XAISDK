@@ -36,6 +36,10 @@ public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
 
   /// The request is still being processed.
   case pending // = 3
+
+  /// The request failed due to an internal service error.
+  /// The error message is in the `error` field of the response.
+  case failed // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -48,6 +52,7 @@ public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 1: self = .done
     case 2: self = .expired
     case 3: self = .pending
+    case 4: self = .failed
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -58,6 +63,7 @@ public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .done: return 1
     case .expired: return 2
     case .pending: return 3
+    case .failed: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -68,6 +74,7 @@ public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     .done,
     .expired,
     .pending,
+    .failed,
   ]
 
 }
@@ -107,7 +114,7 @@ public struct XaiApi_GetDeferredRequest: Sendable {
 fileprivate let _protobuf_package = "xai_api"
 
 extension XaiApi_DeferredStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_DEFERRED_STATUS\0\u{1}DONE\0\u{1}EXPIRED\0\u{1}PENDING\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_DEFERRED_STATUS\0\u{1}DONE\0\u{1}EXPIRED\0\u{1}PENDING\0\u{1}FAILED\0")
 }
 
 extension XaiApi_StartDeferredResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

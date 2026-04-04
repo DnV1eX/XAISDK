@@ -29,7 +29,8 @@ public enum XaiApi_Documents: Sendable {
             /// Descriptor for "Search".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Documents"),
-                method: "Search"
+                method: "Search",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Documents" service.

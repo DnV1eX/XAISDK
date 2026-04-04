@@ -30,7 +30,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "CreateBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "CreateBatch"
+                method: "CreateBatch",
+                type: .unary
             )
         }
         /// Namespace for "GetBatch" metadata.
@@ -42,7 +43,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "GetBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "GetBatch"
+                method: "GetBatch",
+                type: .unary
             )
         }
         /// Namespace for "ListBatches" metadata.
@@ -54,7 +56,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "ListBatches".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "ListBatches"
+                method: "ListBatches",
+                type: .unary
             )
         }
         /// Namespace for "CancelBatch" metadata.
@@ -66,7 +69,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "CancelBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "CancelBatch"
+                method: "CancelBatch",
+                type: .unary
             )
         }
         /// Namespace for "AddBatchRequests" metadata.
@@ -78,7 +82,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "AddBatchRequests".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "AddBatchRequests"
+                method: "AddBatchRequests",
+                type: .unary
             )
         }
         /// Namespace for "ListBatchRequestMetadata" metadata.
@@ -90,7 +95,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "ListBatchRequestMetadata".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "ListBatchRequestMetadata"
+                method: "ListBatchRequestMetadata",
+                type: .unary
             )
         }
         /// Namespace for "ListBatchResults" metadata.
@@ -102,7 +108,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "ListBatchResults".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "ListBatchResults"
+                method: "ListBatchResults",
+                type: .unary
             )
         }
         /// Namespace for "GetBatchRequestResult" metadata.
@@ -114,7 +121,8 @@ public enum XaiApi_BatchMgmt: Sendable {
             /// Descriptor for "GetBatchRequestResult".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.BatchMgmt"),
-                method: "GetBatchRequestResult"
+                method: "GetBatchRequestResult",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.BatchMgmt" service.

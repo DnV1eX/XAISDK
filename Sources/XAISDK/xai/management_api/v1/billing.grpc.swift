@@ -29,7 +29,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "SetBillingInfo".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "SetBillingInfo"
+                method: "SetBillingInfo",
+                type: .unary
             )
         }
         /// Namespace for "GetBillingInfo" metadata.
@@ -41,7 +42,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "GetBillingInfo".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "GetBillingInfo"
+                method: "GetBillingInfo",
+                type: .unary
             )
         }
         /// Namespace for "ListPaymentMethods" metadata.
@@ -53,7 +55,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "ListPaymentMethods".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "ListPaymentMethods"
+                method: "ListPaymentMethods",
+                type: .unary
             )
         }
         /// Namespace for "SetDefaultPaymentMethod" metadata.
@@ -65,7 +68,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "SetDefaultPaymentMethod".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "SetDefaultPaymentMethod"
+                method: "SetDefaultPaymentMethod",
+                type: .unary
             )
         }
         /// Namespace for "GetAmountToPay" metadata.
@@ -77,7 +81,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "GetAmountToPay".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "GetAmountToPay"
+                method: "GetAmountToPay",
+                type: .unary
             )
         }
         /// Namespace for "AnalyzeBillingItems" metadata.
@@ -89,7 +94,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "AnalyzeBillingItems".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "AnalyzeBillingItems"
+                method: "AnalyzeBillingItems",
+                type: .unary
             )
         }
         /// Namespace for "ListInvoices" metadata.
@@ -101,7 +107,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "ListInvoices".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "ListInvoices"
+                method: "ListInvoices",
+                type: .unary
             )
         }
         /// Namespace for "ListPrepaidBalanceChanges" metadata.
@@ -113,7 +120,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "ListPrepaidBalanceChanges".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "ListPrepaidBalanceChanges"
+                method: "ListPrepaidBalanceChanges",
+                type: .unary
             )
         }
         /// Namespace for "TopUpOrGetExistingPendingChange" metadata.
@@ -125,7 +133,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "TopUpOrGetExistingPendingChange".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "TopUpOrGetExistingPendingChange"
+                method: "TopUpOrGetExistingPendingChange",
+                type: .unary
             )
         }
         /// Namespace for "GetSpendingLimits" metadata.
@@ -137,7 +146,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "GetSpendingLimits".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "GetSpendingLimits"
+                method: "GetSpendingLimits",
+                type: .unary
             )
         }
         /// Namespace for "SetSoftSpendingLimit" metadata.
@@ -149,7 +159,8 @@ public enum ProdMcBilling_UISvc: Sendable {
             /// Descriptor for "SetSoftSpendingLimit".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "prod_mc_billing.UISvc"),
-                method: "SetSoftSpendingLimit"
+                method: "SetSoftSpendingLimit",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "prod_mc_billing.UISvc" service.

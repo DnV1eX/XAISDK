@@ -30,7 +30,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "ListLanguageModels".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "ListLanguageModels"
+                method: "ListLanguageModels",
+                type: .unary
             )
         }
         /// Namespace for "ListEmbeddingModels" metadata.
@@ -42,7 +43,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "ListEmbeddingModels".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "ListEmbeddingModels"
+                method: "ListEmbeddingModels",
+                type: .unary
             )
         }
         /// Namespace for "ListImageGenerationModels" metadata.
@@ -54,7 +56,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "ListImageGenerationModels".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "ListImageGenerationModels"
+                method: "ListImageGenerationModels",
+                type: .unary
             )
         }
         /// Namespace for "GetLanguageModel" metadata.
@@ -66,7 +69,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "GetLanguageModel".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "GetLanguageModel"
+                method: "GetLanguageModel",
+                type: .unary
             )
         }
         /// Namespace for "GetEmbeddingModel" metadata.
@@ -78,7 +82,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "GetEmbeddingModel".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "GetEmbeddingModel"
+                method: "GetEmbeddingModel",
+                type: .unary
             )
         }
         /// Namespace for "GetImageGenerationModel" metadata.
@@ -90,7 +95,8 @@ public enum XaiApi_Models: Sendable {
             /// Descriptor for "GetImageGenerationModel".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Models"),
-                method: "GetImageGenerationModel"
+                method: "GetImageGenerationModel",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Models" service.

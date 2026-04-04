@@ -29,7 +29,8 @@ public enum XaiApi_Image: Sendable {
             /// Descriptor for "GenerateImage".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Image"),
-                method: "GenerateImage"
+                method: "GenerateImage",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Image" service.

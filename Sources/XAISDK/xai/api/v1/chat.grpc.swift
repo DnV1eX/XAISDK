@@ -29,7 +29,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "GetCompletion".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "GetCompletion"
+                method: "GetCompletion",
+                type: .unary
             )
         }
         /// Namespace for "GetCompletionChunk" metadata.
@@ -41,7 +42,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "GetCompletionChunk".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "GetCompletionChunk"
+                method: "GetCompletionChunk",
+                type: .serverStreaming
             )
         }
         /// Namespace for "StartDeferredCompletion" metadata.
@@ -53,7 +55,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "StartDeferredCompletion".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "StartDeferredCompletion"
+                method: "StartDeferredCompletion",
+                type: .unary
             )
         }
         /// Namespace for "GetDeferredCompletion" metadata.
@@ -65,7 +68,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "GetDeferredCompletion".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "GetDeferredCompletion"
+                method: "GetDeferredCompletion",
+                type: .unary
             )
         }
         /// Namespace for "GetStoredCompletion" metadata.
@@ -77,7 +81,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "GetStoredCompletion".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "GetStoredCompletion"
+                method: "GetStoredCompletion",
+                type: .unary
             )
         }
         /// Namespace for "DeleteStoredCompletion" metadata.
@@ -89,7 +94,8 @@ public enum XaiApi_Chat: Sendable {
             /// Descriptor for "DeleteStoredCompletion".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
-                method: "DeleteStoredCompletion"
+                method: "DeleteStoredCompletion",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Chat" service.

@@ -29,7 +29,21 @@ public enum XaiApi_Video: Sendable {
             /// Descriptor for "GenerateVideo".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Video"),
-                method: "GenerateVideo"
+                method: "GenerateVideo",
+                type: .unary
+            )
+        }
+        /// Namespace for "ExtendVideo" metadata.
+        public enum ExtendVideo: Sendable {
+            /// Request type for "ExtendVideo".
+            public typealias Input = XaiApi_ExtendVideoRequest
+            /// Response type for "ExtendVideo".
+            public typealias Output = XaiApi_StartDeferredResponse
+            /// Descriptor for "ExtendVideo".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Video"),
+                method: "ExtendVideo",
+                type: .unary
             )
         }
         /// Namespace for "GetDeferredVideo" metadata.
@@ -41,12 +55,14 @@ public enum XaiApi_Video: Sendable {
             /// Descriptor for "GetDeferredVideo".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Video"),
-                method: "GetDeferredVideo"
+                method: "GetDeferredVideo",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Video" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             GenerateVideo.descriptor,
+            ExtendVideo.descriptor,
             GetDeferredVideo.descriptor
         ]
     }
@@ -76,11 +92,12 @@ extension XaiApi_Video {
         /// > Source IDL Documentation:
         /// >
         /// > Create a video based on a text prompt and optionally an image.
-        /// > If an image is provided, generates video with the image as the first frame (image-to-video).
-        /// > If no image is provided, generates video from text only (text-to-video).
+        /// > If an image is provided, generates video with the image as the first frame
+        /// > (image-to-video). If no image is provided, generates video from text only
+        /// > (text-to-video).
         /// > 
-        /// > This is an asynchronous operation. The method returns immediately with a request_id
-        /// > that can be used to poll for the result using GetDeferredVideo.
+        /// > This is an asynchronous operation. The method returns immediately with a
+        /// > request_id that can be used to poll for the result using GetDeferredVideo.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `XaiApi_GenerateVideoRequest` message.
@@ -99,11 +116,38 @@ extension XaiApi_Video {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_StartDeferredResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "ExtendVideo" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Extend an existing video by generating continuation content.
+        /// > 
+        /// > This is an asynchronous operation. The method returns immediately with a
+        /// > request_id that can be used to poll for the result using GetDeferredVideo.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_ExtendVideoRequest` message.
+        ///   - serializer: A serializer for `XaiApi_ExtendVideoRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func extendVideo<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_ExtendVideoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_StartDeferredResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_StartDeferredResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "GetDeferredVideo" method.
         ///
         /// > Source IDL Documentation:
         /// >
-        /// > Gets the result of a video generation started by calling `GenerateVideo`.
+        /// > Gets the result of a video generation started by calling `GenerateVideo` or
+        /// > `ExtendVideo`.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `XaiApi_GetDeferredVideoRequest` message.
@@ -148,11 +192,12 @@ extension XaiApi_Video {
         /// > Source IDL Documentation:
         /// >
         /// > Create a video based on a text prompt and optionally an image.
-        /// > If an image is provided, generates video with the image as the first frame (image-to-video).
-        /// > If no image is provided, generates video from text only (text-to-video).
+        /// > If an image is provided, generates video with the image as the first frame
+        /// > (image-to-video). If no image is provided, generates video from text only
+        /// > (text-to-video).
         /// > 
-        /// > This is an asynchronous operation. The method returns immediately with a request_id
-        /// > that can be used to poll for the result using GetDeferredVideo.
+        /// > This is an asynchronous operation. The method returns immediately with a
+        /// > request_id that can be used to poll for the result using GetDeferredVideo.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `XaiApi_GenerateVideoRequest` message.
@@ -182,11 +227,49 @@ extension XaiApi_Video {
             )
         }
 
+        /// Call the "ExtendVideo" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Extend an existing video by generating continuation content.
+        /// > 
+        /// > This is an asynchronous operation. The method returns immediately with a
+        /// > request_id that can be used to poll for the result using GetDeferredVideo.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_ExtendVideoRequest` message.
+        ///   - serializer: A serializer for `XaiApi_ExtendVideoRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func extendVideo<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_ExtendVideoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_StartDeferredResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_StartDeferredResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: XaiApi_Video.Method.ExtendVideo.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "GetDeferredVideo" method.
         ///
         /// > Source IDL Documentation:
         /// >
-        /// > Gets the result of a video generation started by calling `GenerateVideo`.
+        /// > Gets the result of a video generation started by calling `GenerateVideo` or
+        /// > `ExtendVideo`.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `XaiApi_GetDeferredVideoRequest` message.
@@ -226,11 +309,12 @@ extension XaiApi_Video.ClientProtocol {
     /// > Source IDL Documentation:
     /// >
     /// > Create a video based on a text prompt and optionally an image.
-    /// > If an image is provided, generates video with the image as the first frame (image-to-video).
-    /// > If no image is provided, generates video from text only (text-to-video).
+    /// > If an image is provided, generates video with the image as the first frame
+    /// > (image-to-video). If no image is provided, generates video from text only
+    /// > (text-to-video).
     /// > 
-    /// > This is an asynchronous operation. The method returns immediately with a request_id
-    /// > that can be used to poll for the result using GetDeferredVideo.
+    /// > This is an asynchronous operation. The method returns immediately with a
+    /// > request_id that can be used to poll for the result using GetDeferredVideo.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GenerateVideoRequest` message.
@@ -255,11 +339,44 @@ extension XaiApi_Video.ClientProtocol {
         )
     }
 
+    /// Call the "ExtendVideo" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Extend an existing video by generating continuation content.
+    /// > 
+    /// > This is an asynchronous operation. The method returns immediately with a
+    /// > request_id that can be used to poll for the result using GetDeferredVideo.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `XaiApi_ExtendVideoRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func extendVideo<Result>(
+        request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_StartDeferredResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.extendVideo(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_ExtendVideoRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_StartDeferredResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetDeferredVideo" method.
     ///
     /// > Source IDL Documentation:
     /// >
-    /// > Gets the result of a video generation started by calling `GenerateVideo`.
+    /// > Gets the result of a video generation started by calling `GenerateVideo` or
+    /// > `ExtendVideo`.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetDeferredVideoRequest` message.
@@ -293,11 +410,12 @@ extension XaiApi_Video.ClientProtocol {
     /// > Source IDL Documentation:
     /// >
     /// > Create a video based on a text prompt and optionally an image.
-    /// > If an image is provided, generates video with the image as the first frame (image-to-video).
-    /// > If no image is provided, generates video from text only (text-to-video).
+    /// > If an image is provided, generates video with the image as the first frame
+    /// > (image-to-video). If no image is provided, generates video from text only
+    /// > (text-to-video).
     /// > 
-    /// > This is an asynchronous operation. The method returns immediately with a request_id
-    /// > that can be used to poll for the result using GetDeferredVideo.
+    /// > This is an asynchronous operation. The method returns immediately with a
+    /// > request_id that can be used to poll for the result using GetDeferredVideo.
     ///
     /// - Parameters:
     ///   - message: request message to send.
@@ -326,11 +444,48 @@ extension XaiApi_Video.ClientProtocol {
         )
     }
 
+    /// Call the "ExtendVideo" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Extend an existing video by generating continuation content.
+    /// > 
+    /// > This is an asynchronous operation. The method returns immediately with a
+    /// > request_id that can be used to poll for the result using GetDeferredVideo.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func extendVideo<Result>(
+        _ message: XaiApi_ExtendVideoRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_StartDeferredResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.extendVideo(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetDeferredVideo" method.
     ///
     /// > Source IDL Documentation:
     /// >
-    /// > Gets the result of a video generation started by calling `GenerateVideo`.
+    /// > Gets the result of a video generation started by calling `GenerateVideo` or
+    /// > `ExtendVideo`.
     ///
     /// - Parameters:
     ///   - message: request message to send.

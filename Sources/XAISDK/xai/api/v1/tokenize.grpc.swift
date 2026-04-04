@@ -29,7 +29,8 @@ public enum XaiApi_Tokenize: Sendable {
             /// Descriptor for "TokenizeText".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Tokenize"),
-                method: "TokenizeText"
+                method: "TokenizeText",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Tokenize" service.

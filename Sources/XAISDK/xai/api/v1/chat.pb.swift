@@ -222,6 +222,51 @@ public enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
+/// Number of agents to use for multi-agent models.
+public enum XaiApi_AgentCount: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+
+  /// Unspecified / unset value.
+  case unspecified // = 0
+
+  /// Use 4 agents.
+  case agentCount4 // = 1
+
+  /// Use 16 agents.
+  case agentCount16 // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .agentCount4
+    case 2: self = .agentCount16
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .agentCount4: return 1
+    case .agentCount16: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [XaiApi_AgentCount] = [
+    .unspecified,
+    .agentCount4,
+    .agentCount16,
+  ]
+
+}
+
 public enum XaiApi_ToolMode: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
@@ -759,6 +804,17 @@ public struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
     get {_storage._include}
     set {_uniqueStorage()._include = newValue}
   }
+
+  /// Number of agents to use for multi-agent models.
+  /// Only valid when model is a `multi-agent` model. Defaults to `AGENT_COUNT_UNSPECIFIED`.
+  public var agentCount: XaiApi_AgentCount {
+    get {_storage._agentCount ?? .unspecified}
+    set {_uniqueStorage()._agentCount = newValue}
+  }
+  /// Returns true if `agentCount` has been explicitly set.
+  public var hasAgentCount: Bool {_storage._agentCount != nil}
+  /// Clears the value of `agentCount`. Subsequent reads from it will return its default value.
+  public mutating func clearAgentCount() {_uniqueStorage()._agentCount = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -1349,9 +1405,36 @@ public struct XaiApi_FileContent: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// The file ID returned by the Files API when a user uploads a file.
-  /// This ID is used to reference the uploaded file in chat conversations.
+  /// The file ID from the Files API.
+  ///
+  /// When set, the file content will be fetched via the Files API.
   public var fileID: String = String()
+
+  /// Inline file bytes (optional).
+  ///
+  /// When set, the file content is provided directly in the chat request and does
+  /// NOT require uploading to the Files API first.
+  ///
+  /// Exactly one of `file_id`, `data`, or `url` SHOULD be set.
+  public var data: Data = Data()
+
+  /// Filename for inline uploads.
+  ///
+  /// Recommended when `data` is set. Used for display and may be used by
+  /// downstream systems to infer file type.
+  public var filename: String = String()
+
+  /// Optional MIME type for inline uploads (e.g. "application/pdf").
+  ///
+  /// If unset, downstream systems may attempt to infer the MIME type from the
+  /// content and/or filename.
+  public var mimeType: String = String()
+
+  /// Public URL to a file attachment.
+  ///
+  /// When set, the file will be fetched from this URL as an attachment.
+  /// Exactly one of `file_id`, `data`, or `url` SHOULD be set.
+  public var url: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -2532,6 +2615,10 @@ extension XaiApi_ReasoningEffort: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_EFFORT\0\u{1}EFFORT_LOW\0\u{1}EFFORT_MEDIUM\0\u{1}EFFORT_HIGH\0")
 }
 
+extension XaiApi_AgentCount: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AGENT_COUNT_UNSPECIFIED\0\u{1}AGENT_COUNT_4\0\u{1}AGENT_COUNT_16\0")
+}
+
 extension XaiApi_ToolMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_MODE_INVALID\0\u{1}TOOL_MODE_AUTO\0\u{1}TOOL_MODE_NONE\0\u{1}TOOL_MODE_REQUIRED\0")
 }
@@ -2554,7 +2641,7 @@ extension XaiApi_SearchMode: SwiftProtobuf._ProtoNameProviding {
 
 extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetCompletionsRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}messages\0\u{1}model\0\u{3}frequency_penalty\0\u{2}\u{2}logprobs\0\u{3}top_logprobs\0\u{3}max_tokens\0\u{1}n\0\u{3}presence_penalty\0\u{3}response_format\0\u{1}seed\0\u{1}stop\0\u{2}\u{2}temperature\0\u{3}top_p\0\u{1}user\0\u{1}tools\0\u{3}tool_choice\0\u{3}reasoning_effort\0\u{3}search_parameters\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{3}max_turns\0\u{1}include\0\u{c}\u{4}\u{1}")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}messages\0\u{1}model\0\u{3}frequency_penalty\0\u{2}\u{2}logprobs\0\u{3}top_logprobs\0\u{3}max_tokens\0\u{1}n\0\u{3}presence_penalty\0\u{3}response_format\0\u{1}seed\0\u{1}stop\0\u{2}\u{2}temperature\0\u{3}top_p\0\u{1}user\0\u{1}tools\0\u{3}tool_choice\0\u{3}reasoning_effort\0\u{3}search_parameters\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{3}max_turns\0\u{1}include\0\u{4}\u{3}agent_count\0\u{c}\u{4}\u{1}")
 
   fileprivate class _StorageClass {
     var _messages: [XaiApi_Message] = []
@@ -2581,6 +2668,7 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     var _useEncryptedContent: Bool = false
     var _maxTurns: Int32? = nil
     var _include: [XaiApi_IncludeOption] = []
+    var _agentCount: XaiApi_AgentCount? = nil
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -2615,6 +2703,7 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
       _useEncryptedContent = source._useEncryptedContent
       _maxTurns = source._maxTurns
       _include = source._include
+      _agentCount = source._agentCount
     }
   }
 
@@ -2657,6 +2746,7 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
         case 24: try { try decoder.decodeSingularBoolField(value: &_storage._useEncryptedContent) }()
         case 25: try { try decoder.decodeSingularInt32Field(value: &_storage._maxTurns) }()
         case 26: try { try decoder.decodeRepeatedEnumField(value: &_storage._include) }()
+        case 29: try { try decoder.decodeSingularEnumField(value: &_storage._agentCount) }()
         default: break
         }
       }
@@ -2741,6 +2831,9 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
       if !_storage._include.isEmpty {
         try visitor.visitPackedEnumField(value: _storage._include, fieldNumber: 26)
       }
+      try { if let v = _storage._agentCount {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 29)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -2774,6 +2867,7 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
         if _storage._useEncryptedContent != rhs_storage._useEncryptedContent {return false}
         if _storage._maxTurns != rhs_storage._maxTurns {return false}
         if _storage._include != rhs_storage._include {return false}
+        if _storage._agentCount != rhs_storage._agentCount {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3680,7 +3774,7 @@ extension XaiApi_Content: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
 extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FileContent"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{1}data\0\u{1}filename\0\u{3}mime_type\0\u{1}url\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -3689,6 +3783,10 @@ extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.fileID) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.filename) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.mimeType) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.url) }()
       default: break
       }
     }
@@ -3698,11 +3796,27 @@ extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if !self.fileID.isEmpty {
       try visitor.visitSingularStringField(value: self.fileID, fieldNumber: 1)
     }
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 2)
+    }
+    if !self.filename.isEmpty {
+      try visitor.visitSingularStringField(value: self.filename, fieldNumber: 3)
+    }
+    if !self.mimeType.isEmpty {
+      try visitor.visitSingularStringField(value: self.mimeType, fieldNumber: 4)
+    }
+    if !self.url.isEmpty {
+      try visitor.visitSingularStringField(value: self.url, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_FileContent, rhs: XaiApi_FileContent) -> Bool {
     if lhs.fileID != rhs.fileID {return false}
+    if lhs.data != rhs.data {return false}
+    if lhs.filename != rhs.filename {return false}
+    if lhs.mimeType != rhs.mimeType {return false}
+    if lhs.url != rhs.url {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

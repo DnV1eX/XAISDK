@@ -29,7 +29,8 @@ public enum XaiApi_Sample: Sendable {
             /// Descriptor for "SampleText".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Sample"),
-                method: "SampleText"
+                method: "SampleText",
+                type: .unary
             )
         }
         /// Namespace for "SampleTextStreaming" metadata.
@@ -41,7 +42,8 @@ public enum XaiApi_Sample: Sendable {
             /// Descriptor for "SampleTextStreaming".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Sample"),
-                method: "SampleTextStreaming"
+                method: "SampleTextStreaming",
+                type: .serverStreaming
             )
         }
         /// Descriptors for all methods in the "xai_api.Sample" service.

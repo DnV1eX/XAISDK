@@ -30,7 +30,8 @@ public enum XaiApi_Auth: Sendable {
             /// Descriptor for "get_api_key_info".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Auth"),
-                method: "get_api_key_info"
+                method: "get_api_key_info",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "xai_api.Auth" service.
