@@ -1,6 +1,6 @@
 # xAI Swift SDK
 
-The xAI Swift SDK is a gRPC-based Swift library for interacting with xAI's APIs. It provides a native, high-performance interface to interact with xAI APIs from Swift code, allowing you to easily generate text, images, and utilize other xAI services directly within your Apple ecosystem applications, as well as in Swift client and server applications on other platforms.
+The xAI Swift SDK is a gRPC-based Swift library for interacting with xAI's APIs. It provides a native, high-performance interface to interact with xAI APIs from Swift code, allowing you to easily generate text, images, videos, and utilize other xAI services directly within your Apple ecosystem applications, as well as in Swift client and server applications on other platforms.
 
 For more details on the underlying API, see the [xAI gRPC API Reference](https://docs.x.ai/developers/grpc-api-reference).
 
