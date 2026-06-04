@@ -18,13 +18,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Time series are created by aggregating value into buckets we call `TimeUnit`.
-public enum Prod_ClickhouseAnalytics_TimeUnit: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Prod_ClickhouseAnalytics_TimeUnit: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalid // = 0
   case month // = 1
@@ -91,7 +91,7 @@ public enum Prod_ClickhouseAnalytics_TimeUnit: SwiftProtobuf.Enum, Swift.CaseIte
 
 /// Each value is an aggregate of the individual values in the time bucket. Note that not every field
 /// supports every aggregation method.
-public enum Prod_ClickhouseAnalytics_Aggregation: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Prod_ClickhouseAnalytics_Aggregation: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case none // = 0
   case sum // = 1
@@ -170,7 +170,7 @@ public enum Prod_ClickhouseAnalytics_Aggregation: SwiftProtobuf.Enum, Swift.Case
 }
 
 /// Allows the user to specify a time range in their local timezone.
-public struct Prod_ClickhouseAnalytics_TimeRange: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_TimeRange: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -191,7 +191,7 @@ public struct Prod_ClickhouseAnalytics_TimeRange: Sendable {
 }
 
 /// Determines which values shall be measured and how they shall be aggregated.
-public struct Prod_ClickhouseAnalytics_Value: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_Value: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -208,7 +208,7 @@ public struct Prod_ClickhouseAnalytics_Value: Sendable {
 }
 
 /// Request body for analytics.
-public struct Prod_ClickhouseAnalytics_AnalyticsRequest: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_AnalyticsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -250,7 +250,7 @@ public struct Prod_ClickhouseAnalytics_AnalyticsRequest: Sendable {
 }
 
 /// Response body for analytics.
-public struct Prod_ClickhouseAnalytics_AnalyticsResponse: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_AnalyticsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -268,7 +268,7 @@ public struct Prod_ClickhouseAnalytics_AnalyticsResponse: Sendable {
 }
 
 /// A time series is a sequence of values.
-public struct Prod_ClickhouseAnalytics_TimeSeries: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_TimeSeries: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -288,7 +288,7 @@ public struct Prod_ClickhouseAnalytics_TimeSeries: Sendable {
   public init() {}
 }
 
-public struct Prod_ClickhouseAnalytics_DataPoint: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_DataPoint: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -314,7 +314,7 @@ public struct Prod_ClickhouseAnalytics_DataPoint: Sendable {
 }
 
 /// The analytics scheme specifies which fields can be measured, group by, and filtered by.
-public struct Prod_ClickhouseAnalytics_AnalyticsScheme: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_AnalyticsScheme: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -334,7 +334,7 @@ public struct Prod_ClickhouseAnalytics_AnalyticsScheme: Sendable {
 }
 
 /// Specifies a value and which aggregation methods it supports.
-public struct Prod_ClickhouseAnalytics_ValueScheme: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_ValueScheme: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -348,7 +348,7 @@ public struct Prod_ClickhouseAnalytics_ValueScheme: Sendable {
   public init() {}
 }
 
-public struct Prod_ClickhouseAnalytics_StringRawValue: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_StringRawValue: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -362,7 +362,7 @@ public struct Prod_ClickhouseAnalytics_StringRawValue: Sendable {
   public init() {}
 }
 
-public struct Prod_ClickhouseAnalytics_FloatRawValue: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_FloatRawValue: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -377,7 +377,7 @@ public struct Prod_ClickhouseAnalytics_FloatRawValue: Sendable {
 }
 
 /// Generic representation of a Clickhouse row.
-public struct Prod_ClickhouseAnalytics_AnalyticsRow: Sendable {
+public nonisolated struct Prod_ClickhouseAnalytics_AnalyticsRow: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -416,17 +416,17 @@ public struct Prod_ClickhouseAnalytics_AnalyticsRow: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "prod.clickhouse_analytics"
+fileprivate nonisolated let _protobuf_package = "prod.clickhouse_analytics"
 
-extension Prod_ClickhouseAnalytics_TimeUnit: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_TimeUnit: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TIME_UNIT_INVALID\0\u{1}TIME_UNIT_MONTH\0\u{1}TIME_UNIT_CALENDAR_WEEK\0\u{1}TIME_UNIT_DAY\0\u{1}TIME_UNIT_HOUR\0\u{1}TIME_UNIT_QUARTER_HOUR\0\u{1}TIME_UNIT_MINUTE\0\u{1}TIME_UNIT_SECOND\0\u{1}TIME_UNIT_NONE\0")
 }
 
-extension Prod_ClickhouseAnalytics_Aggregation: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_Aggregation: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AGGREGATION_NONE\0\u{1}AGGREGATION_SUM\0\u{1}AGGREGATION_AVG\0\u{1}AGGREGATION_VAR\0\u{1}AGGREGATION_STD\0\u{1}AGGREGATION_MIN\0\u{1}AGGREGATION_MAX\0\u{1}AGGREGATION_P50\0\u{1}AGGREGATION_P90\0\u{1}AGGREGATION_P99\0\u{1}AGGREGATION_P999\0\u{1}AGGREGATION_COUNT\0\u{1}AGGREGATION_COUNT_DISTINCT\0")
 }
 
-extension Prod_ClickhouseAnalytics_TimeRange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_TimeRange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TimeRange"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}start_time\0\u{3}end_time\0\u{1}timezone\0")
 
@@ -466,7 +466,7 @@ extension Prod_ClickhouseAnalytics_TimeRange: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Prod_ClickhouseAnalytics_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Value"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}aggregation\0")
 
@@ -501,7 +501,7 @@ extension Prod_ClickhouseAnalytics_Value: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension Prod_ClickhouseAnalytics_AnalyticsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_AnalyticsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AnalyticsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}time_range\0\u{3}time_unit\0\u{1}values\0\u{3}group_by\0\u{1}filters\0")
 
@@ -555,7 +555,7 @@ extension Prod_ClickhouseAnalytics_AnalyticsRequest: SwiftProtobuf.Message, Swif
   }
 }
 
-extension Prod_ClickhouseAnalytics_AnalyticsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_AnalyticsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AnalyticsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}time_series\0\u{3}limit_reached\0")
 
@@ -590,7 +590,7 @@ extension Prod_ClickhouseAnalytics_AnalyticsResponse: SwiftProtobuf.Message, Swi
   }
 }
 
-extension Prod_ClickhouseAnalytics_TimeSeries: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_TimeSeries: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TimeSeries"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}group\0\u{3}data_points\0\u{3}group_labels\0")
 
@@ -630,7 +630,7 @@ extension Prod_ClickhouseAnalytics_TimeSeries: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension Prod_ClickhouseAnalytics_DataPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_DataPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DataPoint"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}timestamp\0\u{1}values\0")
 
@@ -669,7 +669,7 @@ extension Prod_ClickhouseAnalytics_DataPoint: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Prod_ClickhouseAnalytics_AnalyticsScheme: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_AnalyticsScheme: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AnalyticsScheme"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}values\0\u{1}filters\0\u{3}group_by\0")
 
@@ -709,7 +709,7 @@ extension Prod_ClickhouseAnalytics_AnalyticsScheme: SwiftProtobuf.Message, Swift
   }
 }
 
-extension Prod_ClickhouseAnalytics_ValueScheme: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_ValueScheme: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ValueScheme"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}aggregations\0")
 
@@ -744,7 +744,7 @@ extension Prod_ClickhouseAnalytics_ValueScheme: SwiftProtobuf.Message, SwiftProt
   }
 }
 
-extension Prod_ClickhouseAnalytics_StringRawValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_StringRawValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StringRawValue"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}value\0")
 
@@ -779,7 +779,7 @@ extension Prod_ClickhouseAnalytics_StringRawValue: SwiftProtobuf.Message, SwiftP
   }
 }
 
-extension Prod_ClickhouseAnalytics_FloatRawValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_FloatRawValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FloatRawValue"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}value\0")
 
@@ -814,7 +814,7 @@ extension Prod_ClickhouseAnalytics_FloatRawValue: SwiftProtobuf.Message, SwiftPr
   }
 }
 
-extension Prod_ClickhouseAnalytics_AnalyticsRow: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Prod_ClickhouseAnalytics_AnalyticsRow: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AnalyticsRow"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}log_id\0\u{1}values\0\u{3}group_by_values\0\u{3}filter_by_values\0\u{1}timestamp\0")
 

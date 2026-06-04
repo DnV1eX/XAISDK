@@ -20,13 +20,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Request to convert text to a sequence of tokens.
-public struct XaiApi_TokenizeTextRequest: Sendable {
+public nonisolated struct XaiApi_TokenizeTextRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -48,7 +48,7 @@ public struct XaiApi_TokenizeTextRequest: Sendable {
 }
 
 /// Information on a token.
-public struct XaiApi_Token: Sendable {
+public nonisolated struct XaiApi_Token: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -68,7 +68,7 @@ public struct XaiApi_Token: Sendable {
 }
 
 /// Response including the tokenization result.
-public struct XaiApi_TokenizeTextResponse: Sendable {
+public nonisolated struct XaiApi_TokenizeTextResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -89,9 +89,9 @@ public struct XaiApi_TokenizeTextResponse: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_TokenizeTextRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_TokenizeTextRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TokenizeTextRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}text\0\u{1}model\0\u{1}user\0")
 
@@ -131,7 +131,7 @@ extension XaiApi_TokenizeTextRequest: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension XaiApi_Token: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Token: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Token"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}token_id\0\u{3}string_token\0\u{4}\u{2}token_bytes\0")
 
@@ -171,7 +171,7 @@ extension XaiApi_Token: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension XaiApi_TokenizeTextResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_TokenizeTextResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TokenizeTextResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}tokens\0\u{1}model\0")
 

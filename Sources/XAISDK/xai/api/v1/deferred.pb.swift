@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Status of deferred completion request.
-public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid status.
@@ -80,7 +80,7 @@ public enum XaiApi_DeferredStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// The response from the service, when creating a deferred completion request.
-public struct XaiApi_StartDeferredResponse: Sendable {
+public nonisolated struct XaiApi_StartDeferredResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -96,7 +96,7 @@ public struct XaiApi_StartDeferredResponse: Sendable {
 
 /// Retrieve the deferred chat request's response with the `request_id` in
 /// StartDeferredResponse.
-public struct XaiApi_GetDeferredRequest: Sendable {
+public nonisolated struct XaiApi_GetDeferredRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -111,13 +111,13 @@ public struct XaiApi_GetDeferredRequest: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_DeferredStatus: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_DeferredStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_DEFERRED_STATUS\0\u{1}DONE\0\u{1}EXPIRED\0\u{1}PENDING\0\u{1}FAILED\0")
 }
 
-extension XaiApi_StartDeferredResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_StartDeferredResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StartDeferredResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}request_id\0")
 
@@ -147,7 +147,7 @@ extension XaiApi_StartDeferredResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension XaiApi_GetDeferredRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetDeferredRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetDeferredRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}request_id\0")
 

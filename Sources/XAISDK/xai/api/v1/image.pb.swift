@@ -15,14 +15,14 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Indicates the level of preprocessing to apply to images that will be fed to
 /// the model.
-public enum XaiApi_ImageDetail: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ImageDetail: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Detail level is invalid.
@@ -77,7 +77,7 @@ public enum XaiApi_ImageDetail: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// The image format to be returned (base-64 encoded string or a url of
 /// the image).
-public enum XaiApi_ImageFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ImageFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Image format is invalid.
@@ -123,7 +123,7 @@ public enum XaiApi_ImageFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// Quality levels for image generation with their corresponding resolutions.
 /// Currently only supported by grok-imagine models.
-public enum XaiApi_ImageQuality: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ImageQuality: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Quality is invalid.
@@ -175,7 +175,7 @@ public enum XaiApi_ImageQuality: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// Aspect ratio for image generation.
 /// Only supported by grok-imagine models.
-public enum XaiApi_ImageAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ImageAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid aspect ratio.
@@ -294,7 +294,7 @@ public enum XaiApi_ImageAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// Resolution for image generation.
 /// Only supported by grok-imagine models.
-public enum XaiApi_ImageResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ImageResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid resolution.
@@ -340,7 +340,7 @@ public enum XaiApi_ImageResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Request message for generating an image.
-public struct XaiApi_GenerateImageRequest: Sendable {
+public nonisolated struct XaiApi_GenerateImageRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -424,7 +424,7 @@ public struct XaiApi_GenerateImageRequest: Sendable {
 }
 
 /// The response from the image generation models containing the generated image(s).
-public struct XaiApi_ImageResponse: Sendable {
+public nonisolated struct XaiApi_ImageResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -453,7 +453,7 @@ public struct XaiApi_ImageResponse: Sendable {
 }
 
 /// Contains all data related to a generated image.
-public struct XaiApi_GeneratedImage: Sendable {
+public nonisolated struct XaiApi_GeneratedImage: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -489,7 +489,7 @@ public struct XaiApi_GeneratedImage: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The generated image.
-  public enum OneOf_Image: Equatable, Sendable {
+  public nonisolated enum OneOf_Image: Equatable, Sendable {
     /// A base-64 encoded string of the image. Provided if user specified `IMG_FORMAT_BASE64` in `format` field of the
     /// `GenerateImageRequest` message.
     case base64(String)
@@ -503,7 +503,7 @@ public struct XaiApi_GeneratedImage: Sendable {
 }
 
 /// Contains data relating to an image that is provided to the model.
-public struct XaiApi_ImageUrlContent: Sendable {
+public nonisolated struct XaiApi_ImageUrlContent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -527,29 +527,29 @@ public struct XaiApi_ImageUrlContent: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_ImageDetail: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageDetail: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0DETAIL_INVALID\0\u{1}DETAIL_AUTO\0\u{1}DETAIL_LOW\0\u{1}DETAIL_HIGH\0")
 }
 
-extension XaiApi_ImageFormat: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageFormat: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0IMG_FORMAT_INVALID\0\u{1}IMG_FORMAT_BASE64\0\u{1}IMG_FORMAT_URL\0")
 }
 
-extension XaiApi_ImageQuality: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageQuality: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0IMG_QUALITY_INVALID\0\u{1}IMG_QUALITY_LOW\0\u{1}IMG_QUALITY_MEDIUM\0\u{1}IMG_QUALITY_HIGH\0")
 }
 
-extension XaiApi_ImageAspectRatio: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageAspectRatio: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0IMG_ASPECT_RATIO_INVALID\0\u{1}IMG_ASPECT_RATIO_1_1\0\u{1}IMG_ASPECT_RATIO_3_4\0\u{1}IMG_ASPECT_RATIO_4_3\0\u{1}IMG_ASPECT_RATIO_9_16\0\u{1}IMG_ASPECT_RATIO_16_9\0\u{1}IMG_ASPECT_RATIO_2_3\0\u{1}IMG_ASPECT_RATIO_3_2\0\u{1}IMG_ASPECT_RATIO_AUTO\0\u{1}IMG_ASPECT_RATIO_9_19_5\0\u{1}IMG_ASPECT_RATIO_19_5_9\0\u{1}IMG_ASPECT_RATIO_9_20\0\u{1}IMG_ASPECT_RATIO_20_9\0\u{1}IMG_ASPECT_RATIO_1_2\0\u{1}IMG_ASPECT_RATIO_2_1\0")
 }
 
-extension XaiApi_ImageResolution: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageResolution: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0IMG_RESOLUTION_INVALID\0\u{1}IMG_RESOLUTION_1K\0\u{1}IMG_RESOLUTION_2K\0")
 }
 
-extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GenerateImageRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}model\0\u{1}n\0\u{1}user\0\u{1}image\0\u{2}\u{6}format\0\u{4}\u{3}aspect_ratio\0\u{1}resolution\0\u{2}\u{2}images\0\u{c}\u{d}\u{1}")
 
@@ -623,7 +623,7 @@ extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension XaiApi_ImageResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ImageResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}images\0\u{1}model\0\u{1}usage\0")
 
@@ -667,7 +667,7 @@ extension XaiApi_ImageResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GeneratedImage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}base64\0\u{2}\u{2}url\0\u{3}respect_moderation\0\u{c}\u{2}\u{1}")
 
@@ -729,7 +729,7 @@ extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_ImageUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ImageUrlContent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}image_url\0\u{1}detail\0")
 

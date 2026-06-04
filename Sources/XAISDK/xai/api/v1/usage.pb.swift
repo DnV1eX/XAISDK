@@ -15,12 +15,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalid // = 0
   case webSearch // = 1
@@ -31,6 +31,7 @@ public enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
   case collectionsSearch // = 6
   case mcp // = 7
   case attachmentSearch // = 8
+  case imageSearch // = 10
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -48,6 +49,7 @@ public enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 6: self = .collectionsSearch
     case 7: self = .mcp
     case 8: self = .attachmentSearch
+    case 10: self = .imageSearch
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -63,6 +65,7 @@ public enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .collectionsSearch: return 6
     case .mcp: return 7
     case .attachmentSearch: return 8
+    case .imageSearch: return 10
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -78,13 +81,14 @@ public enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
     .collectionsSearch,
     .mcp,
     .attachmentSearch,
+    .imageSearch,
   ]
 
 }
 
 /// Records the cost associated with a sampling request (both chat and sample
 /// endpoints).
-public struct XaiApi_SamplingUsage: Sendable {
+public nonisolated struct XaiApi_SamplingUsage: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -111,22 +115,39 @@ public struct XaiApi_SamplingUsage: Sendable {
   /// Total number of image tokens in the prompt.
   public var promptImageTokens: Int32 = 0
 
-  /// Number of individual live search sources used.
-  /// Only applicable when live search is enabled.
-  /// e.g. If a live search query returns citations from both X and Web and news sources, this will be 3.
-  /// If it returns citations from only X, this will be 1.
+  /// [DEPRECATED - live search feature has been deprecated so this field is
+  /// redundant] Number of individual live search sources used. Only applicable
+  /// when live search is enabled. e.g. If a live search query returns citations
+  /// from both X and Web and news sources, this will be 3. If it returns
+  /// citations from only X, this will be 1.
   public var numSourcesUsed: Int32 = 0
 
   /// List of server side tools called.
   public var serverSideToolsUsed: [XaiApi_ServerSideTool] = []
 
+  /// Full price paid by the user for this request, in USD ticks.
+  /// For requests with server-side tools, this is the sum of token cost and
+  /// server-side tool cost. Also used for image gen, video gen, etc.
+  /// 1 USD = 10,000,000,000 ticks (i.e. 1 tick = 1e-10 USD).
+  /// To convert to dollars, divide by 10,000,000,000.
+  public var costInUsdTicks: Int64 {
+    get {_costInUsdTicks ?? 0}
+    set {_costInUsdTicks = newValue}
+  }
+  /// Returns true if `costInUsdTicks` has been explicitly set.
+  public var hasCostInUsdTicks: Bool {self._costInUsdTicks != nil}
+  /// Clears the value of `costInUsdTicks`. Subsequent reads from it will return its default value.
+  public mutating func clearCostInUsdTicks() {self._costInUsdTicks = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _costInUsdTicks: Int64? = nil
 }
 
 /// Usage of embedding models.
-public struct XaiApi_EmbeddingUsage: Sendable {
+public nonisolated struct XaiApi_EmbeddingUsage: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -144,15 +165,15 @@ public struct XaiApi_EmbeddingUsage: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_ServerSideTool: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SERVER_SIDE_TOOL_INVALID\0\u{1}SERVER_SIDE_TOOL_WEB_SEARCH\0\u{1}SERVER_SIDE_TOOL_X_SEARCH\0\u{1}SERVER_SIDE_TOOL_CODE_EXECUTION\0\u{1}SERVER_SIDE_TOOL_VIEW_IMAGE\0\u{1}SERVER_SIDE_TOOL_VIEW_X_VIDEO\0\u{1}SERVER_SIDE_TOOL_COLLECTIONS_SEARCH\0\u{1}SERVER_SIDE_TOOL_MCP\0\u{1}SERVER_SIDE_TOOL_ATTACHMENT_SEARCH\0")
+nonisolated extension XaiApi_ServerSideTool: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SERVER_SIDE_TOOL_INVALID\0\u{1}SERVER_SIDE_TOOL_WEB_SEARCH\0\u{1}SERVER_SIDE_TOOL_X_SEARCH\0\u{1}SERVER_SIDE_TOOL_CODE_EXECUTION\0\u{1}SERVER_SIDE_TOOL_VIEW_IMAGE\0\u{1}SERVER_SIDE_TOOL_VIEW_X_VIDEO\0\u{1}SERVER_SIDE_TOOL_COLLECTIONS_SEARCH\0\u{1}SERVER_SIDE_TOOL_MCP\0\u{1}SERVER_SIDE_TOOL_ATTACHMENT_SEARCH\0\u{2}\u{2}SERVER_SIDE_TOOL_IMAGE_SEARCH\0")
 }
 
-extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SamplingUsage"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}completion_tokens\0\u{3}prompt_tokens\0\u{3}total_tokens\0\u{3}prompt_text_tokens\0\u{3}prompt_image_tokens\0\u{3}reasoning_tokens\0\u{3}cached_prompt_text_tokens\0\u{3}num_sources_used\0\u{3}server_side_tools_used\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}completion_tokens\0\u{3}prompt_tokens\0\u{3}total_tokens\0\u{3}prompt_text_tokens\0\u{3}prompt_image_tokens\0\u{3}reasoning_tokens\0\u{3}cached_prompt_text_tokens\0\u{3}num_sources_used\0\u{3}server_side_tools_used\0\u{4}\u{2}cost_in_usd_ticks\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -169,12 +190,17 @@ extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 7: try { try decoder.decodeSingularInt32Field(value: &self.cachedPromptTextTokens) }()
       case 8: try { try decoder.decodeSingularInt32Field(value: &self.numSourcesUsed) }()
       case 9: try { try decoder.decodeRepeatedEnumField(value: &self.serverSideToolsUsed) }()
+      case 11: try { try decoder.decodeSingularInt64Field(value: &self._costInUsdTicks) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if self.completionTokens != 0 {
       try visitor.visitSingularInt32Field(value: self.completionTokens, fieldNumber: 1)
     }
@@ -202,6 +228,9 @@ extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.serverSideToolsUsed.isEmpty {
       try visitor.visitPackedEnumField(value: self.serverSideToolsUsed, fieldNumber: 9)
     }
+    try { if let v = self._costInUsdTicks {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 11)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -215,12 +244,13 @@ extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs.promptImageTokens != rhs.promptImageTokens {return false}
     if lhs.numSourcesUsed != rhs.numSourcesUsed {return false}
     if lhs.serverSideToolsUsed != rhs.serverSideToolsUsed {return false}
+    if lhs._costInUsdTicks != rhs._costInUsdTicks {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_EmbeddingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbeddingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EmbeddingUsage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}num_text_embeddings\0\u{3}num_image_embeddings\0")
 

@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Modalities supported by a model input/output.
-public enum XaiApi_Modality: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_Modality: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid modality.
@@ -72,7 +72,7 @@ public enum XaiApi_Modality: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Request to get details of a specific model by name.
-public struct XaiApi_GetModelRequest: Sendable {
+public nonisolated struct XaiApi_GetModelRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -86,7 +86,7 @@ public struct XaiApi_GetModelRequest: Sendable {
 }
 
 /// Describes a language model available on the platform.
-public struct XaiApi_LanguageModel: Sendable {
+public nonisolated struct XaiApi_LanguageModel: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -148,7 +148,7 @@ public struct XaiApi_LanguageModel: Sendable {
 }
 
 /// Response from ListLanguageModels including a list of language models.
-public struct XaiApi_ListLanguageModelsResponse: Sendable {
+public nonisolated struct XaiApi_ListLanguageModelsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -162,7 +162,7 @@ public struct XaiApi_ListLanguageModelsResponse: Sendable {
 }
 
 /// Describes an embedding model available on the platform.
-public struct XaiApi_EmbeddingModel: Sendable {
+public nonisolated struct XaiApi_EmbeddingModel: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -211,7 +211,7 @@ public struct XaiApi_EmbeddingModel: Sendable {
 }
 
 /// Response from ListEmbeddingModels including a list of embedding models.
-public struct XaiApi_ListEmbeddingModelsResponse: Sendable {
+public nonisolated struct XaiApi_ListEmbeddingModelsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -225,7 +225,7 @@ public struct XaiApi_ListEmbeddingModelsResponse: Sendable {
 }
 
 /// Describes a language model available on the platform.
-public struct XaiApi_ImageGenerationModel: Sendable {
+public nonisolated struct XaiApi_ImageGenerationModel: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -276,7 +276,7 @@ public struct XaiApi_ImageGenerationModel: Sendable {
 
 /// Response from ListImageGenerationModels including a list of image generation
 /// models.
-public struct XaiApi_ListImageGenerationModelsResponse: Sendable {
+public nonisolated struct XaiApi_ListImageGenerationModelsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -291,13 +291,13 @@ public struct XaiApi_ListImageGenerationModelsResponse: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_Modality: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Modality: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_MODALITY\0\u{1}TEXT\0\u{1}IMAGE\0\u{1}EMBEDDING\0")
 }
 
-extension XaiApi_GetModelRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetModelRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetModelRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0")
 
@@ -327,7 +327,7 @@ extension XaiApi_GetModelRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_LanguageModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_LanguageModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LanguageModel"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}version\0\u{3}input_modalities\0\u{3}output_modalities\0\u{3}prompt_text_token_price\0\u{3}prompt_image_token_price\0\u{3}completion_text_token_price\0\u{1}created\0\u{3}max_prompt_length\0\u{3}system_fingerprint\0\u{1}aliases\0\u{3}cached_prompt_token_price\0\u{3}search_price\0")
 
@@ -421,7 +421,7 @@ extension XaiApi_LanguageModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_ListLanguageModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListLanguageModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListLanguageModelsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}models\0")
 
@@ -451,7 +451,7 @@ extension XaiApi_ListLanguageModelsResponse: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
-extension XaiApi_EmbeddingModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbeddingModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EmbeddingModel"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}version\0\u{3}input_modalities\0\u{3}output_modalities\0\u{3}prompt_text_token_price\0\u{3}prompt_image_token_price\0\u{1}created\0\u{3}system_fingerprint\0\u{2}\u{3}aliases\0")
 
@@ -525,7 +525,7 @@ extension XaiApi_EmbeddingModel: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_ListEmbeddingModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListEmbeddingModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListEmbeddingModelsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}models\0")
 
@@ -555,7 +555,7 @@ extension XaiApi_ListEmbeddingModelsResponse: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension XaiApi_ImageGenerationModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ImageGenerationModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ImageGenerationModel"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}version\0\u{3}input_modalities\0\u{4}\u{3}output_modalities\0\u{2}\u{2}created\0\u{3}max_prompt_length\0\u{3}system_fingerprint\0\u{1}aliases\0\u{3}image_price\0\u{c}\u{4}\u{1}\u{c}\u{5}\u{1}\u{c}\u{7}\u{1}")
 
@@ -629,7 +629,7 @@ extension XaiApi_ImageGenerationModel: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension XaiApi_ListImageGenerationModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListImageGenerationModelsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListImageGenerationModelsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}models\0")
 

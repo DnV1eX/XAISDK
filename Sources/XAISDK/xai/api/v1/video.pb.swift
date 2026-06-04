@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Aspect ratio for video generation.
-public enum XaiApi_VideoAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_VideoAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid/unspecified aspect ratio - defaults to 16:9.
@@ -96,7 +96,7 @@ public enum XaiApi_VideoAspectRatio: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Resolution for video generation.
-public enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid/unspecified resolution - defaults to 480p.
@@ -143,7 +143,7 @@ public enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Specifies a video by URL for video editing.
-public struct XaiApi_VideoUrlContent: Sendable {
+public nonisolated struct XaiApi_VideoUrlContent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -158,7 +158,7 @@ public struct XaiApi_VideoUrlContent: Sendable {
 }
 
 /// Request message for generating a video.
-public struct XaiApi_GenerateVideoRequest: Sendable {
+public nonisolated struct XaiApi_GenerateVideoRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -243,7 +243,7 @@ public struct XaiApi_GenerateVideoRequest: Sendable {
 }
 
 /// Request for retrieving deferred video generation results.
-public struct XaiApi_GetDeferredVideoRequest: Sendable {
+public nonisolated struct XaiApi_GetDeferredVideoRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -257,64 +257,68 @@ public struct XaiApi_GetDeferredVideoRequest: Sendable {
 }
 
 /// The response from the video generation models containing the generated video.
-public struct XaiApi_VideoResponse: Sendable {
+public nonisolated struct XaiApi_VideoResponse: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// The generated video.
   public var video: XaiApi_GeneratedVideo {
-    get {_video ?? XaiApi_GeneratedVideo()}
-    set {_video = newValue}
+    get {_storage._video ?? XaiApi_GeneratedVideo()}
+    set {_uniqueStorage()._video = newValue}
   }
   /// Returns true if `video` has been explicitly set.
-  public var hasVideo: Bool {self._video != nil}
+  public var hasVideo: Bool {_storage._video != nil}
   /// Clears the value of `video`. Subsequent reads from it will return its default value.
-  public mutating func clearVideo() {self._video = nil}
+  public mutating func clearVideo() {_uniqueStorage()._video = nil}
 
   /// The model used to generate the video (ignoring aliases).
-  public var model: String = String()
+  public var model: String {
+    get {_storage._model}
+    set {_uniqueStorage()._model = newValue}
+  }
 
   /// Billing and cost information for this request.
   public var usage: XaiApi_SamplingUsage {
-    get {_usage ?? XaiApi_SamplingUsage()}
-    set {_usage = newValue}
+    get {_storage._usage ?? XaiApi_SamplingUsage()}
+    set {_uniqueStorage()._usage = newValue}
   }
   /// Returns true if `usage` has been explicitly set.
-  public var hasUsage: Bool {self._usage != nil}
+  public var hasUsage: Bool {_storage._usage != nil}
   /// Clears the value of `usage`. Subsequent reads from it will return its default value.
-  public mutating func clearUsage() {self._usage = nil}
+  public mutating func clearUsage() {_uniqueStorage()._usage = nil}
 
   /// Structured error describing why video generation failed.
   /// Only present when the background generation encountered a failure
   /// (either client error 4xx or server error 5xx).
   public var error: XaiApi_VideoError {
-    get {_error ?? XaiApi_VideoError()}
-    set {_error = newValue}
+    get {_storage._error ?? XaiApi_VideoError()}
+    set {_uniqueStorage()._error = newValue}
   }
   /// Returns true if `error` has been explicitly set.
-  public var hasError: Bool {self._error != nil}
+  public var hasError: Bool {_storage._error != nil}
   /// Clears the value of `error`. Subsequent reads from it will return its default value.
-  public mutating func clearError() {self._error = nil}
+  public mutating func clearError() {_uniqueStorage()._error = nil}
 
   /// Approximate completion percentage for the video generation task (0-100).
   /// - When status is `PENDING`: progress is between 0-99, indicating current
   /// completion.
   /// - When status is `DONE`: progress is 100.
   /// - When status is `FAILED`: progress is 0.
-  public var progress: Int32 = 0
+  public var progress: Int32 {
+    get {_storage._progress}
+    set {_uniqueStorage()._progress = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _video: XaiApi_GeneratedVideo? = nil
-  fileprivate var _usage: XaiApi_SamplingUsage? = nil
-  fileprivate var _error: XaiApi_VideoError? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Contains all data related to a generated video.
-public struct XaiApi_GeneratedVideo: Sendable {
+public nonisolated struct XaiApi_GeneratedVideo: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -337,37 +341,34 @@ public struct XaiApi_GeneratedVideo: Sendable {
 
 /// Response from GetDeferredVideo, including the response if the video
 /// generation request has been processed without error.
-public struct XaiApi_GetDeferredVideoResponse: @unchecked Sendable {
+public nonisolated struct XaiApi_GetDeferredVideoResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// Current status of the request.
-  public var status: XaiApi_DeferredStatus {
-    get {_storage._status}
-    set {_uniqueStorage()._status = newValue}
-  }
+  public var status: XaiApi_DeferredStatus = .invalidDeferredStatus
 
   /// Response. Only present if `status=DONE` or `status=FAILED`.
   /// When failed, the `error` field in VideoResponse describes the failure.
   public var response: XaiApi_VideoResponse {
-    get {_storage._response ?? XaiApi_VideoResponse()}
-    set {_uniqueStorage()._response = newValue}
+    get {_response ?? XaiApi_VideoResponse()}
+    set {_response = newValue}
   }
   /// Returns true if `response` has been explicitly set.
-  public var hasResponse: Bool {_storage._response != nil}
+  public var hasResponse: Bool {self._response != nil}
   /// Clears the value of `response`. Subsequent reads from it will return its default value.
-  public mutating func clearResponse() {_uniqueStorage()._response = nil}
+  public mutating func clearResponse() {self._response = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _response: XaiApi_VideoResponse? = nil
 }
 
 /// Structured error returned when video generation fails.
-public struct XaiApi_VideoError: Sendable {
+public nonisolated struct XaiApi_VideoError: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -384,7 +385,7 @@ public struct XaiApi_VideoError: Sendable {
 }
 
 /// Request message for extending an existing video.
-public struct XaiApi_ExtendVideoRequest: Sendable {
+public nonisolated struct XaiApi_ExtendVideoRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -428,17 +429,17 @@ public struct XaiApi_ExtendVideoRequest: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_VideoAspectRatio: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_VideoAspectRatio: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VIDEO_ASPECT_RATIO_UNSPECIFIED\0\u{1}VIDEO_ASPECT_RATIO_1_1\0\u{1}VIDEO_ASPECT_RATIO_16_9\0\u{1}VIDEO_ASPECT_RATIO_9_16\0\u{1}VIDEO_ASPECT_RATIO_4_3\0\u{1}VIDEO_ASPECT_RATIO_3_4\0\u{1}VIDEO_ASPECT_RATIO_3_2\0\u{1}VIDEO_ASPECT_RATIO_2_3\0")
 }
 
-extension XaiApi_VideoResolution: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_VideoResolution: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VIDEO_RESOLUTION_UNSPECIFIED\0\u{1}VIDEO_RESOLUTION_480P\0\u{1}VIDEO_RESOLUTION_720P\0")
 }
 
-extension XaiApi_VideoUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_VideoUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VideoUrlContent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0")
 
@@ -468,7 +469,7 @@ extension XaiApi_VideoUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GenerateVideoRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}image\0\u{1}model\0\u{1}duration\0\u{2}\u{2}video\0\u{3}aspect_ratio\0\u{1}resolution\0\u{4}\u{5}reference_images\0")
 
@@ -537,7 +538,7 @@ extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension XaiApi_GetDeferredVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetDeferredVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetDeferredVideoRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}request_id\0")
 
@@ -567,61 +568,105 @@ extension XaiApi_GetDeferredVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension XaiApi_VideoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_VideoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VideoResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}video\0\u{1}model\0\u{1}usage\0\u{2}\u{3}error\0\u{1}progress\0")
 
+  fileprivate class _StorageClass {
+    var _video: XaiApi_GeneratedVideo? = nil
+    var _model: String = String()
+    var _usage: XaiApi_SamplingUsage? = nil
+    var _error: XaiApi_VideoError? = nil
+    var _progress: Int32 = 0
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _video = source._video
+      _model = source._model
+      _usage = source._usage
+      _error = source._error
+      _progress = source._progress
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._video) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.model) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._usage) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._error) }()
-      case 7: try { try decoder.decodeSingularInt32Field(value: &self.progress) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._video) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._model) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._usage) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._error) }()
+        case 7: try { try decoder.decodeSingularInt32Field(value: &_storage._progress) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._video {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    if !self.model.isEmpty {
-      try visitor.visitSingularStringField(value: self.model, fieldNumber: 2)
-    }
-    try { if let v = self._usage {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._error {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    } }()
-    if self.progress != 0 {
-      try visitor.visitSingularInt32Field(value: self.progress, fieldNumber: 7)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._video {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      if !_storage._model.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._model, fieldNumber: 2)
+      }
+      try { if let v = _storage._usage {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._error {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      if _storage._progress != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._progress, fieldNumber: 7)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_VideoResponse, rhs: XaiApi_VideoResponse) -> Bool {
-    if lhs._video != rhs._video {return false}
-    if lhs.model != rhs.model {return false}
-    if lhs._usage != rhs._usage {return false}
-    if lhs._error != rhs._error {return false}
-    if lhs.progress != rhs.progress {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._video != rhs_storage._video {return false}
+        if _storage._model != rhs_storage._model {return false}
+        if _storage._usage != rhs_storage._usage {return false}
+        if _storage._error != rhs_storage._error {return false}
+        if _storage._progress != rhs_storage._progress {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GeneratedVideo"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0\u{2}\u{3}duration\0\u{3}respect_moderation\0")
 
@@ -661,84 +706,46 @@ extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_GetDeferredVideoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetDeferredVideoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetDeferredVideoResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}status\0\u{1}response\0")
 
-  fileprivate class _StorageClass {
-    var _status: XaiApi_DeferredStatus = .invalidDeferredStatus
-    var _response: XaiApi_VideoResponse? = nil
-
-      // This property is used as the initial default value for new instances of the type.
-      // The type itself is protecting the reference to its storage via CoW semantics.
-      // This will force a copy to be made of this reference when the first mutation occurs;
-      // hence, it is safe to mark this as `nonisolated(unsafe)`.
-      static nonisolated(unsafe) let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _status = source._status
-      _response = source._response
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeSingularEnumField(value: &_storage._status) }()
-        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._response) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._response) }()
+      default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every if/case branch local when no optimizations
-      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-      // https://github.com/apple/swift-protobuf/issues/1182
-      if _storage._status != .invalidDeferredStatus {
-        try visitor.visitSingularEnumField(value: _storage._status, fieldNumber: 1)
-      }
-      try { if let v = _storage._response {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      } }()
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.status != .invalidDeferredStatus {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 1)
     }
+    try { if let v = self._response {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_GetDeferredVideoResponse, rhs: XaiApi_GetDeferredVideoResponse) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._status != rhs_storage._status {return false}
-        if _storage._response != rhs_storage._response {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs.status != rhs.status {return false}
+    if lhs._response != rhs._response {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_VideoError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_VideoError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VideoError"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}code\0\u{1}message\0")
 
@@ -773,7 +780,7 @@ extension XaiApi_VideoError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ExtendVideoRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}video\0\u{1}model\0\u{1}duration\0")
 

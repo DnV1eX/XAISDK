@@ -15,14 +15,14 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// RankingMetric is the metric to use for the search.
 /// Deprecated: Metric now comes from what is set in the collection creation.
-public enum XaiApi_RankingMetric: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_RankingMetric: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
   case l2Distance // = 1
@@ -61,7 +61,7 @@ public enum XaiApi_RankingMetric: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Document search using a combination of keyword and semantic search.
-public struct XaiApi_HybridRetrieval: Sendable {
+public nonisolated struct XaiApi_HybridRetrieval: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -103,7 +103,7 @@ public struct XaiApi_HybridRetrieval: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Which reranker to use to limit results to the desired value.
-  public enum OneOf_Reranker: Equatable, Sendable {
+  public nonisolated enum OneOf_Reranker: Equatable, Sendable {
     /// Use a reranker model to perform the reranking.
     case rerankerModel(XaiApi_RerankerModel)
     /// Use RRF to perform the reranking.
@@ -117,7 +117,7 @@ public struct XaiApi_HybridRetrieval: Sendable {
 }
 
 /// Document search using keyword matching (sparse embeddings).
-public struct XaiApi_KeywordRetrieval: Sendable {
+public nonisolated struct XaiApi_KeywordRetrieval: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -140,7 +140,7 @@ public struct XaiApi_KeywordRetrieval: Sendable {
 }
 
 /// Document search using semantic similarity (dense embeddings).
-public struct XaiApi_SemanticRetrieval: Sendable {
+public nonisolated struct XaiApi_SemanticRetrieval: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -163,7 +163,7 @@ public struct XaiApi_SemanticRetrieval: Sendable {
 }
 
 /// Configuration for reciprocal rank fusion (RRF) reranking.
-public struct XaiApi_ReciprocalRankFusion: Sendable {
+public nonisolated struct XaiApi_ReciprocalRankFusion: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -192,7 +192,7 @@ public struct XaiApi_ReciprocalRankFusion: Sendable {
 }
 
 /// Configuration for model-based reranking.
-public struct XaiApi_RerankerModel: Sendable {
+public nonisolated struct XaiApi_RerankerModel: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -226,7 +226,7 @@ public struct XaiApi_RerankerModel: Sendable {
 }
 
 /// Message that contains settings needed to do a document search.
-public struct XaiApi_SearchRequest: Sendable {
+public nonisolated struct XaiApi_SearchRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -309,7 +309,7 @@ public struct XaiApi_SearchRequest: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// How to perform the document search. Defaults to HybridRetrieval
-  public enum OneOf_RetrievalMode: Equatable, Sendable {
+  public nonisolated enum OneOf_RetrievalMode: Equatable, Sendable {
     case hybridRetrieval(XaiApi_HybridRetrieval)
     case semanticRetrieval(XaiApi_SemanticRetrieval)
     case keywordRetrieval(XaiApi_KeywordRetrieval)
@@ -326,7 +326,7 @@ public struct XaiApi_SearchRequest: Sendable {
 
 /// SearchResponse message contains the results of a document search operation.
 /// It returns a collection of matching document chunks sorted by relevance score.
-public struct XaiApi_SearchResponse: Sendable {
+public nonisolated struct XaiApi_SearchResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -343,7 +343,7 @@ public struct XaiApi_SearchResponse: Sendable {
 /// SearchMatch message represents a single document chunk that matches the search query.
 /// It contains the document ID, chunk ID, content text, and a relevance score indicating
 /// how well it matches the query.
-public struct XaiApi_SearchMatch: Sendable {
+public nonisolated struct XaiApi_SearchMatch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -375,7 +375,7 @@ public struct XaiApi_SearchMatch: Sendable {
 /// This message configures a source for search content within documents or collections of documents.
 /// Those documents must be uploaded through the management API or directly on the xAI console:
 /// https://console.x.ai.
-public struct XaiApi_DocumentsSource: Sendable {
+public nonisolated struct XaiApi_DocumentsSource: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -390,13 +390,13 @@ public struct XaiApi_DocumentsSource: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_RankingMetric: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_RankingMetric: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0RANKING_METRIC_UNKNOWN\0\u{1}RANKING_METRIC_L2_DISTANCE\0\u{1}RANKING_METRIC_COSINE_SIMILARITY\0")
 }
 
-extension XaiApi_HybridRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_HybridRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HybridRetrieval"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}search_multiplier\0\u{3}reranker_model\0\u{3}reciprocal_rank_fusion\0")
 
@@ -468,7 +468,7 @@ extension XaiApi_HybridRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_KeywordRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_KeywordRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".KeywordRetrieval"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}reranker\0")
 
@@ -502,7 +502,7 @@ extension XaiApi_KeywordRetrieval: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension XaiApi_SemanticRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SemanticRetrieval: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SemanticRetrieval"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}reranker\0")
 
@@ -536,7 +536,7 @@ extension XaiApi_SemanticRetrieval: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension XaiApi_ReciprocalRankFusion: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ReciprocalRankFusion: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ReciprocalRankFusion"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}k\0\u{4}\u{2}embedding_weight\0\u{3}text_weight\0\u{c}\u{2}\u{1}")
 
@@ -580,7 +580,7 @@ extension XaiApi_ReciprocalRankFusion: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension XaiApi_RerankerModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_RerankerModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RerankerModel"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}model\0\u{1}instructions\0")
 
@@ -619,7 +619,7 @@ extension XaiApi_RerankerModel: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_SearchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SearchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}query\0\u{1}source\0\u{1}limit\0\u{3}ranking_metric\0\u{1}instructions\0\u{4}\u{6}hybrid_retrieval\0\u{3}semantic_retrieval\0\u{3}keyword_retrieval\0\u{c}\u{6}\u{1}\u{c}\u{7}\u{1}\u{c}\u{8}\u{1}\u{c}\u{9}\u{1}\u{c}\u{a}\u{1}")
 
@@ -728,7 +728,7 @@ extension XaiApi_SearchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}matches\0")
 
@@ -758,7 +758,7 @@ extension XaiApi_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_SearchMatch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SearchMatch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatch"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{3}chunk_id\0\u{3}chunk_content\0\u{1}score\0\u{3}collection_ids\0")
 
@@ -808,7 +808,7 @@ extension XaiApi_SearchMatch: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension XaiApi_DocumentsSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_DocumentsSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DocumentsSource"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_ids\0")
 

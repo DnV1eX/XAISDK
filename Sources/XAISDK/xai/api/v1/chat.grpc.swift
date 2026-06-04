@@ -98,6 +98,19 @@ public enum XaiApi_Chat: Sendable {
                 type: .unary
             )
         }
+        /// Namespace for "CompactContext" metadata.
+        public enum CompactContext: Sendable {
+            /// Request type for "CompactContext".
+            public typealias Input = XaiApi_CompactContextRequest
+            /// Response type for "CompactContext".
+            public typealias Output = XaiApi_CompactContextResponse
+            /// Descriptor for "CompactContext".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Chat"),
+                method: "CompactContext",
+                type: .unary
+            )
+        }
         /// Descriptors for all methods in the "xai_api.Chat" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             GetCompletion.descriptor,
@@ -105,7 +118,8 @@ public enum XaiApi_Chat: Sendable {
             StartDeferredCompletion.descriptor,
             GetDeferredCompletion.descriptor,
             GetStoredCompletion.descriptor,
-            DeleteStoredCompletion.descriptor
+            DeleteStoredCompletion.descriptor,
+            CompactContext.descriptor
         ]
     }
 }
@@ -269,6 +283,32 @@ extension XaiApi_Chat {
             deserializer: some GRPCCore.MessageDeserializer<XaiApi_DeleteStoredCompletionResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_DeleteStoredCompletionResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CompactContext" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Compacts a full input context and returns a compacted context.
+        /// > The client sends the current input items and receives back a compacted
+        /// > set of items (with an opaque compaction blob) suitable for use as
+        /// > the input to the next request.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_CompactContextRequest` message.
+        ///   - serializer: A serializer for `XaiApi_CompactContextRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_CompactContextResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func compactContext<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_CompactContextRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_CompactContextResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CompactContextResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -497,6 +537,43 @@ extension XaiApi_Chat {
                 onResponse: handleResponse
             )
         }
+
+        /// Call the "CompactContext" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Compacts a full input context and returns a compacted context.
+        /// > The client sends the current input items and receives back a compacted
+        /// > set of items (with an opaque compaction blob) suitable for use as
+        /// > the input to the next request.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_CompactContextRequest` message.
+        ///   - serializer: A serializer for `XaiApi_CompactContextRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_CompactContextResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func compactContext<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_CompactContextRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_CompactContextResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CompactContextResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: XaiApi_Chat.Method.CompactContext.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
     }
 }
 
@@ -674,6 +751,38 @@ extension XaiApi_Chat.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_DeleteStoredCompletionRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_DeleteStoredCompletionResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CompactContext" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Compacts a full input context and returns a compacted context.
+    /// > The client sends the current input items and receives back a compacted
+    /// > set of items (with an opaque compaction blob) suitable for use as
+    /// > the input to the next request.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `XaiApi_CompactContextRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func compactContext<Result>(
+        request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CompactContextResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.compactContext(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_CompactContextRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_CompactContextResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -877,6 +986,42 @@ extension XaiApi_Chat.ClientProtocol {
             metadata: metadata
         )
         return try await self.deleteStoredCompletion(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CompactContext" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Compacts a full input context and returns a compacted context.
+    /// > The client sends the current input items and receives back a compacted
+    /// > set of items (with an opaque compaction blob) suitable for use as
+    /// > the input to the next request.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func compactContext<Result>(
+        _ message: XaiApi_CompactContextRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CompactContextResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<XaiApi_CompactContextRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.compactContext(
             request: request,
             options: options,
             onResponse: handleResponse

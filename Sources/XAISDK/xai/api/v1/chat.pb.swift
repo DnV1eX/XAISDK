@@ -20,12 +20,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Default value / invalid option.
@@ -110,7 +110,7 @@ public enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_MessageRole: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_MessageRole: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Default value / invalid role.
@@ -180,12 +180,13 @@ public enum XaiApi_MessageRole: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalidEffort // = 0
   case effortLow // = 1
   case effortMedium // = 2
   case effortHigh // = 3
+  case effortNone // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -198,6 +199,7 @@ public enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 1: self = .effortLow
     case 2: self = .effortMedium
     case 3: self = .effortHigh
+    case 4: self = .effortNone
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -208,6 +210,7 @@ public enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .effortLow: return 1
     case .effortMedium: return 2
     case .effortHigh: return 3
+    case .effortNone: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -218,12 +221,13 @@ public enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIterable {
     .effortLow,
     .effortMedium,
     .effortHigh,
+    .effortNone,
   ]
 
 }
 
 /// Number of agents to use for multi-agent models.
-public enum XaiApi_AgentCount: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_AgentCount: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Unspecified / unset value.
@@ -267,7 +271,7 @@ public enum XaiApi_AgentCount: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_ToolMode: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ToolMode: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid tool mode.
@@ -317,7 +321,7 @@ public enum XaiApi_ToolMode: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_FormatType: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_FormatType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid format type.
@@ -367,7 +371,7 @@ public enum XaiApi_FormatType: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalid // = 0
 
@@ -446,7 +450,7 @@ public enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum XaiApi_ToolCallStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_ToolCallStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// The tool call is in progress.
@@ -497,7 +501,7 @@ public enum XaiApi_ToolCallStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Mode to control the web search.
-public enum XaiApi_SearchMode: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_SearchMode: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalidSearchMode // = 0
   case offSearchMode // = 1
@@ -539,7 +543,7 @@ public enum XaiApi_SearchMode: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
+public nonisolated struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -823,7 +827,7 @@ public struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct XaiApi_GetChatCompletionResponse: @unchecked Sendable {
+public nonisolated struct XaiApi_GetChatCompletionResponse: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -914,7 +918,7 @@ public struct XaiApi_GetChatCompletionResponse: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct XaiApi_GetChatCompletionChunk: @unchecked Sendable {
+public nonisolated struct XaiApi_GetChatCompletionChunk: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -998,7 +1002,7 @@ public struct XaiApi_GetChatCompletionChunk: @unchecked Sendable {
 
 /// Response from GetDeferredCompletion, including the response if the completion
 /// request has been processed without error.
-public struct XaiApi_GetDeferredCompletionResponse: Sendable {
+public nonisolated struct XaiApi_GetDeferredCompletionResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1024,7 +1028,7 @@ public struct XaiApi_GetDeferredCompletionResponse: Sendable {
 }
 
 /// Contains the response generated by the model.
-public struct XaiApi_CompletionOutput: Sendable {
+public nonisolated struct XaiApi_CompletionOutput: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1065,7 +1069,7 @@ public struct XaiApi_CompletionOutput: Sendable {
 }
 
 /// Holds the model output (i.e. the result of the sampling process).
-public struct XaiApi_CompletionMessage: Sendable {
+public nonisolated struct XaiApi_CompletionMessage: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1095,7 +1099,7 @@ public struct XaiApi_CompletionMessage: Sendable {
 
 /// Holds the differences (deltas) that when concatenated make up the entire
 /// agent response.
-public struct XaiApi_CompletionOutputChunk: Sendable {
+public nonisolated struct XaiApi_CompletionOutputChunk: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1135,7 +1139,7 @@ public struct XaiApi_CompletionOutputChunk: Sendable {
 }
 
 /// The delta of a streaming response.
-public struct XaiApi_Delta: Sendable {
+public nonisolated struct XaiApi_Delta: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1164,7 +1168,7 @@ public struct XaiApi_Delta: Sendable {
   public init() {}
 }
 
-public struct XaiApi_InlineCitation: Sendable {
+public nonisolated struct XaiApi_InlineCitation: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1221,7 +1225,7 @@ public struct XaiApi_InlineCitation: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The citation type.
-  public enum OneOf_Citation: Equatable, Sendable {
+  public nonisolated enum OneOf_Citation: Equatable, Sendable {
     /// The citation returned from the web search tool.
     case webCitation(XaiApi_WebCitation)
     /// The citation returned from the X search tool.
@@ -1234,7 +1238,7 @@ public struct XaiApi_InlineCitation: Sendable {
   public init() {}
 }
 
-public struct XaiApi_WebCitation: Sendable {
+public nonisolated struct XaiApi_WebCitation: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1247,7 +1251,7 @@ public struct XaiApi_WebCitation: Sendable {
   public init() {}
 }
 
-public struct XaiApi_XCitation: Sendable {
+public nonisolated struct XaiApi_XCitation: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1261,7 +1265,7 @@ public struct XaiApi_XCitation: Sendable {
   public init() {}
 }
 
-public struct XaiApi_CollectionsCitation: Sendable {
+public nonisolated struct XaiApi_CollectionsCitation: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1287,7 +1291,7 @@ public struct XaiApi_CollectionsCitation: Sendable {
 }
 
 /// Holding the log probabilities of the sampling.
-public struct XaiApi_LogProbs: Sendable {
+public nonisolated struct XaiApi_LogProbs: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1303,7 +1307,7 @@ public struct XaiApi_LogProbs: Sendable {
 
 /// Represents the logarithmic probability and metadata for a single sampled
 /// token.
-public struct XaiApi_LogProb: Sendable {
+public nonisolated struct XaiApi_LogProb: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1330,7 +1334,7 @@ public struct XaiApi_LogProb: Sendable {
 
 /// Represents an alternative token and its log probability among the top
 /// candidates.
-public struct XaiApi_TopLogProb: Sendable {
+public nonisolated struct XaiApi_TopLogProb: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1350,7 +1354,7 @@ public struct XaiApi_TopLogProb: Sendable {
 }
 
 /// Holds a single content element that is part of an input message.
-public struct XaiApi_Content: Sendable {
+public nonisolated struct XaiApi_Content: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1386,7 +1390,7 @@ public struct XaiApi_Content: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Content: Equatable, Sendable {
+  public nonisolated enum OneOf_Content: Equatable, Sendable {
     /// The content is a pure text message.
     case text(String)
     /// The content is a single image.
@@ -1400,7 +1404,7 @@ public struct XaiApi_Content: Sendable {
 }
 
 /// A file attachment in a message.
-public struct XaiApi_FileContent: Sendable {
+public nonisolated struct XaiApi_FileContent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1445,7 +1449,7 @@ public struct XaiApi_FileContent: Sendable {
 /// message originates from a "role", which indicates the entity type who sent
 /// the message. Messages can contain multiple content elements such as text and
 /// images.
-public struct XaiApi_Message: Sendable {
+public nonisolated struct XaiApi_Message: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1497,7 +1501,7 @@ public struct XaiApi_Message: Sendable {
   fileprivate var _toolCallID: String? = nil
 }
 
-public struct XaiApi_ToolChoice: Sendable {
+public nonisolated struct XaiApi_ToolChoice: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1524,7 +1528,7 @@ public struct XaiApi_ToolChoice: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_ToolChoice: Equatable, Sendable {
+  public nonisolated enum OneOf_ToolChoice: Equatable, Sendable {
     /// Force the model to perform in a given mode.
     case mode(XaiApi_ToolMode)
     /// Force the model to call a particular function.
@@ -1535,7 +1539,7 @@ public struct XaiApi_ToolChoice: Sendable {
   public init() {}
 }
 
-public struct XaiApi_Tool: Sendable {
+public nonisolated struct XaiApi_Tool: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1607,7 +1611,7 @@ public struct XaiApi_Tool: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Tool: Equatable, Sendable {
+  public nonisolated enum OneOf_Tool: Equatable, Sendable {
     /// Tool Call defined by user
     case function(XaiApi_Function)
     /// Built in web search.
@@ -1628,7 +1632,7 @@ public struct XaiApi_Tool: Sendable {
   public init() {}
 }
 
-public struct XaiApi_MCP: Sendable {
+public nonisolated struct XaiApi_MCP: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1665,7 +1669,7 @@ public struct XaiApi_MCP: Sendable {
   fileprivate var _authorization: String? = nil
 }
 
-public struct XaiApi_WebSearch: Sendable {
+public nonisolated struct XaiApi_WebSearch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1706,16 +1710,27 @@ public struct XaiApi_WebSearch: Sendable {
   /// Clears the value of `userLocation`. Subsequent reads from it will return its default value.
   public mutating func clearUserLocation() {self._userLocation = nil}
 
+  /// Enable image search results that can be embedded in responses.
+  public var enableImageSearch: Bool {
+    get {_enableImageSearch ?? false}
+    set {_enableImageSearch = newValue}
+  }
+  /// Returns true if `enableImageSearch` has been explicitly set.
+  public var hasEnableImageSearch: Bool {self._enableImageSearch != nil}
+  /// Clears the value of `enableImageSearch`. Subsequent reads from it will return its default value.
+  public mutating func clearEnableImageSearch() {self._enableImageSearch = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _enableImageUnderstanding: Bool? = nil
   fileprivate var _userLocation: XaiApi_WebSearchUserLocation? = nil
+  fileprivate var _enableImageSearch: Bool? = nil
 }
 
 /// The user location to use for a preference on the search results.
-public struct XaiApi_WebSearchUserLocation: Sendable {
+public nonisolated struct XaiApi_WebSearchUserLocation: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1770,7 +1785,7 @@ public struct XaiApi_WebSearchUserLocation: Sendable {
   fileprivate var _timezone: String? = nil
 }
 
-public struct XaiApi_XSearch: Sendable {
+public nonisolated struct XaiApi_XSearch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1844,7 +1859,7 @@ public struct XaiApi_XSearch: Sendable {
   fileprivate var _enableVideoUnderstanding: Bool? = nil
 }
 
-public struct XaiApi_CodeExecution: Sendable {
+public nonisolated struct XaiApi_CodeExecution: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1854,7 +1869,7 @@ public struct XaiApi_CodeExecution: Sendable {
   public init() {}
 }
 
-public struct XaiApi_CollectionsSearch: Sendable {
+public nonisolated struct XaiApi_CollectionsSearch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1918,7 +1933,7 @@ public struct XaiApi_CollectionsSearch: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// How to perform the document search. Defaults to hybrid retrieval when unset.
-  public enum OneOf_RetrievalMode: Equatable, Sendable {
+  public nonisolated enum OneOf_RetrievalMode: Equatable, Sendable {
     /// Perform hybrid retrieval combining keyword and semantic search.
     case hybridRetrieval(XaiApi_HybridRetrieval)
     /// Perform pure semantic retrieval using dense embeddings.
@@ -1934,7 +1949,7 @@ public struct XaiApi_CollectionsSearch: Sendable {
   fileprivate var _instructions: String? = nil
 }
 
-public struct XaiApi_AttachmentSearch: Sendable {
+public nonisolated struct XaiApi_AttachmentSearch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1956,7 +1971,7 @@ public struct XaiApi_AttachmentSearch: Sendable {
   fileprivate var _limit: Int32? = nil
 }
 
-public struct XaiApi_Function: Sendable {
+public nonisolated struct XaiApi_Function: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1979,7 +1994,7 @@ public struct XaiApi_Function: Sendable {
 }
 
 /// Content of a tool call, typically in a response from model.
-public struct XaiApi_ToolCall: Sendable {
+public nonisolated struct XaiApi_ToolCall: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2018,7 +2033,7 @@ public struct XaiApi_ToolCall: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Information regarding invoking the tool call.
-  public enum OneOf_Tool: Equatable, Sendable {
+  public nonisolated enum OneOf_Tool: Equatable, Sendable {
     case function(XaiApi_FunctionCall)
 
   }
@@ -2029,7 +2044,7 @@ public struct XaiApi_ToolCall: Sendable {
 }
 
 /// Tool call information.
-public struct XaiApi_FunctionCall: Sendable {
+public nonisolated struct XaiApi_FunctionCall: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2046,7 +2061,7 @@ public struct XaiApi_FunctionCall: Sendable {
 }
 
 /// The response format for structured response.
-public struct XaiApi_ResponseFormat: Sendable {
+public nonisolated struct XaiApi_ResponseFormat: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2078,7 +2093,7 @@ public struct XaiApi_ResponseFormat: Sendable {
 /// searching external sources for information. You can specify which sources to search,
 /// set date ranges for relevant content, control the search mode, and configure how
 /// results are returned.
-public struct XaiApi_SearchParameters: Sendable {
+public nonisolated struct XaiApi_SearchParameters: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2145,7 +2160,7 @@ public struct XaiApi_SearchParameters: Sendable {
 /// Defines a source for search requests, specifying the type of content to search.
 /// This message acts as a container for different types of search sources. Only one type
 /// of source can be specified per instance using the oneof field.
-public struct XaiApi_Source: Sendable {
+public nonisolated struct XaiApi_Source: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2194,7 +2209,7 @@ public struct XaiApi_Source: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Source: Equatable, Sendable {
+  public nonisolated enum OneOf_Source: Equatable, Sendable {
     /// Configuration for searching online web content. Use this to search general websites
     /// with options to filter by country, exclude specific domains, or only allow specific domains.
     case web(XaiApi_WebSource)
@@ -2218,7 +2233,7 @@ public struct XaiApi_Source: Sendable {
 /// This message configures a source for searching online web content. It allows specification
 /// of regional content through country codes and filtering of results by excluding or allowing
 /// specific websites.
-public struct XaiApi_WebSource: Sendable {
+public nonisolated struct XaiApi_WebSource: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2262,7 +2277,7 @@ public struct XaiApi_WebSource: Sendable {
 ///
 /// This message configures a source for searching recent articles and reports from news outlets.
 /// It is useful for obtaining current events or topic-specific updates with regional filtering.
-public struct XaiApi_NewsSource: Sendable {
+public nonisolated struct XaiApi_NewsSource: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2298,7 +2313,7 @@ public struct XaiApi_NewsSource: Sendable {
 ///
 /// This message configures a source for searching content on X. It allows focusing the search
 /// on specific user handles to retrieve targeted posts and interactions.
-public struct XaiApi_XSource: Sendable {
+public nonisolated struct XaiApi_XSource: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2350,7 +2365,7 @@ public struct XaiApi_XSource: Sendable {
 ///
 /// This message configures a source for searching content from RSS feeds. It requires specific
 /// feed URLs to query for content updates.
-public struct XaiApi_RssSource: Sendable {
+public nonisolated struct XaiApi_RssSource: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2364,7 +2379,7 @@ public struct XaiApi_RssSource: Sendable {
   public init() {}
 }
 
-public struct XaiApi_RequestSettings: @unchecked Sendable {
+public nonisolated struct XaiApi_RequestSettings: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2511,7 +2526,7 @@ public struct XaiApi_RequestSettings: @unchecked Sendable {
 }
 
 /// Request to retrieve a stored completion response.
-public struct XaiApi_GetStoredCompletionRequest: Sendable {
+public nonisolated struct XaiApi_GetStoredCompletionRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2525,7 +2540,7 @@ public struct XaiApi_GetStoredCompletionRequest: Sendable {
 }
 
 /// Request to delete a stored completion response.
-public struct XaiApi_DeleteStoredCompletionRequest: Sendable {
+public nonisolated struct XaiApi_DeleteStoredCompletionRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2539,7 +2554,7 @@ public struct XaiApi_DeleteStoredCompletionRequest: Sendable {
 }
 
 /// Response for deleting a stored completion.
-public struct XaiApi_DeleteStoredCompletionResponse: Sendable {
+public nonisolated struct XaiApi_DeleteStoredCompletionResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2553,7 +2568,7 @@ public struct XaiApi_DeleteStoredCompletionResponse: Sendable {
 }
 
 /// Holds debug information. Only available to trusted testers.
-public struct XaiApi_DebugOutput: Sendable {
+public nonisolated struct XaiApi_DebugOutput: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -2599,47 +2614,100 @@ public struct XaiApi_DebugOutput: Sendable {
   public init() {}
 }
 
+/// Request for the standalone CompactContext RPC.
+public nonisolated struct XaiApi_CompactContextRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Model to use for generating the compaction blob.
+  public var model: String = String()
+
+  /// Full current input window as proto messages.
+  /// This is the same set of messages the client would send in
+  /// GetCompletionsRequest.messages.
+  public var input: [XaiApi_Message] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// Response from the standalone CompactContext RPC.
+public nonisolated struct XaiApi_CompactContextResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Unique compaction ID (e.g. cmp_<uuid>).
+  public var id: String = String()
+
+  /// Opaque blob representing the compacted conversation. Clients must pass
+  /// this back unchanged in subsequent requests.
+  public var encryptedContent: String = String()
+
+  /// Number of input Message entries (role + content pairs) from the
+  /// original input that were dropped or folded into the compacted blob.
+  public var droppedMessageCount: UInt32 = 0
+
+  /// Token usage from the compacting model call.
+  public var usage: XaiApi_SamplingUsage {
+    get {_usage ?? XaiApi_SamplingUsage()}
+    set {_usage = newValue}
+  }
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
+  public mutating func clearUsage() {self._usage = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _usage: XaiApi_SamplingUsage? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_IncludeOption: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_IncludeOption: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INCLUDE_OPTION_INVALID\0\u{1}INCLUDE_OPTION_WEB_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_X_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_CODE_EXECUTION_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_COLLECTIONS_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_ATTACHMENT_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_MCP_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_INLINE_CITATIONS\0\u{1}INCLUDE_OPTION_VERBOSE_STREAMING\0")
 }
 
-extension XaiApi_MessageRole: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_MessageRole: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_ROLE\0\u{1}ROLE_USER\0\u{1}ROLE_ASSISTANT\0\u{1}ROLE_SYSTEM\0\u{1}ROLE_FUNCTION\0\u{1}ROLE_TOOL\0\u{1}ROLE_DEVELOPER\0")
 }
 
-extension XaiApi_ReasoningEffort: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_EFFORT\0\u{1}EFFORT_LOW\0\u{1}EFFORT_MEDIUM\0\u{1}EFFORT_HIGH\0")
+nonisolated extension XaiApi_ReasoningEffort: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_EFFORT\0\u{1}EFFORT_LOW\0\u{1}EFFORT_MEDIUM\0\u{1}EFFORT_HIGH\0\u{1}EFFORT_NONE\0")
 }
 
-extension XaiApi_AgentCount: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_AgentCount: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AGENT_COUNT_UNSPECIFIED\0\u{1}AGENT_COUNT_4\0\u{1}AGENT_COUNT_16\0")
 }
 
-extension XaiApi_ToolMode: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ToolMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_MODE_INVALID\0\u{1}TOOL_MODE_AUTO\0\u{1}TOOL_MODE_NONE\0\u{1}TOOL_MODE_REQUIRED\0")
 }
 
-extension XaiApi_FormatType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_FormatType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0FORMAT_TYPE_INVALID\0\u{1}FORMAT_TYPE_TEXT\0\u{1}FORMAT_TYPE_JSON_OBJECT\0\u{1}FORMAT_TYPE_JSON_SCHEMA\0")
 }
 
-extension XaiApi_ToolCallType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ToolCallType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_CALL_TYPE_INVALID\0\u{1}TOOL_CALL_TYPE_CLIENT_SIDE_TOOL\0\u{1}TOOL_CALL_TYPE_WEB_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_X_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_CODE_EXECUTION_TOOL\0\u{1}TOOL_CALL_TYPE_COLLECTIONS_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_MCP_TOOL\0\u{1}TOOL_CALL_TYPE_ATTACHMENT_SEARCH_TOOL\0")
 }
 
-extension XaiApi_ToolCallStatus: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ToolCallStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_CALL_STATUS_IN_PROGRESS\0\u{1}TOOL_CALL_STATUS_COMPLETED\0\u{1}TOOL_CALL_STATUS_INCOMPLETE\0\u{1}TOOL_CALL_STATUS_FAILED\0")
 }
 
-extension XaiApi_SearchMode: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SearchMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_SEARCH_MODE\0\u{1}OFF_SEARCH_MODE\0\u{1}ON_SEARCH_MODE\0\u{1}AUTO_SEARCH_MODE\0")
 }
 
-extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetCompletionsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}messages\0\u{1}model\0\u{3}frequency_penalty\0\u{2}\u{2}logprobs\0\u{3}top_logprobs\0\u{3}max_tokens\0\u{1}n\0\u{3}presence_penalty\0\u{3}response_format\0\u{1}seed\0\u{1}stop\0\u{2}\u{2}temperature\0\u{3}top_p\0\u{1}user\0\u{1}tools\0\u{3}tool_choice\0\u{3}reasoning_effort\0\u{3}search_parameters\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{3}max_turns\0\u{1}include\0\u{4}\u{3}agent_count\0\u{c}\u{4}\u{1}")
 
@@ -2877,7 +2945,7 @@ extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetChatCompletionResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{2}\u{3}created\0\u{1}model\0\u{3}system_fingerprint\0\u{2}\u{2}usage\0\u{1}citations\0\u{1}settings\0\u{3}debug_output\0")
 
@@ -3003,7 +3071,7 @@ extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetChatCompletionChunk"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{1}created\0\u{1}model\0\u{3}system_fingerprint\0\u{1}usage\0\u{1}citations\0\u{4}\u{3}debug_output\0")
 
@@ -3122,7 +3190,7 @@ extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension XaiApi_GetDeferredCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetDeferredCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetDeferredCompletionResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}response\0\u{1}status\0")
 
@@ -3161,7 +3229,7 @@ extension XaiApi_GetDeferredCompletionResponse: SwiftProtobuf.Message, SwiftProt
   }
 }
 
-extension XaiApi_CompletionOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CompletionOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CompletionOutput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}finish_reason\0\u{1}index\0\u{1}message\0\u{1}logprobs\0")
 
@@ -3210,7 +3278,7 @@ extension XaiApi_CompletionOutput: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension XaiApi_CompletionMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CompletionMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CompletionMessage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}content\0\u{1}role\0\u{3}tool_calls\0\u{3}reasoning_content\0\u{3}encrypted_content\0\u{1}citations\0")
 
@@ -3265,7 +3333,7 @@ extension XaiApi_CompletionMessage: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension XaiApi_CompletionOutputChunk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CompletionOutputChunk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CompletionOutputChunk"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}delta\0\u{1}logprobs\0\u{3}finish_reason\0\u{1}index\0")
 
@@ -3314,7 +3382,7 @@ extension XaiApi_CompletionOutputChunk: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension XaiApi_Delta: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Delta: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Delta"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}content\0\u{1}role\0\u{3}tool_calls\0\u{3}reasoning_content\0\u{3}encrypted_content\0\u{1}citations\0")
 
@@ -3369,7 +3437,7 @@ extension XaiApi_Delta: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension XaiApi_InlineCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_InlineCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".InlineCitation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{3}start_index\0\u{3}web_citation\0\u{3}x_citation\0\u{3}collections_citation\0\u{3}end_index\0")
 
@@ -3468,7 +3536,7 @@ extension XaiApi_InlineCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_WebCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_WebCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WebCitation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0")
 
@@ -3498,7 +3566,7 @@ extension XaiApi_WebCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension XaiApi_XCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_XCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".XCitation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0")
 
@@ -3528,7 +3596,7 @@ extension XaiApi_XCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension XaiApi_CollectionsCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CollectionsCitation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CollectionsCitation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{3}chunk_id\0\u{3}chunk_content\0\u{1}score\0\u{3}collection_ids\0")
 
@@ -3578,7 +3646,7 @@ extension XaiApi_CollectionsCitation: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension XaiApi_LogProbs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_LogProbs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LogProbs"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}content\0")
 
@@ -3608,7 +3676,7 @@ extension XaiApi_LogProbs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension XaiApi_LogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_LogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LogProb"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}token\0\u{1}logprob\0\u{1}bytes\0\u{3}top_logprobs\0")
 
@@ -3653,7 +3721,7 @@ extension XaiApi_LogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension XaiApi_TopLogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_TopLogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TopLogProb"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}token\0\u{1}logprob\0\u{1}bytes\0")
 
@@ -3693,7 +3761,7 @@ extension XaiApi_TopLogProb: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_Content: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Content: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Content"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}text\0\u{3}image_url\0\u{1}file\0")
 
@@ -3772,7 +3840,7 @@ extension XaiApi_Content: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FileContent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{1}data\0\u{1}filename\0\u{3}mime_type\0\u{1}url\0")
 
@@ -3822,7 +3890,7 @@ extension XaiApi_FileContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension XaiApi_Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Message"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}content\0\u{1}role\0\u{1}name\0\u{3}tool_calls\0\u{3}reasoning_content\0\u{3}encrypted_content\0\u{3}tool_call_id\0")
 
@@ -3886,7 +3954,7 @@ extension XaiApi_Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension XaiApi_ToolChoice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ToolChoice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ToolChoice"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}mode\0\u{3}function_name\0")
 
@@ -3943,7 +4011,7 @@ extension XaiApi_ToolChoice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Tool"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}function\0\u{4}\u{2}web_search\0\u{3}x_search\0\u{3}code_execution\0\u{3}collections_search\0\u{1}mcp\0\u{3}attachment_search\0")
 
@@ -4095,7 +4163,7 @@ extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
   }
 }
 
-extension XaiApi_MCP: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_MCP: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".MCP"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}server_label\0\u{3}server_description\0\u{3}server_url\0\u{3}allowed_tool_names\0\u{1}authorization\0\u{3}extra_headers\0")
 
@@ -4154,9 +4222,9 @@ extension XaiApi_MCP: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
   }
 }
 
-extension XaiApi_WebSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_WebSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WebSearch"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}excluded_domains\0\u{3}allowed_domains\0\u{3}enable_image_understanding\0\u{3}user_location\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}excluded_domains\0\u{3}allowed_domains\0\u{3}enable_image_understanding\0\u{3}user_location\0\u{3}enable_image_search\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -4168,6 +4236,7 @@ extension XaiApi_WebSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 2: try { try decoder.decodeRepeatedStringField(value: &self.allowedDomains) }()
       case 3: try { try decoder.decodeSingularBoolField(value: &self._enableImageUnderstanding) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._userLocation) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._enableImageSearch) }()
       default: break
       }
     }
@@ -4190,6 +4259,9 @@ extension XaiApi_WebSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._userLocation {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._enableImageSearch {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -4198,12 +4270,13 @@ extension XaiApi_WebSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs.allowedDomains != rhs.allowedDomains {return false}
     if lhs._enableImageUnderstanding != rhs._enableImageUnderstanding {return false}
     if lhs._userLocation != rhs._userLocation {return false}
+    if lhs._enableImageSearch != rhs._enableImageSearch {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_WebSearchUserLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_WebSearchUserLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WebSearchUserLocation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}country\0\u{1}city\0\u{1}region\0\u{1}timezone\0")
 
@@ -4252,7 +4325,7 @@ extension XaiApi_WebSearchUserLocation: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension XaiApi_XSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_XSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".XSearch"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}from_date\0\u{3}to_date\0\u{3}allowed_x_handles\0\u{3}excluded_x_handles\0\u{3}enable_image_understanding\0\u{3}enable_video_understanding\0")
 
@@ -4311,7 +4384,7 @@ extension XaiApi_XSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension XaiApi_CodeExecution: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CodeExecution: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CodeExecution"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -4330,7 +4403,7 @@ extension XaiApi_CodeExecution: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_CollectionsSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CollectionsSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CollectionsSearch"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_ids\0\u{1}limit\0\u{1}instructions\0\u{3}hybrid_retrieval\0\u{3}semantic_retrieval\0\u{3}keyword_retrieval\0")
 
@@ -4429,7 +4502,7 @@ extension XaiApi_CollectionsSearch: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension XaiApi_AttachmentSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_AttachmentSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AttachmentSearch"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}limit\0")
 
@@ -4463,7 +4536,7 @@ extension XaiApi_AttachmentSearch: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension XaiApi_Function: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Function: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Function"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}description\0\u{1}strict\0\u{1}parameters\0")
 
@@ -4508,7 +4581,7 @@ extension XaiApi_Function: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ToolCall"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}type\0\u{1}status\0\u{3}error_message\0\u{2}\u{6}function\0")
 
@@ -4574,7 +4647,7 @@ extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension XaiApi_FunctionCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_FunctionCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FunctionCall"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}arguments\0")
 
@@ -4609,7 +4682,7 @@ extension XaiApi_FunctionCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension XaiApi_ResponseFormat: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ResponseFormat: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ResponseFormat"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}format_type\0\u{1}schema\0")
 
@@ -4648,7 +4721,7 @@ extension XaiApi_ResponseFormat: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension XaiApi_SearchParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_SearchParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchParameters"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}mode\0\u{4}\u{3}from_date\0\u{3}to_date\0\u{4}\u{2}return_citations\0\u{3}max_search_results\0\u{1}sources\0")
 
@@ -4707,7 +4780,7 @@ extension XaiApi_SearchParameters: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension XaiApi_Source: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Source: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Source"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}web\0\u{1}news\0\u{1}x\0\u{1}rss\0")
 
@@ -4808,7 +4881,7 @@ extension XaiApi_Source: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 }
 
-extension XaiApi_WebSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_WebSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WebSource"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}excluded_websites\0\u{1}country\0\u{3}safe_search\0\u{3}allowed_websites\0")
 
@@ -4857,7 +4930,7 @@ extension XaiApi_WebSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension XaiApi_NewsSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_NewsSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".NewsSource"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}excluded_websites\0\u{1}country\0\u{3}safe_search\0")
 
@@ -4901,7 +4974,7 @@ extension XaiApi_NewsSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_XSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_XSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".XSource"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{7}included_x_handles\0\u{3}excluded_x_handles\0\u{3}post_favorite_count\0\u{3}post_view_count\0\u{c}\u{6}\u{1}")
 
@@ -4950,7 +5023,7 @@ extension XaiApi_XSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension XaiApi_RssSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_RssSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RssSource"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}links\0")
 
@@ -4980,7 +5053,7 @@ extension XaiApi_RssSource: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension XaiApi_RequestSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_RequestSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RequestSettings"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}max_tokens\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}reasoning_effort\0\u{1}temperature\0\u{3}response_format\0\u{3}tool_choice\0\u{1}tools\0\u{3}top_p\0\u{1}user\0\u{3}search_parameters\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{1}include\0")
 
@@ -5141,7 +5214,7 @@ extension XaiApi_RequestSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_GetStoredCompletionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetStoredCompletionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetStoredCompletionRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}response_id\0")
 
@@ -5171,7 +5244,7 @@ extension XaiApi_GetStoredCompletionRequest: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
-extension XaiApi_DeleteStoredCompletionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_DeleteStoredCompletionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteStoredCompletionRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}response_id\0")
 
@@ -5201,7 +5274,7 @@ extension XaiApi_DeleteStoredCompletionRequest: SwiftProtobuf.Message, SwiftProt
   }
 }
 
-extension XaiApi_DeleteStoredCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_DeleteStoredCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteStoredCompletionResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}response_id\0")
 
@@ -5231,7 +5304,7 @@ extension XaiApi_DeleteStoredCompletionResponse: SwiftProtobuf.Message, SwiftPro
   }
 }
 
-extension XaiApi_DebugOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_DebugOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DebugOutput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}attempts\0\u{1}request\0\u{1}prompt\0\u{1}responses\0\u{3}cache_read_count\0\u{3}cache_read_input_bytes\0\u{3}cache_write_count\0\u{3}cache_write_input_bytes\0\u{3}engine_request\0\u{3}lb_address\0\u{3}sampler_tag\0\u{1}chunks\0")
 
@@ -5311,6 +5384,90 @@ extension XaiApi_DebugOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if lhs.cacheWriteInputBytes != rhs.cacheWriteInputBytes {return false}
     if lhs.lbAddress != rhs.lbAddress {return false}
     if lhs.samplerTag != rhs.samplerTag {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_CompactContextRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CompactContextRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}model\0\u{1}input\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.model) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.input) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.model.isEmpty {
+      try visitor.visitSingularStringField(value: self.model, fieldNumber: 1)
+    }
+    if !self.input.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.input, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_CompactContextRequest, rhs: XaiApi_CompactContextRequest) -> Bool {
+    if lhs.model != rhs.model {return false}
+    if lhs.input != rhs.input {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_CompactContextResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CompactContextResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{3}encrypted_content\0\u{3}dropped_message_count\0\u{1}usage\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.encryptedContent) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.droppedMessageCount) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._usage) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
+    }
+    if !self.encryptedContent.isEmpty {
+      try visitor.visitSingularStringField(value: self.encryptedContent, fieldNumber: 2)
+    }
+    if self.droppedMessageCount != 0 {
+      try visitor.visitSingularUInt32Field(value: self.droppedMessageCount, fieldNumber: 3)
+    }
+    try { if let v = self._usage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_CompactContextResponse, rhs: XaiApi_CompactContextResponse) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.encryptedContent != rhs.encryptedContent {return false}
+    if lhs.droppedMessageCount != rhs.droppedMessageCount {return false}
+    if lhs._usage != rhs._usage {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Payment method types.
-public enum ProdCharger_PaymentMethodType: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum ProdCharger_PaymentMethodType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknownPmt // = 0
   case card // = 10
@@ -68,7 +68,7 @@ public enum ProdCharger_PaymentMethodType: SwiftProtobuf.Enum, Swift.CaseIterabl
 }
 
 /// Representation of USD Cents.
-public struct ProdCharger_Cent: Sendable {
+public nonisolated struct ProdCharger_Cent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -81,7 +81,7 @@ public struct ProdCharger_Cent: Sendable {
 }
 
 /// Payment method types wrapper to allow repeated optional fields.
-public struct ProdCharger_PaymentMethodTypes: Sendable {
+public nonisolated struct ProdCharger_PaymentMethodTypes: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -94,7 +94,7 @@ public struct ProdCharger_PaymentMethodTypes: Sendable {
 }
 
 /// A redacted version of card details. The actual card details are handled by third-party payment providers.
-public struct ProdCharger_Address: Sendable {
+public nonisolated struct ProdCharger_Address: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -123,7 +123,7 @@ public struct ProdCharger_Address: Sendable {
 }
 
 /// Billing info.
-public struct ProdCharger_BillingInfo: Sendable {
+public nonisolated struct ProdCharger_BillingInfo: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -158,7 +158,7 @@ public struct ProdCharger_BillingInfo: Sendable {
 }
 
 /// A redacted version of card details. The actual card details are handled by third-party payment providers.
-public struct ProdCharger_CardDetails: Sendable {
+public nonisolated struct ProdCharger_CardDetails: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -182,7 +182,7 @@ public struct ProdCharger_CardDetails: Sendable {
 }
 
 /// ACH blocked reason.
-public struct ProdCharger_UsBankAccountBlocked: Sendable {
+public nonisolated struct ProdCharger_UsBankAccountBlocked: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -197,7 +197,7 @@ public struct ProdCharger_UsBankAccountBlocked: Sendable {
 }
 
 /// ACH details.
-public struct ProdCharger_UsBankAccountDetails: Sendable {
+public nonisolated struct ProdCharger_UsBankAccountDetails: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -225,7 +225,7 @@ public struct ProdCharger_UsBankAccountDetails: Sendable {
 }
 
 /// Link payment details.
-public struct ProdCharger_LinkDetails: Sendable {
+public nonisolated struct ProdCharger_LinkDetails: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -238,7 +238,7 @@ public struct ProdCharger_LinkDetails: Sendable {
 }
 
 /// Payment method and details.
-public struct ProdCharger_PaymentMethod: @unchecked Sendable {
+public nonisolated struct ProdCharger_PaymentMethod: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -298,13 +298,13 @@ public struct ProdCharger_PaymentMethod: @unchecked Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "prod_charger"
+fileprivate nonisolated let _protobuf_package = "prod_charger"
 
-extension ProdCharger_PaymentMethodType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_PaymentMethodType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0UNKNOWN_PMT\0\u{2}\u{a}CARD\0\u{2}\u{a}CASHAPP\0\u{2}\u{a}LINK\0\u{2}\u{a}US_BANK_ACCOUNT\0")
 }
 
-extension ProdCharger_Cent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_Cent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Cent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}val\0")
 
@@ -334,7 +334,7 @@ extension ProdCharger_Cent: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension ProdCharger_PaymentMethodTypes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_PaymentMethodTypes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PaymentMethodTypes"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}payment_method_types\0")
 
@@ -364,7 +364,7 @@ extension ProdCharger_PaymentMethodTypes: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension ProdCharger_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Address"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}line1\0\u{1}line2\0\u{2}\u{4}city\0\u{2}\u{5}country\0\u{4}\u{a}postal_code\0\u{2}\u{a}state\0")
 
@@ -419,7 +419,7 @@ extension ProdCharger_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension ProdCharger_BillingInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_BillingInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BillingInfo"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}name\0\u{2}\u{a}address\0\u{2}\u{a}email\0\u{4}\u{a}tax_id_type\0\u{3}tax_number\0")
 
@@ -473,7 +473,7 @@ extension ProdCharger_BillingInfo: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension ProdCharger_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CardDetails"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}brand\0\u{4}\u{a}exp_month\0\u{4}\u{a}exp_year\0\u{2}\u{a}last4\0")
 
@@ -518,7 +518,7 @@ extension ProdCharger_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension ProdCharger_UsBankAccountBlocked: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_UsBankAccountBlocked: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UsBankAccountBlocked"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}network_code\0\u{4}\u{a}block_reason\0")
 
@@ -553,7 +553,7 @@ extension ProdCharger_UsBankAccountBlocked: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension ProdCharger_UsBankAccountDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_UsBankAccountDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UsBankAccountDetails"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}bank_name\0\u{2}\u{a}last4\0\u{4}\u{a}routing_number\0\u{2}\u{a}blocked\0")
 
@@ -602,7 +602,7 @@ extension ProdCharger_UsBankAccountDetails: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension ProdCharger_LinkDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_LinkDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LinkDetails"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}email\0")
 
@@ -632,7 +632,7 @@ extension ProdCharger_LinkDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension ProdCharger_PaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdCharger_PaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PaymentMethod"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}payment_method_id\0\u{4}\u{a}billing_info\0\u{4}\u{a}card_details\0\u{3}us_bank_account_details\0\u{3}link_details\0\u{4}\u{8}payment_type\0")
 

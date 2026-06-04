@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Holds basic information about a batch process.
-public struct XaiApi_Batch: @unchecked Sendable {
+public nonisolated struct XaiApi_Batch: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -104,6 +104,17 @@ public struct XaiApi_Batch: @unchecked Sendable {
   /// Clears the value of `costBreakdown`. Subsequent reads from it will return its default value.
   public mutating func clearCostBreakdown() {_uniqueStorage()._costBreakdown = nil}
 
+  /// File ID of the uploaded JSONL input file (from Files API). Only set
+  /// when the batch was created via file upload.
+  public var inputFileID: String {
+    get {_storage._inputFileID ?? String()}
+    set {_uniqueStorage()._inputFileID = newValue}
+  }
+  /// Returns true if `inputFileID` has been explicitly set.
+  public var hasInputFileID: Bool {_storage._inputFileID != nil}
+  /// Clears the value of `inputFileID`. Subsequent reads from it will return its default value.
+  public mutating func clearInputFileID() {_uniqueStorage()._inputFileID = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -112,7 +123,7 @@ public struct XaiApi_Batch: @unchecked Sendable {
 }
 
 /// Holds aggregate information about the current state of a batch process.
-public struct XaiApi_BatchState: Sendable {
+public nonisolated struct XaiApi_BatchState: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -138,7 +149,7 @@ public struct XaiApi_BatchState: Sendable {
 }
 
 /// Holds cost information for processed batch requests.
-public struct XaiApi_BatchCostBreakdown: Sendable {
+public nonisolated struct XaiApi_BatchCostBreakdown: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -167,7 +178,7 @@ public struct XaiApi_BatchCostBreakdown: Sendable {
 }
 
 /// Cost breakdown for a specific endpoint.
-public struct XaiApi_EndpointCost: Sendable {
+public nonisolated struct XaiApi_EndpointCost: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -187,7 +198,7 @@ public struct XaiApi_EndpointCost: Sendable {
 }
 
 /// A request that can be added to a batch for processing.
-public struct XaiApi_BatchRequest: Sendable {
+public nonisolated struct XaiApi_BatchRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -216,12 +227,45 @@ public struct XaiApi_BatchRequest: Sendable {
     set {request = .completionRequest(newValue)}
   }
 
+  /// An image generation or editing request to send for processing in the batch.
+  public var imageRequest: XaiApi_GenerateImageRequest {
+    get {
+      if case .imageRequest(let v)? = request {return v}
+      return XaiApi_GenerateImageRequest()
+    }
+    set {request = .imageRequest(newValue)}
+  }
+
+  /// A video generation request to send for processing in the batch.
+  public var videoRequest: XaiApi_GenerateVideoRequest {
+    get {
+      if case .videoRequest(let v)? = request {return v}
+      return XaiApi_GenerateVideoRequest()
+    }
+    set {request = .videoRequest(newValue)}
+  }
+
+  /// A video extension request to send for processing in the batch.
+  public var videoExtensionRequest: XaiApi_ExtendVideoRequest {
+    get {
+      if case .videoExtensionRequest(let v)? = request {return v}
+      return XaiApi_ExtendVideoRequest()
+    }
+    set {request = .videoExtensionRequest(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The request to add for processing in the batch.
-  public enum OneOf_Request: Equatable, Sendable {
+  public nonisolated enum OneOf_Request: Equatable, Sendable {
     /// A completion request to send for processing in the batch.
     case completionRequest(XaiApi_GetCompletionsRequest)
+    /// An image generation or editing request to send for processing in the batch.
+    case imageRequest(XaiApi_GenerateImageRequest)
+    /// A video generation request to send for processing in the batch.
+    case videoRequest(XaiApi_GenerateVideoRequest)
+    /// A video extension request to send for processing in the batch.
+    case videoExtensionRequest(XaiApi_ExtendVideoRequest)
 
   }
 
@@ -230,8 +274,8 @@ public struct XaiApi_BatchRequest: Sendable {
   fileprivate var _batchRequestID: String? = nil
 }
 
-/// A container for the completion response that is returned in a `BatchResult`.
-public struct XaiApi_BatchResultData: Sendable {
+/// A container for the response that is returned in a `BatchResult`.
+public nonisolated struct XaiApi_BatchResultData: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -248,12 +292,34 @@ public struct XaiApi_BatchResultData: Sendable {
     set {response = .completionResponse(newValue)}
   }
 
+  /// An image generation response that has finished processing in the batch.
+  public var imageResponse: XaiApi_ImageResponse {
+    get {
+      if case .imageResponse(let v)? = response {return v}
+      return XaiApi_ImageResponse()
+    }
+    set {response = .imageResponse(newValue)}
+  }
+
+  /// A video generation response that has finished processing in the batch.
+  public var videoResponse: XaiApi_VideoResponse {
+    get {
+      if case .videoResponse(let v)? = response {return v}
+      return XaiApi_VideoResponse()
+    }
+    set {response = .videoResponse(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The response from the batch request.
-  public enum OneOf_Response: Equatable, Sendable {
+  public nonisolated enum OneOf_Response: Equatable, Sendable {
     /// A completion response that has finished processing in the batch.
     case completionResponse(XaiApi_GetChatCompletionResponse)
+    /// An image generation response that has finished processing in the batch.
+    case imageResponse(XaiApi_ImageResponse)
+    /// A video generation response that has finished processing in the batch.
+    case videoResponse(XaiApi_VideoResponse)
 
   }
 
@@ -262,7 +328,7 @@ public struct XaiApi_BatchResultData: Sendable {
 
 /// The result corresponding to a `BatchRequest`. Returns the result if processing is successful, or error if processing
 /// has failed.
-public struct XaiApi_BatchResult: Sendable {
+public nonisolated struct XaiApi_BatchResult: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -294,7 +360,7 @@ public struct XaiApi_BatchResult: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The result data, or error status if processing has failed.
-  public enum OneOf_Result: Equatable, Sendable {
+  public nonisolated enum OneOf_Result: Equatable, Sendable {
     case response(XaiApi_BatchResultData)
     case error(Google_Rpc_Status)
 
@@ -304,7 +370,7 @@ public struct XaiApi_BatchResult: Sendable {
 }
 
 /// Metadata about an individual batch request.
-public struct XaiApi_BatchRequestMetadata: Sendable {
+public nonisolated struct XaiApi_BatchRequestMetadata: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -343,7 +409,7 @@ public struct XaiApi_BatchRequestMetadata: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The processing state of this batch request.
-  public enum State: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public nonisolated enum State: SwiftProtobuf.Enum, Swift.CaseIterable {
     public typealias RawValue = Int
     case unknown // = 0
     case pending // = 1
@@ -396,7 +462,7 @@ public struct XaiApi_BatchRequestMetadata: Sendable {
 }
 
 /// Request to create a new batch.
-public struct XaiApi_CreateBatchRequest: Sendable {
+public nonisolated struct XaiApi_CreateBatchRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -404,13 +470,17 @@ public struct XaiApi_CreateBatchRequest: Sendable {
   /// The name of the batch to be created.
   public var name: String = String()
 
+  /// Optional file ID of a JSONL input file (uploaded via the Files API).
+  /// When provided, the batch will be populated from the file's contents.
+  public var inputFileID: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
 /// Request to add `BatchRequest`s to an existing batch for processing.
-public struct XaiApi_AddBatchRequestsRequest: Sendable {
+public nonisolated struct XaiApi_AddBatchRequestsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -427,7 +497,7 @@ public struct XaiApi_AddBatchRequestsRequest: Sendable {
 }
 
 /// Request to get the information of a batch.
-public struct XaiApi_GetBatchRequest: Sendable {
+public nonisolated struct XaiApi_GetBatchRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -441,7 +511,7 @@ public struct XaiApi_GetBatchRequest: Sendable {
 }
 
 /// Request to list all batches in the team.
-public struct XaiApi_ListBatchesRequest: Sendable {
+public nonisolated struct XaiApi_ListBatchesRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -467,7 +537,7 @@ public struct XaiApi_ListBatchesRequest: Sendable {
 }
 
 /// Response containing all the batches on a page.
-public struct XaiApi_ListBatchesResponse: Sendable {
+public nonisolated struct XaiApi_ListBatchesResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -493,7 +563,7 @@ public struct XaiApi_ListBatchesResponse: Sendable {
 }
 
 /// Request to cancel processing of all the batch requests in a batch.
-public struct XaiApi_CancelBatchRequest: Sendable {
+public nonisolated struct XaiApi_CancelBatchRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -507,7 +577,7 @@ public struct XaiApi_CancelBatchRequest: Sendable {
 }
 
 /// Request for the request metadata within a batch.
-public struct XaiApi_ListBatchRequestMetadataRequest: Sendable {
+public nonisolated struct XaiApi_ListBatchRequestMetadataRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -528,6 +598,9 @@ public struct XaiApi_ListBatchRequestMetadataRequest: Sendable {
   /// Clears the value of `paginationToken`. Subsequent reads from it will return its default value.
   public mutating func clearPaginationToken() {self._paginationToken = nil}
 
+  /// Optional filter by request state. If empty, all states are returned.
+  public var status: [XaiApi_BatchRequestMetadata.State] = []
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -536,7 +609,7 @@ public struct XaiApi_ListBatchRequestMetadataRequest: Sendable {
 }
 
 /// Response with the metadata of batch requests within a batch.
-public struct XaiApi_ListBatchRequestMetadataResponse: Sendable {
+public nonisolated struct XaiApi_ListBatchRequestMetadataResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -562,7 +635,7 @@ public struct XaiApi_ListBatchRequestMetadataResponse: Sendable {
 }
 
 /// Request to list a batch's processing results.
-public struct XaiApi_ListBatchResultsRequest: Sendable {
+public nonisolated struct XaiApi_ListBatchResultsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -591,7 +664,7 @@ public struct XaiApi_ListBatchResultsRequest: Sendable {
 }
 
 /// Response with the batch's processing results.
-public struct XaiApi_ListBatchResultsResponse: Sendable {
+public nonisolated struct XaiApi_ListBatchResultsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -616,7 +689,7 @@ public struct XaiApi_ListBatchResultsResponse: Sendable {
   fileprivate var _paginationToken: String? = nil
 }
 
-public struct XaiApi_GetBatchRequestResultRequest: Sendable {
+public nonisolated struct XaiApi_GetBatchRequestResultRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -632,46 +705,45 @@ public struct XaiApi_GetBatchRequestResultRequest: Sendable {
   public init() {}
 }
 
-public struct XaiApi_GetBatchRequestResultResponse: Sendable {
+public nonisolated struct XaiApi_GetBatchRequestResultResponse: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// The request that was processed.
   public var request: XaiApi_BatchRequest {
-    get {_request ?? XaiApi_BatchRequest()}
-    set {_request = newValue}
+    get {_storage._request ?? XaiApi_BatchRequest()}
+    set {_uniqueStorage()._request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  public var hasRequest: Bool {self._request != nil}
+  public var hasRequest: Bool {_storage._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  public mutating func clearRequest() {self._request = nil}
+  public mutating func clearRequest() {_uniqueStorage()._request = nil}
 
   /// The response that was returned.
   public var result: XaiApi_BatchResult {
-    get {_result ?? XaiApi_BatchResult()}
-    set {_result = newValue}
+    get {_storage._result ?? XaiApi_BatchResult()}
+    set {_uniqueStorage()._result = newValue}
   }
   /// Returns true if `result` has been explicitly set.
-  public var hasResult: Bool {self._result != nil}
+  public var hasResult: Bool {_storage._result != nil}
   /// Clears the value of `result`. Subsequent reads from it will return its default value.
-  public mutating func clearResult() {self._result = nil}
+  public mutating func clearResult() {_uniqueStorage()._result = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _request: XaiApi_BatchRequest? = nil
-  fileprivate var _result: XaiApi_BatchResult? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Batch"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{1}name\0\u{3}create_time\0\u{3}expire_time\0\u{3}create_api_key_id\0\u{3}cancel_time\0\u{3}cancel_by_xai_message\0\u{1}state\0\u{3}cost_breakdown\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{1}name\0\u{3}create_time\0\u{3}expire_time\0\u{3}create_api_key_id\0\u{3}cancel_time\0\u{3}cancel_by_xai_message\0\u{1}state\0\u{3}cost_breakdown\0\u{3}input_file_id\0")
 
   fileprivate class _StorageClass {
     var _batchID: String = String()
@@ -683,6 +755,7 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     var _cancelByXaiMessage: String? = nil
     var _state: XaiApi_BatchState? = nil
     var _costBreakdown: XaiApi_BatchCostBreakdown? = nil
+    var _inputFileID: String? = nil
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -702,6 +775,7 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       _cancelByXaiMessage = source._cancelByXaiMessage
       _state = source._state
       _costBreakdown = source._costBreakdown
+      _inputFileID = source._inputFileID
     }
   }
 
@@ -729,6 +803,7 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         case 7: try { try decoder.decodeSingularStringField(value: &_storage._cancelByXaiMessage) }()
         case 8: try { try decoder.decodeSingularMessageField(value: &_storage._state) }()
         case 9: try { try decoder.decodeSingularMessageField(value: &_storage._costBreakdown) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._inputFileID) }()
         default: break
         }
       }
@@ -768,6 +843,9 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       try { if let v = _storage._costBreakdown {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
       } }()
+      try { if let v = _storage._inputFileID {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 10)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -786,6 +864,7 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         if _storage._cancelByXaiMessage != rhs_storage._cancelByXaiMessage {return false}
         if _storage._state != rhs_storage._state {return false}
         if _storage._costBreakdown != rhs_storage._costBreakdown {return false}
+        if _storage._inputFileID != rhs_storage._inputFileID {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -795,7 +874,7 @@ extension XaiApi_Batch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension XaiApi_BatchState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchState"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}num_requests\0\u{3}num_pending\0\u{3}num_success\0\u{3}num_error\0\u{3}num_cancelled\0")
 
@@ -845,7 +924,7 @@ extension XaiApi_BatchState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_BatchCostBreakdown: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchCostBreakdown: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchCostBreakdown"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}total_cost_usd_ticks\0\u{3}endpoint_costs\0\u{3}calculation_time\0")
 
@@ -889,7 +968,7 @@ extension XaiApi_BatchCostBreakdown: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension XaiApi_EndpointCost: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EndpointCost: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EndpointCost"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}endpoint\0\u{3}cost_usd_ticks\0\u{3}request_count\0")
 
@@ -929,9 +1008,9 @@ extension XaiApi_EndpointCost: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension XaiApi_BatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_request_id\0\u{3}completion_request\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_request_id\0\u{3}completion_request\0\u{3}image_request\0\u{3}video_request\0\u{3}video_extension_request\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -953,6 +1032,45 @@ extension XaiApi_BatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
           self.request = .completionRequest(v)
         }
       }()
+      case 3: try {
+        var v: XaiApi_GenerateImageRequest?
+        var hadOneofValue = false
+        if let current = self.request {
+          hadOneofValue = true
+          if case .imageRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .imageRequest(v)
+        }
+      }()
+      case 4: try {
+        var v: XaiApi_GenerateVideoRequest?
+        var hadOneofValue = false
+        if let current = self.request {
+          hadOneofValue = true
+          if case .videoRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .videoRequest(v)
+        }
+      }()
+      case 5: try {
+        var v: XaiApi_ExtendVideoRequest?
+        var hadOneofValue = false
+        if let current = self.request {
+          hadOneofValue = true
+          if case .videoExtensionRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .videoExtensionRequest(v)
+        }
+      }()
       default: break
       }
     }
@@ -966,9 +1084,25 @@ extension XaiApi_BatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try { if let v = self._batchRequestID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     } }()
-    try { if case .completionRequest(let v)? = self.request {
+    switch self.request {
+    case .completionRequest?: try {
+      guard case .completionRequest(let v)? = self.request else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
+    }()
+    case .imageRequest?: try {
+      guard case .imageRequest(let v)? = self.request else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
+    case .videoRequest?: try {
+      guard case .videoRequest(let v)? = self.request else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }()
+    case .videoExtensionRequest?: try {
+      guard case .videoExtensionRequest(let v)? = self.request else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
+    case nil: break
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -980,9 +1114,9 @@ extension XaiApi_BatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension XaiApi_BatchResultData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchResultData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchResultData"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}completion_response\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}completion_response\0\u{3}image_response\0\u{3}video_response\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1003,6 +1137,32 @@ extension XaiApi_BatchResultData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
           self.response = .completionResponse(v)
         }
       }()
+      case 3: try {
+        var v: XaiApi_ImageResponse?
+        var hadOneofValue = false
+        if let current = self.response {
+          hadOneofValue = true
+          if case .imageResponse(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .imageResponse(v)
+        }
+      }()
+      case 4: try {
+        var v: XaiApi_VideoResponse?
+        var hadOneofValue = false
+        if let current = self.response {
+          hadOneofValue = true
+          if case .videoResponse(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .videoResponse(v)
+        }
+      }()
       default: break
       }
     }
@@ -1013,9 +1173,21 @@ extension XaiApi_BatchResultData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if case .completionResponse(let v)? = self.response {
+    switch self.response {
+    case .completionResponse?: try {
+      guard case .completionResponse(let v)? = self.response else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
+    }()
+    case .imageResponse?: try {
+      guard case .imageResponse(let v)? = self.response else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
+    case .videoResponse?: try {
+      guard case .videoResponse(let v)? = self.response else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }()
+    case nil: break
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1026,7 +1198,7 @@ extension XaiApi_BatchResultData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchResult"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_request_id\0\u{2}\u{2}error\0\u{1}response\0")
 
@@ -1098,7 +1270,7 @@ extension XaiApi_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension XaiApi_BatchRequestMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchRequestMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchRequestMetadata"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_request_id\0\u{1}endpoint\0\u{1}model\0\u{1}state\0\u{3}create_time\0\u{3}finish_time\0")
 
@@ -1157,13 +1329,13 @@ extension XaiApi_BatchRequestMetadata: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension XaiApi_BatchRequestMetadata.State: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_BatchRequestMetadata.State: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0STATE_UNKNOWN\0\u{1}STATE_PENDING\0\u{1}STATE_SUCCEEDED\0\u{1}STATE_CANCELLED\0\u{1}STATE_FAILED\0")
 }
 
-extension XaiApi_CreateBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CreateBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CreateBatchRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{3}input_file_id\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1172,6 +1344,7 @@ extension XaiApi_CreateBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.inputFileID) }()
       default: break
       }
     }
@@ -1181,17 +1354,21 @@ extension XaiApi_CreateBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
     }
+    if !self.inputFileID.isEmpty {
+      try visitor.visitSingularStringField(value: self.inputFileID, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_CreateBatchRequest, rhs: XaiApi_CreateBatchRequest) -> Bool {
     if lhs.name != rhs.name {return false}
+    if lhs.inputFileID != rhs.inputFileID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_AddBatchRequestsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_AddBatchRequestsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AddBatchRequestsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{3}batch_requests\0")
 
@@ -1226,7 +1403,7 @@ extension XaiApi_AddBatchRequestsRequest: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension XaiApi_GetBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetBatchRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0")
 
@@ -1256,7 +1433,7 @@ extension XaiApi_GetBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension XaiApi_ListBatchesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchesRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}limit\0\u{3}pagination_token\0")
 
@@ -1295,7 +1472,7 @@ extension XaiApi_ListBatchesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension XaiApi_ListBatchesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchesResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}batches\0\u{3}pagination_token\0")
 
@@ -1334,7 +1511,7 @@ extension XaiApi_ListBatchesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension XaiApi_CancelBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_CancelBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CancelBatchRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0")
 
@@ -1364,9 +1541,9 @@ extension XaiApi_CancelBatchRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension XaiApi_ListBatchRequestMetadataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchRequestMetadataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchRequestMetadataRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{1}limit\0\u{3}pagination_token\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{1}limit\0\u{3}pagination_token\0\u{1}status\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1377,6 +1554,7 @@ extension XaiApi_ListBatchRequestMetadataRequest: SwiftProtobuf.Message, SwiftPr
       case 1: try { try decoder.decodeSingularStringField(value: &self.batchID) }()
       case 2: try { try decoder.decodeSingularInt32Field(value: &self.limit) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._paginationToken) }()
+      case 4: try { try decoder.decodeRepeatedEnumField(value: &self.status) }()
       default: break
       }
     }
@@ -1396,6 +1574,9 @@ extension XaiApi_ListBatchRequestMetadataRequest: SwiftProtobuf.Message, SwiftPr
     try { if let v = self._paginationToken {
       try visitor.visitSingularStringField(value: v, fieldNumber: 3)
     } }()
+    if !self.status.isEmpty {
+      try visitor.visitPackedEnumField(value: self.status, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1403,12 +1584,13 @@ extension XaiApi_ListBatchRequestMetadataRequest: SwiftProtobuf.Message, SwiftPr
     if lhs.batchID != rhs.batchID {return false}
     if lhs.limit != rhs.limit {return false}
     if lhs._paginationToken != rhs._paginationToken {return false}
+    if lhs.status != rhs.status {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension XaiApi_ListBatchRequestMetadataResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchRequestMetadataResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchRequestMetadataResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_request_metadata\0\u{3}pagination_token\0")
 
@@ -1447,7 +1629,7 @@ extension XaiApi_ListBatchRequestMetadataResponse: SwiftProtobuf.Message, SwiftP
   }
 }
 
-extension XaiApi_ListBatchResultsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchResultsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchResultsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{1}limit\0\u{3}pagination_token\0")
 
@@ -1491,7 +1673,7 @@ extension XaiApi_ListBatchResultsRequest: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension XaiApi_ListBatchResultsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_ListBatchResultsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListBatchResultsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}results\0\u{3}pagination_token\0")
 
@@ -1530,7 +1712,7 @@ extension XaiApi_ListBatchResultsResponse: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension XaiApi_GetBatchRequestResultRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetBatchRequestResultRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetBatchRequestResultRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}batch_id\0\u{3}batch_request_id\0")
 
@@ -1565,40 +1747,78 @@ extension XaiApi_GetBatchRequestResultRequest: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension XaiApi_GetBatchRequestResultResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_GetBatchRequestResultResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetBatchRequestResultResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}request\0\u{1}result\0")
 
+  fileprivate class _StorageClass {
+    var _request: XaiApi_BatchRequest? = nil
+    var _result: XaiApi_BatchResult? = nil
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _request = source._request
+      _result = source._result
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._request) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._result) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._request) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._result) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._request {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._result {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._request {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      try { if let v = _storage._result {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_GetBatchRequestResultResponse, rhs: XaiApi_GetBatchRequestResultResponse) -> Bool {
-    if lhs._request != rhs._request {return false}
-    if lhs._result != rhs._result {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._request != rhs_storage._request {return false}
+        if _storage._result != rhs_storage._result {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -119,8 +119,9 @@ guard let xaiClient = try? client(proxy: proxyHost, metadata: ["x-app-attest": a
 
 ## Supported Platforms
 
+The SDK requires **Swift 6.1** or later.
+
 **Apple Platforms (using Network framework transport):**
-The SDK requires the following minimum platform versions:
 - macOS 15.0+
 - iOS 18.0+
 - watchOS 11.0+
@@ -148,7 +149,12 @@ Run the following commands from the root of the repository:
 git submodule update --remote xai-proto
 ```
 
-2. Regenerate the Swift source files:
+2. Remove previously generated folders (the plugin does not delete stale files):
+```bash
+rm -rf Sources/XAISDK/google Sources/XAISDK/xai
+```
+
+3. Regenerate the Swift source files:
 ```bash
 swift package --allow-writing-to-package-directory generate-grpc-code-from-protos --output-path Sources/XAISDK --no-servers --access-level public -- googleapis xai-proto/proto
 ```

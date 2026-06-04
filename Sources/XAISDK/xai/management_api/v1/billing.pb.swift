@@ -15,13 +15,13 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Request to set the billing information on the team.
-public struct ProdMcBilling_SetBillingInfoReq: Sendable {
+public nonisolated struct ProdMcBilling_SetBillingInfoReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -47,7 +47,7 @@ public struct ProdMcBilling_SetBillingInfoReq: Sendable {
 }
 
 /// Response of setting the billing information on the team.
-public struct ProdMcBilling_SetBillingInfoResp: Sendable {
+public nonisolated struct ProdMcBilling_SetBillingInfoResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -58,7 +58,7 @@ public struct ProdMcBilling_SetBillingInfoResp: Sendable {
 }
 
 ///  Request for getting billing information.
-public struct ProdMcBilling_GetBillingInfoReq: Sendable {
+public nonisolated struct ProdMcBilling_GetBillingInfoReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -72,7 +72,7 @@ public struct ProdMcBilling_GetBillingInfoReq: Sendable {
 }
 
 /// Response containing the billing information of the team.
-public struct ProdMcBilling_GetBillingInfoResp: Sendable {
+public nonisolated struct ProdMcBilling_GetBillingInfoResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -95,7 +95,7 @@ public struct ProdMcBilling_GetBillingInfoResp: Sendable {
 }
 
 /// List payment methods that belong to the team.
-public struct ProdMcBilling_ListPaymentMethodsReq: Sendable {
+public nonisolated struct ProdMcBilling_ListPaymentMethodsReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -110,7 +110,7 @@ public struct ProdMcBilling_ListPaymentMethodsReq: Sendable {
 
 /// Represents an incomplete attempt to add a payment method.
 /// Might resolve into a payment method.
-public struct ProdMcBilling_PendingPaymentMethod: Sendable {
+public nonisolated struct ProdMcBilling_PendingPaymentMethod: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -124,7 +124,7 @@ public struct ProdMcBilling_PendingPaymentMethod: Sendable {
 }
 
 /// Response containing a list of payment methods for the team.
-public struct ProdMcBilling_ListPaymentMethodsResp: Sendable {
+public nonisolated struct ProdMcBilling_ListPaymentMethodsResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -150,7 +150,7 @@ public struct ProdMcBilling_ListPaymentMethodsResp: Sendable {
 }
 
 /// Request to set default payment method on a team.
-public struct ProdMcBilling_SetDefaultPaymentMethodReq: Sendable {
+public nonisolated struct ProdMcBilling_SetDefaultPaymentMethodReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -167,7 +167,7 @@ public struct ProdMcBilling_SetDefaultPaymentMethodReq: Sendable {
 }
 
 /// Response to setting default payment method.
-public struct ProdMcBilling_SetDefaultPaymentMethodResp: Sendable {
+public nonisolated struct ProdMcBilling_SetDefaultPaymentMethodResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -178,7 +178,7 @@ public struct ProdMcBilling_SetDefaultPaymentMethodResp: Sendable {
 }
 
 /// Each line on the invoice.
-public struct ProdMcBilling_Line: Sendable {
+public nonisolated struct ProdMcBilling_Line: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -207,7 +207,7 @@ public struct ProdMcBilling_Line: Sendable {
 }
 
 /// The invoice object.
-public struct ProdMcBilling_CoreInvoice: Sendable {
+public nonisolated struct ProdMcBilling_CoreInvoice: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -270,7 +270,7 @@ public struct ProdMcBilling_CoreInvoice: Sendable {
 }
 
 /// Request to get the payment amount of current month's monthly invoice.
-public struct ProdMcBilling_GetAmountToPayReq: Sendable {
+public nonisolated struct ProdMcBilling_GetAmountToPayReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -284,7 +284,7 @@ public struct ProdMcBilling_GetAmountToPayReq: Sendable {
 }
 
 /// Response of the payment amount of current month's monthly invoice.
-public struct ProdMcBilling_GetAmountToPayResp: Sendable {
+public nonisolated struct ProdMcBilling_GetAmountToPayResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -324,7 +324,7 @@ public struct ProdMcBilling_GetAmountToPayResp: Sendable {
 }
 
 /// Request to get historical API usage.
-public struct ProdMcBilling_AnalyzeBillingItemsRequest: Sendable {
+public nonisolated struct ProdMcBilling_AnalyzeBillingItemsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -349,7 +349,7 @@ public struct ProdMcBilling_AnalyzeBillingItemsRequest: Sendable {
   fileprivate var _analyticsRequest: Prod_ClickhouseAnalytics_AnalyticsRequest? = nil
 }
 
-public struct ProdMcBilling_BillingCycle: Sendable {
+public nonisolated struct ProdMcBilling_BillingCycle: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -363,7 +363,7 @@ public struct ProdMcBilling_BillingCycle: Sendable {
   public init() {}
 }
 
-public struct ProdMcBilling_ChargerAttempt: Sendable {
+public nonisolated struct ProdMcBilling_ChargerAttempt: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -380,7 +380,7 @@ public struct ProdMcBilling_ChargerAttempt: Sendable {
   public init() {}
 }
 
-public struct ProdMcBilling_MonthlyInvoiceBundle: Sendable {
+public nonisolated struct ProdMcBilling_MonthlyInvoiceBundle: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -457,7 +457,7 @@ public struct ProdMcBilling_MonthlyInvoiceBundle: Sendable {
   fileprivate var _correctionsCsvAssetKeySuffix: String? = nil
 }
 
-public struct ProdMcBilling_PrepaidInvoiceBundle: Sendable {
+public nonisolated struct ProdMcBilling_PrepaidInvoiceBundle: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -467,7 +467,7 @@ public struct ProdMcBilling_PrepaidInvoiceBundle: Sendable {
   public init() {}
 }
 
-public struct ProdMcBilling_SubscriptionsInvoiceBundle: Sendable {
+public nonisolated struct ProdMcBilling_SubscriptionsInvoiceBundle: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -478,7 +478,7 @@ public struct ProdMcBilling_SubscriptionsInvoiceBundle: Sendable {
 }
 
 /// Invoice item.
-public struct ProdMcBilling_InvoiceBundle: @unchecked Sendable {
+public nonisolated struct ProdMcBilling_InvoiceBundle: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -595,7 +595,7 @@ public struct ProdMcBilling_InvoiceBundle: @unchecked Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Type of the invoice.
-  public enum OneOf_Flavour: Equatable, Sendable {
+  public nonisolated enum OneOf_Flavour: Equatable, Sendable {
     case monthly(ProdMcBilling_MonthlyInvoiceBundle)
     case prepaid(ProdMcBilling_PrepaidInvoiceBundle)
     case subscriptions(ProdMcBilling_SubscriptionsInvoiceBundle)
@@ -603,7 +603,7 @@ public struct ProdMcBilling_InvoiceBundle: @unchecked Sendable {
   }
 
   /// Charging status of the invoice.
-  public enum Status: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public nonisolated enum Status: SwiftProtobuf.Enum, Swift.CaseIterable {
     public typealias RawValue = Int
     case invalid // = 0
     case pending // = 1
@@ -654,7 +654,7 @@ public struct ProdMcBilling_InvoiceBundle: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct ProdMcBilling_InvoiceIds: Sendable {
+public nonisolated struct ProdMcBilling_InvoiceIds: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -667,7 +667,7 @@ public struct ProdMcBilling_InvoiceIds: Sendable {
 }
 
 /// Request to list invoices.
-public struct ProdMcBilling_ListInvoicesReq: Sendable {
+public nonisolated struct ProdMcBilling_ListInvoicesReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -706,7 +706,7 @@ public struct ProdMcBilling_ListInvoicesReq: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Filter: Equatable, Sendable {
+  public nonisolated enum OneOf_Filter: Equatable, Sendable {
     /// Specific billing cycle to retrieve.
     case billingCycle(ProdMcBilling_BillingCycle)
     /// Specify since which billing cycle to retrieve.
@@ -720,7 +720,7 @@ public struct ProdMcBilling_ListInvoicesReq: Sendable {
 }
 
 /// Response containing invoices.
-public struct ProdMcBilling_ListInvoicesResp: Sendable {
+public nonisolated struct ProdMcBilling_ListInvoicesResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -734,7 +734,7 @@ public struct ProdMcBilling_ListInvoicesResp: Sendable {
 }
 
 /// Change item on the prepaid credit balance.
-public struct ProdMcBilling_PrepaidBalanceChange: Sendable {
+public nonisolated struct ProdMcBilling_PrepaidBalanceChange: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -828,7 +828,7 @@ public struct ProdMcBilling_PrepaidBalanceChange: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The reason for the change.
-  public enum ChangeOrigin: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public nonisolated enum ChangeOrigin: SwiftProtobuf.Enum, Swift.CaseIterable {
     public typealias RawValue = Int
     case invalidOrigin // = 0
 
@@ -883,7 +883,7 @@ public struct ProdMcBilling_PrepaidBalanceChange: Sendable {
   }
 
   /// Status of the top up.
-  public enum TopUpStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public nonisolated enum TopUpStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     public typealias RawValue = Int
     case invalidStatus // = 0
     case toGenerateInvoice // = 10
@@ -946,7 +946,7 @@ public struct ProdMcBilling_PrepaidBalanceChange: Sendable {
 }
 
 /// Request to list prepaid credit balance.
-public struct ProdMcBilling_ListPrepaidBalanceChangesReq: Sendable {
+public nonisolated struct ProdMcBilling_ListPrepaidBalanceChangesReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -960,7 +960,7 @@ public struct ProdMcBilling_ListPrepaidBalanceChangesReq: Sendable {
 }
 
 /// Response for prepaid credit balance.
-public struct ProdMcBilling_ListPrepaidBalanceChangesResp: Sendable {
+public nonisolated struct ProdMcBilling_ListPrepaidBalanceChangesResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -987,7 +987,7 @@ public struct ProdMcBilling_ListPrepaidBalanceChangesResp: Sendable {
 }
 
 /// Top up prepaid credit request.
-public struct ProdMcBilling_TopUpOrGetExistingPendingChangeReq: Sendable {
+public nonisolated struct ProdMcBilling_TopUpOrGetExistingPendingChangeReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1013,7 +1013,7 @@ public struct ProdMcBilling_TopUpOrGetExistingPendingChangeReq: Sendable {
 }
 
 /// Response for prepaid credit top up.
-public struct ProdMcBilling_TopUpOrGetExistingPendingChangeResp: Sendable {
+public nonisolated struct ProdMcBilling_TopUpOrGetExistingPendingChangeResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1035,7 +1035,7 @@ public struct ProdMcBilling_TopUpOrGetExistingPendingChangeResp: Sendable {
 }
 
 /// Request to get postpaid monthly spending limit.
-public struct ProdMcBilling_GetSpendingLimitsReq: Sendable {
+public nonisolated struct ProdMcBilling_GetSpendingLimitsReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1048,7 +1048,7 @@ public struct ProdMcBilling_GetSpendingLimitsReq: Sendable {
 }
 
 /// Postpaid monthly spending limit.
-public struct ProdMcBilling_SpendingLimits: Sendable {
+public nonisolated struct ProdMcBilling_SpendingLimits: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1117,7 +1117,7 @@ public struct ProdMcBilling_SpendingLimits: Sendable {
 }
 
 /// Response for postpaid monthly spending limit.
-public struct ProdMcBilling_GetSpendingLimitsResp: Sendable {
+public nonisolated struct ProdMcBilling_GetSpendingLimitsResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1139,7 +1139,7 @@ public struct ProdMcBilling_GetSpendingLimitsResp: Sendable {
 }
 
 /// Request by user to set a new postpaid monthly spending limit.
-public struct ProdMcBilling_SetSoftSpendingLimitReq: Sendable {
+public nonisolated struct ProdMcBilling_SetSoftSpendingLimitReq: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1165,7 +1165,7 @@ public struct ProdMcBilling_SetSoftSpendingLimitReq: Sendable {
 }
 
 /// Response of setting a new postpaid monthly spending limit.
-public struct ProdMcBilling_SetSoftSpendingLimitResp: Sendable {
+public nonisolated struct ProdMcBilling_SetSoftSpendingLimitResp: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1189,9 +1189,9 @@ public struct ProdMcBilling_SetSoftSpendingLimitResp: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "prod_mc_billing"
+fileprivate nonisolated let _protobuf_package = "prod_mc_billing"
 
-extension ProdMcBilling_SetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetBillingInfoReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}team_id\0\u{4}\u{9}billing_info\0")
 
@@ -1230,7 +1230,7 @@ extension ProdMcBilling_SetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension ProdMcBilling_SetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetBillingInfoResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -1249,7 +1249,7 @@ extension ProdMcBilling_SetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension ProdMcBilling_GetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetBillingInfoReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}team_id\0")
 
@@ -1279,7 +1279,7 @@ extension ProdMcBilling_GetBillingInfoReq: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension ProdMcBilling_GetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetBillingInfoResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}billing_info\0")
 
@@ -1313,7 +1313,7 @@ extension ProdMcBilling_GetBillingInfoResp: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension ProdMcBilling_ListPaymentMethodsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListPaymentMethodsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListPaymentMethodsReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0")
 
@@ -1343,7 +1343,7 @@ extension ProdMcBilling_ListPaymentMethodsReq: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension ProdMcBilling_PendingPaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_PendingPaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PendingPaymentMethod"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}ach_microdeposit_hosted_verification_url\0")
 
@@ -1373,7 +1373,7 @@ extension ProdMcBilling_PendingPaymentMethod: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension ProdMcBilling_ListPaymentMethodsResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListPaymentMethodsResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListPaymentMethodsResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}payment_methods\0\u{4}\u{b}pending_payment_method\0\u{c}\u{14}\u{1}")
 
@@ -1412,7 +1412,7 @@ extension ProdMcBilling_ListPaymentMethodsResp: SwiftProtobuf.Message, SwiftProt
   }
 }
 
-extension ProdMcBilling_SetDefaultPaymentMethodReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetDefaultPaymentMethodReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetDefaultPaymentMethodReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0\u{4}\u{a}payment_method_id\0")
 
@@ -1447,7 +1447,7 @@ extension ProdMcBilling_SetDefaultPaymentMethodReq: SwiftProtobuf.Message, Swift
   }
 }
 
-extension ProdMcBilling_SetDefaultPaymentMethodResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetDefaultPaymentMethodResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetDefaultPaymentMethodResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -1466,7 +1466,7 @@ extension ProdMcBilling_SetDefaultPaymentMethodResp: SwiftProtobuf.Message, Swif
   }
 }
 
-extension ProdMcBilling_Line: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_Line: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Line"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}cluster_name\0\u{1}description\0\u{3}unit_type\0\u{3}unit_price\0\u{3}num_units\0\u{1}amount\0")
 
@@ -1521,7 +1521,7 @@ extension ProdMcBilling_Line: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension ProdMcBilling_CoreInvoice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_CoreInvoice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CoreInvoice"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}lines\0\u{3}amount_before_vat\0\u{3}vat_cost\0\u{3}amount_after_vat\0\u{3}auto_credits_issued\0\u{3}default_credits_issued\0\u{3}prepaid_credits_used\0\u{3}prepaid_credits\0\u{3}total_with_corr\0")
 
@@ -1595,7 +1595,7 @@ extension ProdMcBilling_CoreInvoice: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension ProdMcBilling_GetAmountToPayReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetAmountToPayReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetAmountToPayReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0")
 
@@ -1625,7 +1625,7 @@ extension ProdMcBilling_GetAmountToPayReq: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension ProdMcBilling_GetAmountToPayResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetAmountToPayResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetAmountToPayResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}core_invoice\0\u{3}effective_spending_limit\0\u{3}default_credits\0\u{3}billing_cycle\0\u{c}\u{a}\u{1}\u{c}\u{14}\u{1}")
 
@@ -1674,7 +1674,7 @@ extension ProdMcBilling_GetAmountToPayResp: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension ProdMcBilling_AnalyzeBillingItemsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_AnalyzeBillingItemsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AnalyzeBillingItemsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}analytics_request\0\u{3}team_id\0")
 
@@ -1713,7 +1713,7 @@ extension ProdMcBilling_AnalyzeBillingItemsRequest: SwiftProtobuf.Message, Swift
   }
 }
 
-extension ProdMcBilling_BillingCycle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_BillingCycle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BillingCycle"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}year\0\u{1}month\0")
 
@@ -1748,7 +1748,7 @@ extension ProdMcBilling_BillingCycle: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension ProdMcBilling_ChargerAttempt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ChargerAttempt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ChargerAttempt"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}ticket\0\u{2}\u{a}successful\0\u{4}\u{a}payment_method_id\0")
 
@@ -1788,7 +1788,7 @@ extension ProdMcBilling_ChargerAttempt: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension ProdMcBilling_MonthlyInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_MonthlyInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".MonthlyInvoiceBundle"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}billing_cycle\0\u{4}\u{a}default_credits_issued\0\u{4}\u{a}auto_credits_issued\0\u{4}\u{5}prepaid_tokens_to_spend\0\u{4}\u{5}billing_items_csv_asset_key_suffix\0\u{4}\u{a}corrections_csv_asset_key_suffix\0")
 
@@ -1847,7 +1847,7 @@ extension ProdMcBilling_MonthlyInvoiceBundle: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension ProdMcBilling_PrepaidInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_PrepaidInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PrepaidInvoiceBundle"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -1866,7 +1866,7 @@ extension ProdMcBilling_PrepaidInvoiceBundle: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension ProdMcBilling_SubscriptionsInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SubscriptionsInvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SubscriptionsInvoiceBundle"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -1885,7 +1885,7 @@ extension ProdMcBilling_SubscriptionsInvoiceBundle: SwiftProtobuf.Message, Swift
   }
 }
 
-extension ProdMcBilling_InvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_InvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".InvoiceBundle"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0\u{4}\u{a}invoice_id\0\u{3}invoice_number\0\u{4}\u{a}create_time\0\u{4}\u{9}invoice_status\0\u{4}\u{a}first_desired_next_cycle_ts\0\u{4}\u{a}charger_attempts\0\u{2}\u{a}lines\0\u{2}\u{a}subtotal\0\u{2}\u{a}tax\0\u{2}\u{a}total\0\u{4}\u{a}invoice_pdf_asset_key_suffix\0\u{2}\u{a}monthly\0\u{2}\u{a}prepaid\0\u{2}\u{a}subscriptions\0")
 
@@ -2089,11 +2089,11 @@ extension ProdMcBilling_InvoiceBundle: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension ProdMcBilling_InvoiceBundle.Status: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_InvoiceBundle.Status: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID\0\u{1}PENDING\0\u{1}PAID\0\u{1}WILL_NEVER_BE_CHARGED\0\u{1}FAILED\0")
 }
 
-extension ProdMcBilling_InvoiceIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_InvoiceIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".InvoiceIds"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}invoice_ids\0")
 
@@ -2123,7 +2123,7 @@ extension ProdMcBilling_InvoiceIds: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension ProdMcBilling_ListInvoicesReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListInvoicesReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListInvoicesReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0\u{4}\u{a}billing_cycle\0\u{2}\u{a}since\0\u{4}\u{a}invoice_ids\0")
 
@@ -2212,7 +2212,7 @@ extension ProdMcBilling_ListInvoicesReq: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension ProdMcBilling_ListInvoicesResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListInvoicesResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListInvoicesResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}invoices\0")
 
@@ -2242,7 +2242,7 @@ extension ProdMcBilling_ListInvoicesResp: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension ProdMcBilling_PrepaidBalanceChange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_PrepaidBalanceChange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PrepaidBalanceChange"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0\u{4}\u{a}change_origin\0\u{4}\u{a}topup_status\0\u{2}\u{a}amount\0\u{4}\u{a}invoice_id\0\u{3}invoice_number\0\u{4}\u{9}create_time\0\u{4}\u{a}spend_bp_key_year\0\u{4}\u{a}spend_bp_key_month\0\u{4}\u{5}create_ts\0\u{c}Z\u{1}\u{1}")
 
@@ -2321,15 +2321,15 @@ extension ProdMcBilling_PrepaidBalanceChange: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension ProdMcBilling_PrepaidBalanceChange.ChangeOrigin: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_PrepaidBalanceChange.ChangeOrigin: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_ORIGIN\0\u{2}\u{a}PURCHASE\0\u{2}\u{a}SPEND\0\u{2}\u{a}REFUND\0\u{2}\u{a}MANUAL\0")
 }
 
-extension ProdMcBilling_PrepaidBalanceChange.TopUpStatus: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_PrepaidBalanceChange.TopUpStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_STATUS\0\u{2}\u{a}TO_GENERATE_INVOICE\0\u{2}\u{a}FAILED_TO_GENERATE_INVOICE\0\u{2}\u{a}TO_CHARGE\0\u{2}\u{a}FAILED_TO_CHARGE\0\u{2}\u{a}SUCCEEDED\0")
 }
 
-extension ProdMcBilling_ListPrepaidBalanceChangesReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListPrepaidBalanceChangesReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListPrepaidBalanceChangesReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0")
 
@@ -2359,7 +2359,7 @@ extension ProdMcBilling_ListPrepaidBalanceChangesReq: SwiftProtobuf.Message, Swi
   }
 }
 
-extension ProdMcBilling_ListPrepaidBalanceChangesResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_ListPrepaidBalanceChangesResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListPrepaidBalanceChangesResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}changes\0\u{2}\u{a}total\0")
 
@@ -2398,7 +2398,7 @@ extension ProdMcBilling_ListPrepaidBalanceChangesResp: SwiftProtobuf.Message, Sw
   }
 }
 
-extension ProdMcBilling_TopUpOrGetExistingPendingChangeReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_TopUpOrGetExistingPendingChangeReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TopUpOrGetExistingPendingChangeReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{a}team_id\0\u{2}\u{a}amount\0")
 
@@ -2437,7 +2437,7 @@ extension ProdMcBilling_TopUpOrGetExistingPendingChangeReq: SwiftProtobuf.Messag
   }
 }
 
-extension ProdMcBilling_TopUpOrGetExistingPendingChangeResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_TopUpOrGetExistingPendingChangeResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TopUpOrGetExistingPendingChangeResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{a}change\0")
 
@@ -2471,7 +2471,7 @@ extension ProdMcBilling_TopUpOrGetExistingPendingChangeResp: SwiftProtobuf.Messa
   }
 }
 
-extension ProdMcBilling_GetSpendingLimitsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetSpendingLimitsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetSpendingLimitsReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}team_id\0")
 
@@ -2501,7 +2501,7 @@ extension ProdMcBilling_GetSpendingLimitsReq: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension ProdMcBilling_SpendingLimits: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SpendingLimits: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SpendingLimits"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}hard_sl_override\0\u{3}hard_sl_auto\0\u{3}soft_sl\0\u{3}effective_sl\0\u{3}effective_hard_sl\0")
 
@@ -2555,7 +2555,7 @@ extension ProdMcBilling_SpendingLimits: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension ProdMcBilling_GetSpendingLimitsResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_GetSpendingLimitsResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetSpendingLimitsResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}spending_limits\0")
 
@@ -2589,7 +2589,7 @@ extension ProdMcBilling_GetSpendingLimitsResp: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension ProdMcBilling_SetSoftSpendingLimitReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetSoftSpendingLimitReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetSoftSpendingLimitReq"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}team_id\0\u{3}desired_soft_spending_limit\0")
 
@@ -2628,7 +2628,7 @@ extension ProdMcBilling_SetSoftSpendingLimitReq: SwiftProtobuf.Message, SwiftPro
   }
 }
 
-extension ProdMcBilling_SetSoftSpendingLimitResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension ProdMcBilling_SetSoftSpendingLimitResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetSoftSpendingLimitResp"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}this_bp_soft_spending_limit\0")
 

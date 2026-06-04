@@ -15,12 +15,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public enum XaiApi_EmbedEncodingFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum XaiApi_EmbedEncodingFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Invalid format.
@@ -65,7 +65,7 @@ public enum XaiApi_EmbedEncodingFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// Request message for generating embeddings.
-public struct XaiApi_EmbedRequest: Sendable {
+public nonisolated struct XaiApi_EmbedRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -92,7 +92,7 @@ public struct XaiApi_EmbedRequest: Sendable {
 }
 
 /// Input content to be embedded.
-public struct XaiApi_EmbedInput: Sendable {
+public nonisolated struct XaiApi_EmbedInput: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -119,7 +119,7 @@ public struct XaiApi_EmbedInput: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Input: Equatable, Sendable {
+  public nonisolated enum OneOf_Input: Equatable, Sendable {
     /// A string to be embedded.
     case string(String)
     /// An image to be embedded.
@@ -131,7 +131,7 @@ public struct XaiApi_EmbedInput: Sendable {
 }
 
 /// Response object for the `Embed` RPC.
-public struct XaiApi_EmbedResponse: Sendable {
+public nonisolated struct XaiApi_EmbedResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -171,7 +171,7 @@ public struct XaiApi_EmbedResponse: Sendable {
 }
 
 /// Holds the embedding vector for a single embedding input.
-public struct XaiApi_Embedding: Sendable {
+public nonisolated struct XaiApi_Embedding: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -189,7 +189,7 @@ public struct XaiApi_Embedding: Sendable {
 }
 
 /// A single feature vector.
-public struct XaiApi_FeatureVector: Sendable {
+public nonisolated struct XaiApi_FeatureVector: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -209,13 +209,13 @@ public struct XaiApi_FeatureVector: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "xai_api"
+fileprivate nonisolated let _protobuf_package = "xai_api"
 
-extension XaiApi_EmbedEncodingFormat: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbedEncodingFormat: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0FORMAT_INVALID\0\u{1}FORMAT_FLOAT\0\u{1}FORMAT_BASE64\0")
 }
 
-extension XaiApi_EmbedRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbedRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EmbedRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}input\0\u{1}model\0\u{3}encoding_format\0\u{1}user\0")
 
@@ -260,7 +260,7 @@ extension XaiApi_EmbedRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension XaiApi_EmbedInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbedInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EmbedInput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}string\0\u{3}image_url\0")
 
@@ -322,7 +322,7 @@ extension XaiApi_EmbedInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension XaiApi_EmbedResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_EmbedResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".EmbedResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}embeddings\0\u{1}usage\0\u{1}model\0\u{3}system_fingerprint\0")
 
@@ -376,7 +376,7 @@ extension XaiApi_EmbedResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension XaiApi_Embedding: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_Embedding: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Embedding"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}index\0\u{1}embeddings\0")
 
@@ -411,7 +411,7 @@ extension XaiApi_Embedding: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension XaiApi_FeatureVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension XaiApi_FeatureVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FeatureVector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}float_array\0\u{3}base64_array\0")
 
