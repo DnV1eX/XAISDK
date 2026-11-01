@@ -6,7 +6,7 @@
 // Source: xai/api/v1/files.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -85,13 +85,41 @@ public enum XaiApi_Files: Sendable {
                 type: .serverStreaming
             )
         }
+        /// Namespace for "CreatePublicUrl" metadata.
+        public enum CreatePublicUrl: Sendable {
+            /// Request type for "CreatePublicUrl".
+            public typealias Input = XaiApi_CreatePublicUrlRequest
+            /// Response type for "CreatePublicUrl".
+            public typealias Output = XaiApi_CreatePublicUrlResponse
+            /// Descriptor for "CreatePublicUrl".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Files"),
+                method: "CreatePublicUrl",
+                type: .unary
+            )
+        }
+        /// Namespace for "RevokePublicUrl" metadata.
+        public enum RevokePublicUrl: Sendable {
+            /// Request type for "RevokePublicUrl".
+            public typealias Input = XaiApi_RevokePublicUrlRequest
+            /// Response type for "RevokePublicUrl".
+            public typealias Output = XaiApi_RevokePublicUrlResponse
+            /// Descriptor for "RevokePublicUrl".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "xai_api.Files"),
+                method: "RevokePublicUrl",
+                type: .unary
+            )
+        }
         /// Descriptors for all methods in the "xai_api.Files" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             UploadFile.descriptor,
             ListFiles.descriptor,
             RetrieveFile.descriptor,
             DeleteFile.descriptor,
-            RetrieveFileContent.descriptor
+            RetrieveFileContent.descriptor,
+            CreatePublicUrl.descriptor,
+            RevokePublicUrl.descriptor
         ]
     }
 }
@@ -135,9 +163,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_UploadFileChunk` messages.
         ///   - deserializer: A deserializer for `XaiApi_File` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func uploadFile<Result>(
             request: GRPCCore.StreamingClientRequest<XaiApi_UploadFileChunk>,
@@ -159,9 +187,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_ListFilesRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListFilesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listFiles<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListFilesRequest>,
@@ -184,9 +212,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_RetrieveFileRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_File` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func retrieveFile<Result>(
             request: GRPCCore.ClientRequest<XaiApi_RetrieveFileRequest>,
@@ -209,9 +237,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_DeleteFileRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_DeleteFileResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteFile<Result>(
             request: GRPCCore.ClientRequest<XaiApi_DeleteFileRequest>,
@@ -233,9 +261,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_RetrieveFileContentRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_FileContentChunk` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func retrieveFileContent<Result>(
             request: GRPCCore.ClientRequest<XaiApi_RetrieveFileContentRequest>,
@@ -243,6 +271,85 @@ extension XaiApi_Files {
             deserializer: some GRPCCore.MessageDeserializer<XaiApi_FileContentChunk>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<XaiApi_FileContentChunk>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CreatePublicUrl" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Create a public, unauthenticated URL for a file, accessible without an
+        /// > API key. Only images, videos, and PDFs can be made public.
+        /// > 
+        /// > A file can have at most one public URL at a time. Calling this on a
+        /// > file that already has a public URL returns the existing URL. To update
+        /// > the expiry, call again with a new `expires_after` value.
+        /// > 
+        /// > **Public URL expiry behavior:**
+        /// > 
+        /// > - If `expires_after` is set, the public URL expires that many seconds
+        /// >   from now, independently of the file's own TTL.
+        /// > - If `expires_after` is omitted and the file has a TTL
+        /// >   (`UploadFileInit.expires_after` was set at upload), the public URL
+        /// >   automatically inherits the file's expiry — it will expire at the
+        /// >   same time as the file.
+        /// > - If `expires_after` is omitted and the file has no TTL, the public
+        /// >   URL remains valid indefinitely (until explicitly revoked or the file
+        /// >   is deleted).
+        /// > 
+        /// > **Automatic revocation:**
+        /// > 
+        /// > A public URL is automatically revoked when the file is deleted (by the
+        /// > user or by TTL expiry). Revocation may not take effect immediately, so
+        /// > the URL can remain accessible for a short period after the file or the
+        /// > public URL expires. Call `RevokePublicUrl` to revoke immediately.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_CreatePublicUrlRequest` message.
+        ///   - serializer: A serializer for `XaiApi_CreatePublicUrlRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_CreatePublicUrlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        func createPublicUrl<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_CreatePublicUrlRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_CreatePublicUrlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_CreatePublicUrlResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CreatePublicUrlResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "RevokePublicUrl" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Revoke the public URL for a file. After revocation the public URL is
+        /// > no longer accessible, while the original file remains accessible via
+        /// > authenticated endpoints.
+        /// > 
+        /// > Public URLs are also automatically revoked when the file is deleted,
+        /// > when the file's TTL elapses, or when the public URL's own expiry
+        /// > elapses. Automatic revocation may not take effect immediately; use this
+        /// > RPC to revoke a public URL right away.
+        /// > 
+        /// > Returns success if the file has no public URL (nothing to revoke).
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_RevokePublicUrlRequest` message.
+        ///   - serializer: A serializer for `XaiApi_RevokePublicUrlRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_RevokePublicUrlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        func revokePublicUrl<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_RevokePublicUrlRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_RevokePublicUrlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_RevokePublicUrlResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_RevokePublicUrlResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -286,9 +393,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_UploadFileChunk` messages.
         ///   - deserializer: A deserializer for `XaiApi_File` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func uploadFile<Result>(
             request: GRPCCore.StreamingClientRequest<XaiApi_UploadFileChunk>,
@@ -321,9 +428,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_ListFilesRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListFilesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listFiles<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListFilesRequest>,
@@ -357,9 +464,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_RetrieveFileRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_File` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func retrieveFile<Result>(
             request: GRPCCore.ClientRequest<XaiApi_RetrieveFileRequest>,
@@ -393,9 +500,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_DeleteFileRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_DeleteFileResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteFile<Result>(
             request: GRPCCore.ClientRequest<XaiApi_DeleteFileRequest>,
@@ -428,9 +535,9 @@ extension XaiApi_Files {
         ///   - serializer: A serializer for `XaiApi_RetrieveFileContentRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_FileContentChunk` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func retrieveFileContent<Result>(
             request: GRPCCore.ClientRequest<XaiApi_RetrieveFileContentRequest>,
@@ -442,6 +549,107 @@ extension XaiApi_Files {
             try await self.client.serverStreaming(
                 request: request,
                 descriptor: XaiApi_Files.Method.RetrieveFileContent.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "CreatePublicUrl" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Create a public, unauthenticated URL for a file, accessible without an
+        /// > API key. Only images, videos, and PDFs can be made public.
+        /// > 
+        /// > A file can have at most one public URL at a time. Calling this on a
+        /// > file that already has a public URL returns the existing URL. To update
+        /// > the expiry, call again with a new `expires_after` value.
+        /// > 
+        /// > **Public URL expiry behavior:**
+        /// > 
+        /// > - If `expires_after` is set, the public URL expires that many seconds
+        /// >   from now, independently of the file's own TTL.
+        /// > - If `expires_after` is omitted and the file has a TTL
+        /// >   (`UploadFileInit.expires_after` was set at upload), the public URL
+        /// >   automatically inherits the file's expiry — it will expire at the
+        /// >   same time as the file.
+        /// > - If `expires_after` is omitted and the file has no TTL, the public
+        /// >   URL remains valid indefinitely (until explicitly revoked or the file
+        /// >   is deleted).
+        /// > 
+        /// > **Automatic revocation:**
+        /// > 
+        /// > A public URL is automatically revoked when the file is deleted (by the
+        /// > user or by TTL expiry). Revocation may not take effect immediately, so
+        /// > the URL can remain accessible for a short period after the file or the
+        /// > public URL expires. Call `RevokePublicUrl` to revoke immediately.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_CreatePublicUrlRequest` message.
+        ///   - serializer: A serializer for `XaiApi_CreatePublicUrlRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_CreatePublicUrlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func createPublicUrl<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_CreatePublicUrlRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_CreatePublicUrlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_CreatePublicUrlResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CreatePublicUrlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: XaiApi_Files.Method.CreatePublicUrl.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "RevokePublicUrl" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Revoke the public URL for a file. After revocation the public URL is
+        /// > no longer accessible, while the original file remains accessible via
+        /// > authenticated endpoints.
+        /// > 
+        /// > Public URLs are also automatically revoked when the file is deleted,
+        /// > when the file's TTL elapses, or when the public URL's own expiry
+        /// > elapses. Automatic revocation may not take effect immediately; use this
+        /// > RPC to revoke a public URL right away.
+        /// > 
+        /// > Returns success if the file has no public URL (nothing to revoke).
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `XaiApi_RevokePublicUrlRequest` message.
+        ///   - serializer: A serializer for `XaiApi_RevokePublicUrlRequest` messages.
+        ///   - deserializer: A deserializer for `XaiApi_RevokePublicUrlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func revokePublicUrl<Result>(
+            request: GRPCCore.ClientRequest<XaiApi_RevokePublicUrlRequest>,
+            serializer: some GRPCCore.MessageSerializer<XaiApi_RevokePublicUrlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<XaiApi_RevokePublicUrlResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_RevokePublicUrlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: XaiApi_Files.Method.RevokePublicUrl.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -469,9 +677,9 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - request: A streaming request producing `XaiApi_UploadFileChunk` messages.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func uploadFile<Result>(
         request: GRPCCore.StreamingClientRequest<XaiApi_UploadFileChunk>,
@@ -499,9 +707,9 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_ListFilesRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listFiles<Result>(
         request: GRPCCore.ClientRequest<XaiApi_ListFilesRequest>,
@@ -530,9 +738,9 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_RetrieveFileRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func retrieveFile<Result>(
         request: GRPCCore.ClientRequest<XaiApi_RetrieveFileRequest>,
@@ -561,9 +769,9 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_DeleteFileRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFile<Result>(
         request: GRPCCore.ClientRequest<XaiApi_DeleteFileRequest>,
@@ -591,9 +799,9 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_RetrieveFileContentRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func retrieveFileContent<Result>(
         request: GRPCCore.ClientRequest<XaiApi_RetrieveFileContentRequest>,
@@ -604,6 +812,97 @@ extension XaiApi_Files.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_RetrieveFileContentRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_FileContentChunk>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreatePublicUrl" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Create a public, unauthenticated URL for a file, accessible without an
+    /// > API key. Only images, videos, and PDFs can be made public.
+    /// > 
+    /// > A file can have at most one public URL at a time. Calling this on a
+    /// > file that already has a public URL returns the existing URL. To update
+    /// > the expiry, call again with a new `expires_after` value.
+    /// > 
+    /// > **Public URL expiry behavior:**
+    /// > 
+    /// > - If `expires_after` is set, the public URL expires that many seconds
+    /// >   from now, independently of the file's own TTL.
+    /// > - If `expires_after` is omitted and the file has a TTL
+    /// >   (`UploadFileInit.expires_after` was set at upload), the public URL
+    /// >   automatically inherits the file's expiry — it will expire at the
+    /// >   same time as the file.
+    /// > - If `expires_after` is omitted and the file has no TTL, the public
+    /// >   URL remains valid indefinitely (until explicitly revoked or the file
+    /// >   is deleted).
+    /// > 
+    /// > **Automatic revocation:**
+    /// > 
+    /// > A public URL is automatically revoked when the file is deleted (by the
+    /// > user or by TTL expiry). Revocation may not take effect immediately, so
+    /// > the URL can remain accessible for a short period after the file or the
+    /// > public URL expires. Call `RevokePublicUrl` to revoke immediately.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `XaiApi_CreatePublicUrlRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createPublicUrl<Result>(
+        request: GRPCCore.ClientRequest<XaiApi_CreatePublicUrlRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CreatePublicUrlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.createPublicUrl(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_CreatePublicUrlRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_CreatePublicUrlResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "RevokePublicUrl" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Revoke the public URL for a file. After revocation the public URL is
+    /// > no longer accessible, while the original file remains accessible via
+    /// > authenticated endpoints.
+    /// > 
+    /// > Public URLs are also automatically revoked when the file is deleted,
+    /// > when the file's TTL elapses, or when the public URL's own expiry
+    /// > elapses. Automatic revocation may not take effect immediately; use this
+    /// > RPC to revoke a public URL right away.
+    /// > 
+    /// > Returns success if the file has no public URL (nothing to revoke).
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `XaiApi_RevokePublicUrlRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func revokePublicUrl<Result>(
+        request: GRPCCore.ClientRequest<XaiApi_RevokePublicUrlRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_RevokePublicUrlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.revokePublicUrl(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<XaiApi_RevokePublicUrlRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<XaiApi_RevokePublicUrlResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -628,11 +927,11 @@ extension XaiApi_Files.ClientProtocol {
     /// - Parameters:
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - producer: A closure producing request messages to send to the server. The request
-    ///       stream is closed when the closure returns.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - producer: A closure producing request messages to send to the server. Returning
+    ///       from the closure closes the request stream.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func uploadFile<Result>(
         metadata: GRPCCore.Metadata = [:],
@@ -664,9 +963,9 @@ extension XaiApi_Files.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listFiles<Result>(
         _ message: XaiApi_ListFilesRequest,
@@ -699,9 +998,9 @@ extension XaiApi_Files.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func retrieveFile<Result>(
         _ message: XaiApi_RetrieveFileRequest,
@@ -734,9 +1033,9 @@ extension XaiApi_Files.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFile<Result>(
         _ message: XaiApi_DeleteFileRequest,
@@ -768,9 +1067,9 @@ extension XaiApi_Files.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func retrieveFileContent<Result>(
         _ message: XaiApi_RetrieveFileContentRequest,
@@ -783,6 +1082,105 @@ extension XaiApi_Files.ClientProtocol {
             metadata: metadata
         )
         return try await self.retrieveFileContent(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreatePublicUrl" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Create a public, unauthenticated URL for a file, accessible without an
+    /// > API key. Only images, videos, and PDFs can be made public.
+    /// > 
+    /// > A file can have at most one public URL at a time. Calling this on a
+    /// > file that already has a public URL returns the existing URL. To update
+    /// > the expiry, call again with a new `expires_after` value.
+    /// > 
+    /// > **Public URL expiry behavior:**
+    /// > 
+    /// > - If `expires_after` is set, the public URL expires that many seconds
+    /// >   from now, independently of the file's own TTL.
+    /// > - If `expires_after` is omitted and the file has a TTL
+    /// >   (`UploadFileInit.expires_after` was set at upload), the public URL
+    /// >   automatically inherits the file's expiry — it will expire at the
+    /// >   same time as the file.
+    /// > - If `expires_after` is omitted and the file has no TTL, the public
+    /// >   URL remains valid indefinitely (until explicitly revoked or the file
+    /// >   is deleted).
+    /// > 
+    /// > **Automatic revocation:**
+    /// > 
+    /// > A public URL is automatically revoked when the file is deleted (by the
+    /// > user or by TTL expiry). Revocation may not take effect immediately, so
+    /// > the URL can remain accessible for a short period after the file or the
+    /// > public URL expires. Call `RevokePublicUrl` to revoke immediately.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createPublicUrl<Result>(
+        _ message: XaiApi_CreatePublicUrlRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_CreatePublicUrlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<XaiApi_CreatePublicUrlRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.createPublicUrl(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "RevokePublicUrl" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Revoke the public URL for a file. After revocation the public URL is
+    /// > no longer accessible, while the original file remains accessible via
+    /// > authenticated endpoints.
+    /// > 
+    /// > Public URLs are also automatically revoked when the file is deleted,
+    /// > when the file's TTL elapses, or when the public URL's own expiry
+    /// > elapses. Automatic revocation may not take effect immediately; use this
+    /// > RPC to revoke a public URL right away.
+    /// > 
+    /// > Returns success if the file has no public URL (nothing to revoke).
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func revokePublicUrl<Result>(
+        _ message: XaiApi_RevokePublicUrlRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<XaiApi_RevokePublicUrlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<XaiApi_RevokePublicUrlRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.revokePublicUrl(
             request: request,
             options: options,
             onResponse: handleResponse

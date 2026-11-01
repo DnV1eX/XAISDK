@@ -380,6 +380,19 @@ public nonisolated struct XaiApi_GenerateImageRequest: Sendable {
   /// in. See ImageFormat enum for options.
   public var format: XaiApi_ImageFormat = .imgFormatInvalid
 
+  /// Optional quality setting for image generation.
+  /// Only supported by grok-imagine models.
+  /// Defaults to medium. Some models restrict the accepted values (a request
+  /// outside the model's supported set is rejected).
+  public var quality: XaiApi_ImageQuality {
+    get {_quality ?? .imgQualityInvalid}
+    set {_quality = newValue}
+  }
+  /// Returns true if `quality` has been explicitly set.
+  public var hasQuality: Bool {self._quality != nil}
+  /// Clears the value of `quality`. Subsequent reads from it will return its default value.
+  public mutating func clearQuality() {self._quality = nil}
+
   /// Optional aspect ratio for image generation/editing.
   /// Only supported by grok-imagine models.
   /// Defaults to 1:1 if not specified. Auto is only supported for image generation
@@ -413,14 +426,168 @@ public nonisolated struct XaiApi_GenerateImageRequest: Sendable {
   /// This field cannot be set together with the `image` field.
   public var images: [XaiApi_ImageUrlContent] = []
 
+  /// Optional output storage configuration. When present, the generated
+  /// image(s) are stored in the Files API and a file_id is returned in
+  /// the response alongside the ephemeral URL.
+  public var storageOptions: XaiApi_StorageOptions {
+    get {_storageOptions ?? XaiApi_StorageOptions()}
+    set {_storageOptions = newValue}
+  }
+  /// Returns true if `storageOptions` has been explicitly set.
+  public var hasStorageOptions: Bool {self._storageOptions != nil}
+  /// Clears the value of `storageOptions`. Subsequent reads from it will return its default value.
+  public mutating func clearStorageOptions() {self._storageOptions = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _image: XaiApi_ImageUrlContent? = nil
   fileprivate var _n: Int32? = nil
+  fileprivate var _quality: XaiApi_ImageQuality? = nil
   fileprivate var _aspectRatio: XaiApi_ImageAspectRatio? = nil
   fileprivate var _resolution: XaiApi_ImageResolution? = nil
+  fileprivate var _storageOptions: XaiApi_StorageOptions? = nil
+}
+
+/// Configuration for storing generation output in the Files API.
+public nonisolated struct XaiApi_StorageOptions: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Filename for the stored file.
+  public var filename: String = String()
+
+  /// Seconds from now until the file auto-expires. If omitted, the file
+  /// does not expire.
+  public var expiresAfter: Int64 {
+    get {_expiresAfter ?? 0}
+    set {_expiresAfter = newValue}
+  }
+  /// Returns true if `expiresAfter` has been explicitly set.
+  public var hasExpiresAfter: Bool {self._expiresAfter != nil}
+  /// Clears the value of `expiresAfter`. Subsequent reads from it will return its default value.
+  public mutating func clearExpiresAfter() {self._expiresAfter = nil}
+
+  /// When present, a public URL is created for the stored file after upload.
+  /// The public URL is accessible without authentication.
+  /// Omit entirely to store the file privately (no public URL).
+  public var publicURL: XaiApi_PublicUrlOptions {
+    get {_publicURL ?? XaiApi_PublicUrlOptions()}
+    set {_publicURL = newValue}
+  }
+  /// Returns true if `publicURL` has been explicitly set.
+  public var hasPublicURL: Bool {self._publicURL != nil}
+  /// Clears the value of `publicURL`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicURL() {self._publicURL = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _expiresAfter: Int64? = nil
+  fileprivate var _publicURL: XaiApi_PublicUrlOptions? = nil
+}
+
+/// Configuration for creating a public URL alongside file storage.
+public nonisolated struct XaiApi_PublicUrlOptions: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Seconds from now until the public URL expires.
+  ///
+  /// If omitted and the file has a TTL (`StorageOptions.expires_after`),
+  /// the public URL inherits the file's expiry. If omitted and the file
+  /// has no TTL, the public URL remains valid indefinitely until the file
+  /// is deleted or the URL is explicitly revoked via `RevokePublicUrl`.
+  /// The file itself always remains accessible via authenticated endpoints
+  /// after the public URL expires.
+  public var expiresAfter: Int64 {
+    get {_expiresAfter ?? 0}
+    set {_expiresAfter = newValue}
+  }
+  /// Returns true if `expiresAfter` has been explicitly set.
+  public var hasExpiresAfter: Bool {self._expiresAfter != nil}
+  /// Clears the value of `expiresAfter`. Subsequent reads from it will return its default value.
+  public mutating func clearExpiresAfter() {self._expiresAfter = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _expiresAfter: Int64? = nil
+}
+
+/// Information about a generated file stored in the Files API.
+public nonisolated struct XaiApi_FileOutput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Files API file_id of the stored file.
+  public var fileID: String = String()
+
+  /// Filename of the stored file.
+  public var filename: String = String()
+
+  /// Public URL for the stored file. Only present when the request included
+  /// storage_options.public_url and creation succeeded.
+  public var publicURL: String {
+    get {_publicURL ?? String()}
+    set {_publicURL = newValue}
+  }
+  /// Returns true if `publicURL` has been explicitly set.
+  public var hasPublicURL: Bool {self._publicURL != nil}
+  /// Clears the value of `publicURL`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicURL() {self._publicURL = nil}
+
+  /// When the public URL expires. Only present when public_url is set and
+  /// has an independent expiry (i.e. the request specified
+  /// public_url.expires_after, or the file has a TTL). Absent when the
+  /// public URL is valid indefinitely.
+  public var publicURLExpiresAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {_publicURLExpiresAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_publicURLExpiresAt = newValue}
+  }
+  /// Returns true if `publicURLExpiresAt` has been explicitly set.
+  public var hasPublicURLExpiresAt: Bool {self._publicURLExpiresAt != nil}
+  /// Clears the value of `publicURLExpiresAt`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicURLExpiresAt() {self._publicURLExpiresAt = nil}
+
+  /// When the stored file expires and will be automatically deleted. Only
+  /// present when the file has an expiration (storage_options.expires_after
+  /// was set).
+  public var expiresAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {_expiresAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_expiresAt = newValue}
+  }
+  /// Returns true if `expiresAt` has been explicitly set.
+  public var hasExpiresAt: Bool {self._expiresAt != nil}
+  /// Clears the value of `expiresAt`. Subsequent reads from it will return its default value.
+  public mutating func clearExpiresAt() {self._expiresAt = nil}
+
+  /// Human-readable error when storage_options.public_url was set but
+  /// public URL creation failed. The file itself was stored successfully —
+  /// the public URL can be retried via `CreatePublicUrl`.
+  public var publicURLError: String {
+    get {_publicURLError ?? String()}
+    set {_publicURLError = newValue}
+  }
+  /// Returns true if `publicURLError` has been explicitly set.
+  public var hasPublicURLError: Bool {self._publicURLError != nil}
+  /// Clears the value of `publicURLError`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicURLError() {self._publicURLError = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _publicURL: String? = nil
+  fileprivate var _publicURLExpiresAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _expiresAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _publicURLError: String? = nil
 }
 
 /// The response from the image generation models containing the generated image(s).
@@ -486,6 +653,29 @@ public nonisolated struct XaiApi_GeneratedImage: Sendable {
   /// the field will be false and the image field is replaced by a placeholder.
   public var respectModeration: Bool = false
 
+  /// Storage info for the generated image. Only present when the request
+  /// included `storage_options` and the upload succeeded.
+  public var fileOutput: XaiApi_FileOutput {
+    get {_fileOutput ?? XaiApi_FileOutput()}
+    set {_fileOutput = newValue}
+  }
+  /// Returns true if `fileOutput` has been explicitly set.
+  public var hasFileOutput: Bool {self._fileOutput != nil}
+  /// Clears the value of `fileOutput`. Subsequent reads from it will return its default value.
+  public mutating func clearFileOutput() {self._fileOutput = nil}
+
+  /// Human-readable error when `storage_options` was set but the upload
+  /// failed. Only present on storage failure; absent on success or when
+  /// storage was not requested.
+  public var storageError: String {
+    get {_storageError ?? String()}
+    set {_storageError = newValue}
+  }
+  /// Returns true if `storageError` has been explicitly set.
+  public var hasStorageError: Bool {self._storageError != nil}
+  /// Clears the value of `storageError`. Subsequent reads from it will return its default value.
+  public mutating func clearStorageError() {self._storageError = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The generated image.
@@ -500,6 +690,9 @@ public nonisolated struct XaiApi_GeneratedImage: Sendable {
   }
 
   public init() {}
+
+  fileprivate var _fileOutput: XaiApi_FileOutput? = nil
+  fileprivate var _storageError: String? = nil
 }
 
 /// Contains data relating to an image that is provided to the model.
@@ -508,6 +701,10 @@ public nonisolated struct XaiApi_ImageUrlContent: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// The source of the image — either a direct URL/base64 string or a
+  /// file_id from the xAI Files API. Exactly one must be set.
+  public var source: XaiApi_ImageUrlContent.OneOf_Source? = nil
+
   /// This is either an image URL or a base64-encoded version of the image.
   /// The following image formats are supported: PNG, JPG, and WebP.
   /// If an image URL is provided, the image will be downloaded for every API
@@ -515,12 +712,45 @@ public nonisolated struct XaiApi_ImageUrlContent: Sendable {
   /// "XaiImageApiFetch/1.0" user agent, and will timeout after 5 seconds.
   /// The image size is limited to 10 MiB. If the image download fails, the API
   /// request will fail as well.
-  public var imageURL: String = String()
+  public var imageURL: String {
+    get {
+      if case .imageURL(let v)? = source {return v}
+      return String()
+    }
+    set {source = .imageURL(newValue)}
+  }
+
+  /// A file ID from the xAI Files API. The file must be an image
+  /// (JPEG, PNG, or WebP).
+  public var fileID: String {
+    get {
+      if case .fileID(let v)? = source {return v}
+      return String()
+    }
+    set {source = .fileID(newValue)}
+  }
 
   /// The level of pre-processing resolution that will be applied to the image.
   public var detail: XaiApi_ImageDetail = .detailInvalid
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// The source of the image — either a direct URL/base64 string or a
+  /// file_id from the xAI Files API. Exactly one must be set.
+  public nonisolated enum OneOf_Source: Equatable, Sendable {
+    /// This is either an image URL or a base64-encoded version of the image.
+    /// The following image formats are supported: PNG, JPG, and WebP.
+    /// If an image URL is provided, the image will be downloaded for every API
+    /// request without being cached. Images are fetched using
+    /// "XaiImageApiFetch/1.0" user agent, and will timeout after 5 seconds.
+    /// The image size is limited to 10 MiB. If the image download fails, the API
+    /// request will fail as well.
+    case imageURL(String)
+    /// A file ID from the xAI Files API. The file must be an image
+    /// (JPEG, PNG, or WebP).
+    case fileID(String)
+
+  }
 
   public init() {}
 }
@@ -551,7 +781,7 @@ nonisolated extension XaiApi_ImageResolution: SwiftProtobuf._ProtoNameProviding 
 
 nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GenerateImageRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}model\0\u{1}n\0\u{1}user\0\u{1}image\0\u{2}\u{6}format\0\u{4}\u{3}aspect_ratio\0\u{1}resolution\0\u{2}\u{2}images\0\u{c}\u{d}\u{1}")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}model\0\u{1}n\0\u{1}user\0\u{1}image\0\u{2}\u{6}format\0\u{1}quality\0\u{4}\u{2}aspect_ratio\0\u{1}resolution\0\u{2}\u{2}images\0\u{4}\u{2}storage_options\0\u{c}\u{d}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -565,9 +795,11 @@ nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftP
       case 4: try { try decoder.decodeSingularStringField(value: &self.user) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._image) }()
       case 11: try { try decoder.decodeSingularEnumField(value: &self.format) }()
+      case 12: try { try decoder.decodeSingularEnumField(value: &self._quality) }()
       case 14: try { try decoder.decodeSingularEnumField(value: &self._aspectRatio) }()
       case 15: try { try decoder.decodeSingularEnumField(value: &self._resolution) }()
       case 17: try { try decoder.decodeRepeatedMessageField(value: &self.images) }()
+      case 19: try { try decoder.decodeSingularMessageField(value: &self._storageOptions) }()
       default: break
       }
     }
@@ -596,6 +828,9 @@ nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftP
     if self.format != .imgFormatInvalid {
       try visitor.visitSingularEnumField(value: self.format, fieldNumber: 11)
     }
+    try { if let v = self._quality {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 12)
+    } }()
     try { if let v = self._aspectRatio {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 14)
     } }()
@@ -605,6 +840,9 @@ nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftP
     if !self.images.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.images, fieldNumber: 17)
     }
+    try { if let v = self._storageOptions {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -615,9 +853,148 @@ nonisolated extension XaiApi_GenerateImageRequest: SwiftProtobuf.Message, SwiftP
     if lhs._n != rhs._n {return false}
     if lhs.user != rhs.user {return false}
     if lhs.format != rhs.format {return false}
+    if lhs._quality != rhs._quality {return false}
     if lhs._aspectRatio != rhs._aspectRatio {return false}
     if lhs._resolution != rhs._resolution {return false}
     if lhs.images != rhs.images {return false}
+    if lhs._storageOptions != rhs._storageOptions {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_StorageOptions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".StorageOptions"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}filename\0\u{3}expires_after\0\u{3}public_url\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.filename) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self._expiresAfter) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._publicURL) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.filename.isEmpty {
+      try visitor.visitSingularStringField(value: self.filename, fieldNumber: 1)
+    }
+    try { if let v = self._expiresAfter {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._publicURL {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_StorageOptions, rhs: XaiApi_StorageOptions) -> Bool {
+    if lhs.filename != rhs.filename {return false}
+    if lhs._expiresAfter != rhs._expiresAfter {return false}
+    if lhs._publicURL != rhs._publicURL {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_PublicUrlOptions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PublicUrlOptions"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}expires_after\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self._expiresAfter) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._expiresAfter {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_PublicUrlOptions, rhs: XaiApi_PublicUrlOptions) -> Bool {
+    if lhs._expiresAfter != rhs._expiresAfter {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_FileOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".FileOutput"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{1}filename\0\u{4}\u{2}public_url\0\u{3}public_url_expires_at\0\u{3}expires_at\0\u{3}public_url_error\0\u{c}\u{3}\u{1}")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fileID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.filename) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._publicURL) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._publicURLExpiresAt) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._expiresAt) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._publicURLError) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.fileID.isEmpty {
+      try visitor.visitSingularStringField(value: self.fileID, fieldNumber: 1)
+    }
+    if !self.filename.isEmpty {
+      try visitor.visitSingularStringField(value: self.filename, fieldNumber: 2)
+    }
+    try { if let v = self._publicURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._publicURLExpiresAt {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._expiresAt {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._publicURLError {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_FileOutput, rhs: XaiApi_FileOutput) -> Bool {
+    if lhs.fileID != rhs.fileID {return false}
+    if lhs.filename != rhs.filename {return false}
+    if lhs._publicURL != rhs._publicURL {return false}
+    if lhs._publicURLExpiresAt != rhs._publicURLExpiresAt {return false}
+    if lhs._expiresAt != rhs._expiresAt {return false}
+    if lhs._publicURLError != rhs._publicURLError {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -669,7 +1046,7 @@ nonisolated extension XaiApi_ImageResponse: SwiftProtobuf.Message, SwiftProtobuf
 
 nonisolated extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GeneratedImage"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}base64\0\u{2}\u{2}url\0\u{3}respect_moderation\0\u{c}\u{2}\u{1}")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}base64\0\u{2}\u{2}url\0\u{3}respect_moderation\0\u{4}\u{4}file_output\0\u{3}storage_error\0\u{c}\u{2}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -694,6 +1071,8 @@ nonisolated extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobu
         }
       }()
       case 4: try { try decoder.decodeSingularBoolField(value: &self.respectModeration) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._fileOutput) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self._storageError) }()
       default: break
       }
     }
@@ -718,12 +1097,20 @@ nonisolated extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobu
     if self.respectModeration != false {
       try visitor.visitSingularBoolField(value: self.respectModeration, fieldNumber: 4)
     }
+    try { if let v = self._fileOutput {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._storageError {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_GeneratedImage, rhs: XaiApi_GeneratedImage) -> Bool {
     if lhs.image != rhs.image {return false}
     if lhs.respectModeration != rhs.respectModeration {return false}
+    if lhs._fileOutput != rhs._fileOutput {return false}
+    if lhs._storageError != rhs._storageError {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -731,7 +1118,7 @@ nonisolated extension XaiApi_GeneratedImage: SwiftProtobuf.Message, SwiftProtobu
 
 nonisolated extension XaiApi_ImageUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ImageUrlContent"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}image_url\0\u{1}detail\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}image_url\0\u{1}detail\0\u{3}file_id\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -739,25 +1126,47 @@ nonisolated extension XaiApi_ImageUrlContent: SwiftProtobuf.Message, SwiftProtob
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
+      case 1: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.source != nil {try decoder.handleConflictingOneOf()}
+          self.source = .imageURL(v)
+        }
+      }()
       case 2: try { try decoder.decodeSingularEnumField(value: &self.detail) }()
+      case 3: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.source != nil {try decoder.handleConflictingOneOf()}
+          self.source = .fileID(v)
+        }
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.imageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 1)
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if case .imageURL(let v)? = self.source {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
     if self.detail != .detailInvalid {
       try visitor.visitSingularEnumField(value: self.detail, fieldNumber: 2)
     }
+    try { if case .fileID(let v)? = self.source {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_ImageUrlContent, rhs: XaiApi_ImageUrlContent) -> Bool {
-    if lhs.imageURL != rhs.imageURL {return false}
+    if lhs.source != rhs.source {return false}
     if lhs.detail != rhs.detail {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

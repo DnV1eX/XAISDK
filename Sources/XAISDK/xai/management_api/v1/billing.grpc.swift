@@ -6,7 +6,7 @@
 // Source: xai/management_api/v1/billing.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -210,9 +210,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetBillingInfoReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetBillingInfoResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func setBillingInfo<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetBillingInfoReq>,
@@ -233,9 +233,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetBillingInfoReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetBillingInfoResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getBillingInfo<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetBillingInfoReq>,
@@ -256,9 +256,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListPaymentMethodsReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListPaymentMethodsResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listPaymentMethods<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListPaymentMethodsReq>,
@@ -279,9 +279,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetDefaultPaymentMethodReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetDefaultPaymentMethodResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func setDefaultPaymentMethod<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetDefaultPaymentMethodReq>,
@@ -302,9 +302,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetAmountToPayReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetAmountToPayResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getAmountToPay<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetAmountToPayReq>,
@@ -325,9 +325,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_AnalyzeBillingItemsRequest` messages.
         ///   - deserializer: A deserializer for `Prod_ClickhouseAnalytics_AnalyticsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func analyzeBillingItems<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_AnalyzeBillingItemsRequest>,
@@ -348,9 +348,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListInvoicesReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListInvoicesResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listInvoices<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListInvoicesReq>,
@@ -371,9 +371,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListPrepaidBalanceChangesReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListPrepaidBalanceChangesResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listPrepaidBalanceChanges<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListPrepaidBalanceChangesReq>,
@@ -394,9 +394,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_TopUpOrGetExistingPendingChangeReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_TopUpOrGetExistingPendingChangeResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func topUpOrGetExistingPendingChange<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_TopUpOrGetExistingPendingChangeReq>,
@@ -418,9 +418,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetSpendingLimitsReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetSpendingLimitsResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getSpendingLimits<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetSpendingLimitsReq>,
@@ -443,9 +443,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetSoftSpendingLimitReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetSoftSpendingLimitResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func setSoftSpendingLimit<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetSoftSpendingLimitReq>,
@@ -487,9 +487,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetBillingInfoReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetBillingInfoResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func setBillingInfo<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetBillingInfoReq>,
@@ -521,9 +521,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetBillingInfoReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetBillingInfoResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getBillingInfo<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetBillingInfoReq>,
@@ -555,9 +555,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListPaymentMethodsReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListPaymentMethodsResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listPaymentMethods<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListPaymentMethodsReq>,
@@ -589,9 +589,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetDefaultPaymentMethodReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetDefaultPaymentMethodResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func setDefaultPaymentMethod<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetDefaultPaymentMethodReq>,
@@ -623,9 +623,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetAmountToPayReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetAmountToPayResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getAmountToPay<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetAmountToPayReq>,
@@ -657,9 +657,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_AnalyzeBillingItemsRequest` messages.
         ///   - deserializer: A deserializer for `Prod_ClickhouseAnalytics_AnalyticsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func analyzeBillingItems<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_AnalyzeBillingItemsRequest>,
@@ -691,9 +691,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListInvoicesReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListInvoicesResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listInvoices<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListInvoicesReq>,
@@ -725,9 +725,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_ListPrepaidBalanceChangesReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_ListPrepaidBalanceChangesResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listPrepaidBalanceChanges<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_ListPrepaidBalanceChangesReq>,
@@ -759,9 +759,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_TopUpOrGetExistingPendingChangeReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_TopUpOrGetExistingPendingChangeResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func topUpOrGetExistingPendingChange<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_TopUpOrGetExistingPendingChangeReq>,
@@ -794,9 +794,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_GetSpendingLimitsReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_GetSpendingLimitsResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getSpendingLimits<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_GetSpendingLimitsReq>,
@@ -830,9 +830,9 @@ extension ProdMcBilling_UISvc {
         ///   - serializer: A serializer for `ProdMcBilling_SetSoftSpendingLimitReq` messages.
         ///   - deserializer: A deserializer for `ProdMcBilling_SetSoftSpendingLimitResp` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func setSoftSpendingLimit<Result>(
             request: GRPCCore.ClientRequest<ProdMcBilling_SetSoftSpendingLimitReq>,
@@ -867,9 +867,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_SetBillingInfoReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setBillingInfo<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_SetBillingInfoReq>,
@@ -896,9 +896,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_GetBillingInfoReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBillingInfo<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_GetBillingInfoReq>,
@@ -925,9 +925,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_ListPaymentMethodsReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listPaymentMethods<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_ListPaymentMethodsReq>,
@@ -954,9 +954,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_SetDefaultPaymentMethodReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setDefaultPaymentMethod<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_SetDefaultPaymentMethodReq>,
@@ -983,9 +983,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_GetAmountToPayReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getAmountToPay<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_GetAmountToPayReq>,
@@ -1012,9 +1012,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_AnalyzeBillingItemsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func analyzeBillingItems<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_AnalyzeBillingItemsRequest>,
@@ -1041,9 +1041,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_ListInvoicesReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listInvoices<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_ListInvoicesReq>,
@@ -1070,9 +1070,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_ListPrepaidBalanceChangesReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listPrepaidBalanceChanges<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_ListPrepaidBalanceChangesReq>,
@@ -1099,9 +1099,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_TopUpOrGetExistingPendingChangeReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func topUpOrGetExistingPendingChange<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_TopUpOrGetExistingPendingChangeReq>,
@@ -1129,9 +1129,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_GetSpendingLimitsReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getSpendingLimits<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_GetSpendingLimitsReq>,
@@ -1160,9 +1160,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `ProdMcBilling_SetSoftSpendingLimitReq` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setSoftSpendingLimit<Result>(
         request: GRPCCore.ClientRequest<ProdMcBilling_SetSoftSpendingLimitReq>,
@@ -1194,9 +1194,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setBillingInfo<Result>(
         _ message: ProdMcBilling_SetBillingInfoReq,
@@ -1227,9 +1227,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBillingInfo<Result>(
         _ message: ProdMcBilling_GetBillingInfoReq,
@@ -1260,9 +1260,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listPaymentMethods<Result>(
         _ message: ProdMcBilling_ListPaymentMethodsReq,
@@ -1293,9 +1293,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setDefaultPaymentMethod<Result>(
         _ message: ProdMcBilling_SetDefaultPaymentMethodReq,
@@ -1326,9 +1326,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getAmountToPay<Result>(
         _ message: ProdMcBilling_GetAmountToPayReq,
@@ -1359,9 +1359,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func analyzeBillingItems<Result>(
         _ message: ProdMcBilling_AnalyzeBillingItemsRequest,
@@ -1392,9 +1392,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listInvoices<Result>(
         _ message: ProdMcBilling_ListInvoicesReq,
@@ -1425,9 +1425,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listPrepaidBalanceChanges<Result>(
         _ message: ProdMcBilling_ListPrepaidBalanceChangesReq,
@@ -1458,9 +1458,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func topUpOrGetExistingPendingChange<Result>(
         _ message: ProdMcBilling_TopUpOrGetExistingPendingChangeReq,
@@ -1492,9 +1492,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getSpendingLimits<Result>(
         _ message: ProdMcBilling_GetSpendingLimitsReq,
@@ -1527,9 +1527,9 @@ extension ProdMcBilling_UISvc.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setSoftSpendingLimit<Result>(
         _ message: ProdMcBilling_SetSoftSpendingLimitReq,

@@ -6,7 +6,7 @@
 // Source: xai/api/v1/models.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -142,9 +142,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListLanguageModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listLanguageModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -165,9 +165,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListEmbeddingModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listEmbeddingModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -188,9 +188,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListImageGenerationModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listImageGenerationModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -211,9 +211,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_LanguageModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getLanguageModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -234,9 +234,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_EmbeddingModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getEmbeddingModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -257,9 +257,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ImageGenerationModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getImageGenerationModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -302,9 +302,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListLanguageModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listLanguageModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -336,9 +336,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListEmbeddingModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listEmbeddingModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -370,9 +370,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListImageGenerationModelsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listImageGenerationModels<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -404,9 +404,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_LanguageModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getLanguageModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -438,9 +438,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_EmbeddingModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getEmbeddingModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -472,9 +472,9 @@ extension XaiApi_Models {
         ///   - serializer: A serializer for `XaiApi_GetModelRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ImageGenerationModel` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getImageGenerationModel<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -509,9 +509,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `SwiftProtobuf.Google_Protobuf_Empty` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listLanguageModels<Result>(
         request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -538,9 +538,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `SwiftProtobuf.Google_Protobuf_Empty` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listEmbeddingModels<Result>(
         request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -567,9 +567,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `SwiftProtobuf.Google_Protobuf_Empty` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listImageGenerationModels<Result>(
         request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -596,9 +596,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetModelRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getLanguageModel<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -625,9 +625,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetModelRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getEmbeddingModel<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -654,9 +654,9 @@ extension XaiApi_Models.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetModelRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getImageGenerationModel<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetModelRequest>,
@@ -688,9 +688,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listLanguageModels<Result>(
         _ message: SwiftProtobuf.Google_Protobuf_Empty,
@@ -721,9 +721,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listEmbeddingModels<Result>(
         _ message: SwiftProtobuf.Google_Protobuf_Empty,
@@ -754,9 +754,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listImageGenerationModels<Result>(
         _ message: SwiftProtobuf.Google_Protobuf_Empty,
@@ -787,9 +787,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getLanguageModel<Result>(
         _ message: XaiApi_GetModelRequest,
@@ -820,9 +820,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getEmbeddingModel<Result>(
         _ message: XaiApi_GetModelRequest,
@@ -853,9 +853,9 @@ extension XaiApi_Models.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getImageGenerationModel<Result>(
         _ message: XaiApi_GetModelRequest,

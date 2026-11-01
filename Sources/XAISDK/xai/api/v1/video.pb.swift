@@ -109,6 +109,12 @@ public nonisolated enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIt
   /// 720p resolution.
   /// Dimensions vary by aspect ratio
   case videoResolution720P // = 2
+
+  /// 1080p resolution.
+  /// Dimensions vary by aspect ratio.
+  /// Supported on models that advertise 1080p (e.g. grok-imagine-video-1.5 for
+  /// image-to-video); not available on all video models.
+  case videoResolution1080P // = 3
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -120,6 +126,7 @@ public nonisolated enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIt
     case 0: self = .unspecified
     case 1: self = .videoResolution480P
     case 2: self = .videoResolution720P
+    case 3: self = .videoResolution1080P
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -129,6 +136,7 @@ public nonisolated enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIt
     case .unspecified: return 0
     case .videoResolution480P: return 1
     case .videoResolution720P: return 2
+    case .videoResolution1080P: return 3
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -138,38 +146,105 @@ public nonisolated enum XaiApi_VideoResolution: SwiftProtobuf.Enum, Swift.CaseIt
     .unspecified,
     .videoResolution480P,
     .videoResolution720P,
+    .videoResolution1080P,
   ]
 
 }
 
-/// Specifies a video by URL for video editing.
+/// Specifies a video by URL or file reference for video editing.
 public nonisolated struct XaiApi_VideoUrlContent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// The source of the video — either a direct URL/base64 string or a
+  /// file_id from the xAI Files API. Exactly one must be set.
+  public var source: XaiApi_VideoUrlContent.OneOf_Source? = nil
+
   /// Either a URL of the video (e.g., a public URL) or a base64-encoded video
   /// as a data URL (e.g., "data:video/mp4;base64,...").
-  public var url: String = String()
+  public var url: String {
+    get {
+      if case .url(let v)? = source {return v}
+      return String()
+    }
+    set {source = .url(newValue)}
+  }
+
+  /// A file ID from the xAI Files API. The file must be a video
+  /// (e.g., MP4).
+  public var fileID: String {
+    get {
+      if case .fileID(let v)? = source {return v}
+      return String()
+    }
+    set {source = .fileID(newValue)}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// The source of the video — either a direct URL/base64 string or a
+  /// file_id from the xAI Files API. Exactly one must be set.
+  public nonisolated enum OneOf_Source: Equatable, Sendable {
+    /// Either a URL of the video (e.g., a public URL) or a base64-encoded video
+    /// as a data URL (e.g., "data:video/mp4;base64,...").
+    case url(String)
+    /// A file ID from the xAI Files API. The file must be a video
+    /// (e.g., MP4).
+    case fileID(String)
+
+  }
 
   public init() {}
 }
 
-/// Request message for generating a video.
-public nonisolated struct XaiApi_GenerateVideoRequest: Sendable {
+/// Reference audio input for video generation.
+public nonisolated struct XaiApi_AudioUrlContent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Input prompt to generate a video from.
-  public var prompt: String = String()
+  /// The source of the audio. Must be set.
+  public var source: XaiApi_AudioUrlContent.OneOf_Source? = nil
 
-  /// Optional input image for image-to-video generation.
-  /// If provided, generates video with this image as the first frame.
-  /// If omitted, generates text-to-video.
-  /// Supports the same formats as image generation: URL or base64-encoded image.
+  /// Identifier of a first-party preset voice (e.g. "ara"), using the same
+  /// voice identifiers as the TTS API. Resolved server-side to a curated
+  /// reference clip from the model's voice-preset catalog. Only supported
+  /// by models that accept reference audio.
+  public var voiceID: String {
+    get {
+      if case .voiceID(let v)? = source {return v}
+      return String()
+    }
+    set {source = .voiceID(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// The source of the audio. Must be set.
+  public nonisolated enum OneOf_Source: Equatable, Sendable {
+    /// Identifier of a first-party preset voice (e.g. "ara"), using the same
+    /// voice identifiers as the TTS API. Resolved server-side to a curated
+    /// reference clip from the model's voice-preset catalog. Only supported
+    /// by models that accept reference audio.
+    case voiceID(String)
+
+  }
+
+  public init() {}
+}
+
+/// A mid-video keyframe anchor: the image appears literally at `timestamp_s`
+/// seconds, strictly inside the clip (endpoints use `image` / `last_frame`).
+/// Timestamps snap to the engine's keyframe grid (one anchor per 1/3 second),
+/// so anchors closer together than that are rejected.
+public nonisolated struct XaiApi_VideoKeyframe: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The pinned image. Supports the same formats as image generation: URL or
+  /// base64-encoded image.
   public var image: XaiApi_ImageUrlContent {
     get {_image ?? XaiApi_ImageUrlContent()}
     set {_image = newValue}
@@ -179,67 +254,165 @@ public nonisolated struct XaiApi_GenerateVideoRequest: Sendable {
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
   public mutating func clearImage() {self._image = nil}
 
-  /// Name or alias of the video generation model to be used.
-  public var model: String = String()
-
-  /// Duration of the video to be generated in seconds (1-15 seconds).
-  public var duration: Int32 {
-    get {_duration ?? 0}
-    set {_duration = newValue}
-  }
-  /// Returns true if `duration` has been explicitly set.
-  public var hasDuration: Bool {self._duration != nil}
-  /// Clears the value of `duration`. Subsequent reads from it will return its default value.
-  public mutating func clearDuration() {self._duration = nil}
-
-  /// Optional input video for video editing.
-  /// If provided, the video will be edited based on the prompt.
-  /// Supports URL or base64-encoded video data.
-  public var video: XaiApi_VideoUrlContent {
-    get {_video ?? XaiApi_VideoUrlContent()}
-    set {_video = newValue}
-  }
-  /// Returns true if `video` has been explicitly set.
-  public var hasVideo: Bool {self._video != nil}
-  /// Clears the value of `video`. Subsequent reads from it will return its default value.
-  public mutating func clearVideo() {self._video = nil}
-
-  /// Optional aspect ratio for video generation.
-  /// Defaults to 16:9 if not specified.
-  public var aspectRatio: XaiApi_VideoAspectRatio {
-    get {_aspectRatio ?? .unspecified}
-    set {_aspectRatio = newValue}
-  }
-  /// Returns true if `aspectRatio` has been explicitly set.
-  public var hasAspectRatio: Bool {self._aspectRatio != nil}
-  /// Clears the value of `aspectRatio`. Subsequent reads from it will return its default value.
-  public mutating func clearAspectRatio() {self._aspectRatio = nil}
-
-  /// Optional resolution for video generation.
-  /// Defaults to 480p if not specified.
-  public var resolution: XaiApi_VideoResolution {
-    get {_resolution ?? .unspecified}
-    set {_resolution = newValue}
-  }
-  /// Returns true if `resolution` has been explicitly set.
-  public var hasResolution: Bool {self._resolution != nil}
-  /// Clears the value of `resolution`. Subsequent reads from it will return its default value.
-  public mutating func clearResolution() {self._resolution = nil}
-
-  /// Optional reference images for reference-to-video (R2V) generation.
-  /// When provided (and `image` is not set), generates video using these images
-  /// as style/content references.
-  public var referenceImages: [XaiApi_ImageUrlContent] = []
+  /// Anchor time in seconds, strictly inside the clip (0 < t < duration).
+  public var timestampS: Float = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _image: XaiApi_ImageUrlContent? = nil
-  fileprivate var _duration: Int32? = nil
-  fileprivate var _video: XaiApi_VideoUrlContent? = nil
-  fileprivate var _aspectRatio: XaiApi_VideoAspectRatio? = nil
-  fileprivate var _resolution: XaiApi_VideoResolution? = nil
+}
+
+/// Request message for generating a video.
+public nonisolated struct XaiApi_GenerateVideoRequest: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Input prompt to generate a video from.
+  public var prompt: String {
+    get {_storage._prompt}
+    set {_uniqueStorage()._prompt = newValue}
+  }
+
+  /// Optional input image used as the video's exact FIRST frame.
+  /// Alone, selects image-to-video generation. Combined with
+  /// reference_images / reference_audios / last_frame / keyframes (select
+  /// models only), the video generates from those references while starting
+  /// literally on this image. If omitted, generates text-to-video (or
+  /// reference-to-video when references are present).
+  /// Supports the same formats as image generation: URL or base64-encoded image.
+  public var image: XaiApi_ImageUrlContent {
+    get {_storage._image ?? XaiApi_ImageUrlContent()}
+    set {_uniqueStorage()._image = newValue}
+  }
+  /// Returns true if `image` has been explicitly set.
+  public var hasImage: Bool {_storage._image != nil}
+  /// Clears the value of `image`. Subsequent reads from it will return its default value.
+  public mutating func clearImage() {_uniqueStorage()._image = nil}
+
+  /// Name or alias of the video generation model to be used.
+  public var model: String {
+    get {_storage._model}
+    set {_uniqueStorage()._model = newValue}
+  }
+
+  /// Duration of the video to be generated in seconds (1-15 seconds).
+  public var duration: Int32 {
+    get {_storage._duration ?? 0}
+    set {_uniqueStorage()._duration = newValue}
+  }
+  /// Returns true if `duration` has been explicitly set.
+  public var hasDuration: Bool {_storage._duration != nil}
+  /// Clears the value of `duration`. Subsequent reads from it will return its default value.
+  public mutating func clearDuration() {_uniqueStorage()._duration = nil}
+
+  /// Optional input video for video editing.
+  /// If provided, the video will be edited based on the prompt.
+  /// Supports URL or base64-encoded video data.
+  public var video: XaiApi_VideoUrlContent {
+    get {_storage._video ?? XaiApi_VideoUrlContent()}
+    set {_uniqueStorage()._video = newValue}
+  }
+  /// Returns true if `video` has been explicitly set.
+  public var hasVideo: Bool {_storage._video != nil}
+  /// Clears the value of `video`. Subsequent reads from it will return its default value.
+  public mutating func clearVideo() {_uniqueStorage()._video = nil}
+
+  /// Optional aspect ratio for video generation.
+  /// Defaults to 16:9 if not specified.
+  public var aspectRatio: XaiApi_VideoAspectRatio {
+    get {_storage._aspectRatio ?? .unspecified}
+    set {_uniqueStorage()._aspectRatio = newValue}
+  }
+  /// Returns true if `aspectRatio` has been explicitly set.
+  public var hasAspectRatio: Bool {_storage._aspectRatio != nil}
+  /// Clears the value of `aspectRatio`. Subsequent reads from it will return its default value.
+  public mutating func clearAspectRatio() {_uniqueStorage()._aspectRatio = nil}
+
+  /// Optional resolution for video generation.
+  /// Defaults to 480p if not specified.
+  public var resolution: XaiApi_VideoResolution {
+    get {_storage._resolution ?? .unspecified}
+    set {_uniqueStorage()._resolution = newValue}
+  }
+  /// Returns true if `resolution` has been explicitly set.
+  public var hasResolution: Bool {_storage._resolution != nil}
+  /// Clears the value of `resolution`. Subsequent reads from it will return its default value.
+  public mutating func clearResolution() {_uniqueStorage()._resolution = nil}
+
+  /// Optional reference images for reference-to-video (R2V) generation.
+  /// When provided, generates video using these images as style/content
+  /// references.
+  public var referenceImages: [XaiApi_ImageUrlContent] {
+    get {_storage._referenceImages}
+    set {_uniqueStorage()._referenceImages = newValue}
+  }
+
+  /// Optional output storage configuration. When present, the generated
+  /// video is stored in the Files API and a file_id is returned in
+  /// the response alongside the ephemeral URL.
+  public var storageOptions: XaiApi_StorageOptions {
+    get {_storage._storageOptions ?? XaiApi_StorageOptions()}
+    set {_uniqueStorage()._storageOptions = newValue}
+  }
+  /// Returns true if `storageOptions` has been explicitly set.
+  public var hasStorageOptions: Bool {_storage._storageOptions != nil}
+  /// Clears the value of `storageOptions`. Subsequent reads from it will return its default value.
+  public mutating func clearStorageOptions() {_uniqueStorage()._storageOptions = nil}
+
+  /// Optional reference audio (voice identity) for reference-to-video
+  /// generation. Each entry selects a first-party preset voice via
+  /// `voice_id` (same identifiers as the TTS API). Only supported by select
+  /// video models; at most three entries. May be provided without
+  /// reference_images (audio-only reference-to-video) — at least one
+  /// reference of either kind selects the reference-to-video mode.
+  public var referenceAudios: [XaiApi_AudioUrlContent] {
+    get {_storage._referenceAudios}
+    set {_uniqueStorage()._referenceAudios = newValue}
+  }
+
+  /// Whether the generated video includes an audio track. Defaults to true.
+  /// Set to false for a silent video (the audio track is stripped
+  /// server-side after generation).
+  public var generateAudio: Bool {
+    get {_storage._generateAudio ?? false}
+    set {_uniqueStorage()._generateAudio = newValue}
+  }
+  /// Returns true if `generateAudio` has been explicitly set.
+  public var hasGenerateAudio: Bool {_storage._generateAudio != nil}
+  /// Clears the value of `generateAudio`. Subsequent reads from it will return its default value.
+  public mutating func clearGenerateAudio() {_uniqueStorage()._generateAudio = nil}
+
+  /// Optional image pinned as the video's exact LAST frame — the clip ends
+  /// arriving on it (unlike reference_images, which condition the video and
+  /// appear re-rendered). With image, the video interpolates between the two
+  /// frames. Only supported by select video models. Supports URL or
+  /// base64-encoded image.
+  public var lastFrame: XaiApi_ImageUrlContent {
+    get {_storage._lastFrame ?? XaiApi_ImageUrlContent()}
+    set {_uniqueStorage()._lastFrame = newValue}
+  }
+  /// Returns true if `lastFrame` has been explicitly set.
+  public var hasLastFrame: Bool {_storage._lastFrame != nil}
+  /// Clears the value of `lastFrame`. Subsequent reads from it will return its default value.
+  public mutating func clearLastFrame() {_uniqueStorage()._lastFrame = nil}
+
+  /// Optional mid-video keyframe anchors, strictly between the endpoint pins
+  /// (`image` as the first frame, `last_frame` as the last). Selects
+  /// reference-to-video like the other reference inputs. Only supported by
+  /// select video models; at most 4 entries.
+  public var keyframes: [XaiApi_VideoKeyframe] {
+    get {_storage._keyframes}
+    set {_uniqueStorage()._keyframes = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Request for retrieving deferred video generation results.
@@ -334,9 +507,35 @@ public nonisolated struct XaiApi_GeneratedVideo: Sendable {
   /// the field will be false and the video url field will be empty.
   public var respectModeration: Bool = false
 
+  /// Storage info for the generated video. Only present when the request
+  /// included `storage_options` and the upload succeeded.
+  public var fileOutput: XaiApi_FileOutput {
+    get {_fileOutput ?? XaiApi_FileOutput()}
+    set {_fileOutput = newValue}
+  }
+  /// Returns true if `fileOutput` has been explicitly set.
+  public var hasFileOutput: Bool {self._fileOutput != nil}
+  /// Clears the value of `fileOutput`. Subsequent reads from it will return its default value.
+  public mutating func clearFileOutput() {self._fileOutput = nil}
+
+  /// Human-readable error when `storage_options` was set but the upload
+  /// failed. Only present on storage failure; absent on success or when
+  /// storage was not requested.
+  public var storageError: String {
+    get {_storageError ?? String()}
+    set {_storageError = newValue}
+  }
+  /// Returns true if `storageError` has been explicitly set.
+  public var hasStorageError: Bool {self._storageError != nil}
+  /// Clears the value of `storageError`. Subsequent reads from it will return its default value.
+  public mutating func clearStorageError() {self._storageError = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _fileOutput: XaiApi_FileOutput? = nil
+  fileprivate var _storageError: String? = nil
 }
 
 /// Response from GetDeferredVideo, including the response if the video
@@ -419,12 +618,25 @@ public nonisolated struct XaiApi_ExtendVideoRequest: Sendable {
   /// Clears the value of `duration`. Subsequent reads from it will return its default value.
   public mutating func clearDuration() {self._duration = nil}
 
+  /// Optional output storage configuration. When present, the generated
+  /// video is stored in the Files API and a file_id is returned in
+  /// the response alongside the ephemeral URL.
+  public var storageOptions: XaiApi_StorageOptions {
+    get {_storageOptions ?? XaiApi_StorageOptions()}
+    set {_storageOptions = newValue}
+  }
+  /// Returns true if `storageOptions` has been explicitly set.
+  public var hasStorageOptions: Bool {self._storageOptions != nil}
+  /// Clears the value of `storageOptions`. Subsequent reads from it will return its default value.
+  public mutating func clearStorageOptions() {self._storageOptions = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _video: XaiApi_VideoUrlContent? = nil
   fileprivate var _duration: Int32? = nil
+  fileprivate var _storageOptions: XaiApi_StorageOptions? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -436,12 +648,12 @@ nonisolated extension XaiApi_VideoAspectRatio: SwiftProtobuf._ProtoNameProviding
 }
 
 nonisolated extension XaiApi_VideoResolution: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VIDEO_RESOLUTION_UNSPECIFIED\0\u{1}VIDEO_RESOLUTION_480P\0\u{1}VIDEO_RESOLUTION_720P\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VIDEO_RESOLUTION_UNSPECIFIED\0\u{1}VIDEO_RESOLUTION_480P\0\u{1}VIDEO_RESOLUTION_720P\0\u{1}VIDEO_RESOLUTION_1080P\0")
 }
 
 nonisolated extension XaiApi_VideoUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VideoUrlContent"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0\u{3}file_id\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -449,44 +661,22 @@ nonisolated extension XaiApi_VideoUrlContent: SwiftProtobuf.Message, SwiftProtob
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.url) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.url.isEmpty {
-      try visitor.visitSingularStringField(value: self.url, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: XaiApi_VideoUrlContent, rhs: XaiApi_VideoUrlContent) -> Bool {
-    if lhs.url != rhs.url {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-nonisolated extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GenerateVideoRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}image\0\u{1}model\0\u{1}duration\0\u{2}\u{2}video\0\u{3}aspect_ratio\0\u{1}resolution\0\u{4}\u{5}reference_images\0")
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.prompt) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._image) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.model) }()
-      case 4: try { try decoder.decodeSingularInt32Field(value: &self._duration) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._video) }()
-      case 7: try { try decoder.decodeSingularEnumField(value: &self._aspectRatio) }()
-      case 8: try { try decoder.decodeSingularEnumField(value: &self._resolution) }()
-      case 13: try { try decoder.decodeRepeatedMessageField(value: &self.referenceImages) }()
+      case 1: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.source != nil {try decoder.handleConflictingOneOf()}
+          self.source = .url(v)
+        }
+      }()
+      case 2: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.source != nil {try decoder.handleConflictingOneOf()}
+          self.source = .fileID(v)
+        }
+      }()
       default: break
       }
     }
@@ -497,42 +687,256 @@ nonisolated extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftP
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.prompt.isEmpty {
-      try visitor.visitSingularStringField(value: self.prompt, fieldNumber: 1)
+    switch self.source {
+    case .url?: try {
+      guard case .url(let v)? = self.source else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }()
+    case .fileID?: try {
+      guard case .fileID(let v)? = self.source else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    }()
+    case nil: break
     }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_VideoUrlContent, rhs: XaiApi_VideoUrlContent) -> Bool {
+    if lhs.source != rhs.source {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_AudioUrlContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AudioUrlContent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}voice_id\0\u{c}\u{1}\u{1}")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.source != nil {try decoder.handleConflictingOneOf()}
+          self.source = .voiceID(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if case .voiceID(let v)? = self.source {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_AudioUrlContent, rhs: XaiApi_AudioUrlContent) -> Bool {
+    if lhs.source != rhs.source {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_VideoKeyframe: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".VideoKeyframe"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}image\0\u{3}timestamp_s\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._image) }()
+      case 2: try { try decoder.decodeSingularFloatField(value: &self.timestampS) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     try { if let v = self._image {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
-    if !self.model.isEmpty {
-      try visitor.visitSingularStringField(value: self.model, fieldNumber: 3)
+    if self.timestampS.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.timestampS, fieldNumber: 2)
     }
-    try { if let v = self._duration {
-      try visitor.visitSingularInt32Field(value: v, fieldNumber: 4)
-    } }()
-    try { if let v = self._video {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    } }()
-    try { if let v = self._aspectRatio {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 7)
-    } }()
-    try { if let v = self._resolution {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
-    } }()
-    if !self.referenceImages.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.referenceImages, fieldNumber: 13)
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_VideoKeyframe, rhs: XaiApi_VideoKeyframe) -> Bool {
+    if lhs._image != rhs._image {return false}
+    if lhs.timestampS != rhs.timestampS {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_GenerateVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GenerateVideoRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}image\0\u{1}model\0\u{1}duration\0\u{2}\u{2}video\0\u{3}aspect_ratio\0\u{1}resolution\0\u{4}\u{5}reference_images\0\u{3}storage_options\0\u{4}\u{2}reference_audios\0\u{3}generate_audio\0\u{3}last_frame\0\u{2}\u{2}keyframes\0\u{c}\u{f}\u{1}")
+
+  fileprivate class _StorageClass {
+    var _prompt: String = String()
+    var _image: XaiApi_ImageUrlContent? = nil
+    var _model: String = String()
+    var _duration: Int32? = nil
+    var _video: XaiApi_VideoUrlContent? = nil
+    var _aspectRatio: XaiApi_VideoAspectRatio? = nil
+    var _resolution: XaiApi_VideoResolution? = nil
+    var _referenceImages: [XaiApi_ImageUrlContent] = []
+    var _storageOptions: XaiApi_StorageOptions? = nil
+    var _referenceAudios: [XaiApi_AudioUrlContent] = []
+    var _generateAudio: Bool? = nil
+    var _lastFrame: XaiApi_ImageUrlContent? = nil
+    var _keyframes: [XaiApi_VideoKeyframe] = []
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _prompt = source._prompt
+      _image = source._image
+      _model = source._model
+      _duration = source._duration
+      _video = source._video
+      _aspectRatio = source._aspectRatio
+      _resolution = source._resolution
+      _referenceImages = source._referenceImages
+      _storageOptions = source._storageOptions
+      _referenceAudios = source._referenceAudios
+      _generateAudio = source._generateAudio
+      _lastFrame = source._lastFrame
+      _keyframes = source._keyframes
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._prompt) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._image) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._model) }()
+        case 4: try { try decoder.decodeSingularInt32Field(value: &_storage._duration) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._video) }()
+        case 7: try { try decoder.decodeSingularEnumField(value: &_storage._aspectRatio) }()
+        case 8: try { try decoder.decodeSingularEnumField(value: &_storage._resolution) }()
+        case 13: try { try decoder.decodeRepeatedMessageField(value: &_storage._referenceImages) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._storageOptions) }()
+        case 16: try { try decoder.decodeRepeatedMessageField(value: &_storage._referenceAudios) }()
+        case 17: try { try decoder.decodeSingularBoolField(value: &_storage._generateAudio) }()
+        case 18: try { try decoder.decodeSingularMessageField(value: &_storage._lastFrame) }()
+        case 20: try { try decoder.decodeRepeatedMessageField(value: &_storage._keyframes) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._prompt.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._prompt, fieldNumber: 1)
+      }
+      try { if let v = _storage._image {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      if !_storage._model.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._model, fieldNumber: 3)
+      }
+      try { if let v = _storage._duration {
+        try visitor.visitSingularInt32Field(value: v, fieldNumber: 4)
+      } }()
+      try { if let v = _storage._video {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      try { if let v = _storage._aspectRatio {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 7)
+      } }()
+      try { if let v = _storage._resolution {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
+      } }()
+      if !_storage._referenceImages.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._referenceImages, fieldNumber: 13)
+      }
+      try { if let v = _storage._storageOptions {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      if !_storage._referenceAudios.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._referenceAudios, fieldNumber: 16)
+      }
+      try { if let v = _storage._generateAudio {
+        try visitor.visitSingularBoolField(value: v, fieldNumber: 17)
+      } }()
+      try { if let v = _storage._lastFrame {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+      } }()
+      if !_storage._keyframes.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._keyframes, fieldNumber: 20)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: XaiApi_GenerateVideoRequest, rhs: XaiApi_GenerateVideoRequest) -> Bool {
-    if lhs.prompt != rhs.prompt {return false}
-    if lhs._image != rhs._image {return false}
-    if lhs.model != rhs.model {return false}
-    if lhs._duration != rhs._duration {return false}
-    if lhs._video != rhs._video {return false}
-    if lhs._aspectRatio != rhs._aspectRatio {return false}
-    if lhs._resolution != rhs._resolution {return false}
-    if lhs.referenceImages != rhs.referenceImages {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._prompt != rhs_storage._prompt {return false}
+        if _storage._image != rhs_storage._image {return false}
+        if _storage._model != rhs_storage._model {return false}
+        if _storage._duration != rhs_storage._duration {return false}
+        if _storage._video != rhs_storage._video {return false}
+        if _storage._aspectRatio != rhs_storage._aspectRatio {return false}
+        if _storage._resolution != rhs_storage._resolution {return false}
+        if _storage._referenceImages != rhs_storage._referenceImages {return false}
+        if _storage._storageOptions != rhs_storage._storageOptions {return false}
+        if _storage._referenceAudios != rhs_storage._referenceAudios {return false}
+        if _storage._generateAudio != rhs_storage._generateAudio {return false}
+        if _storage._lastFrame != rhs_storage._lastFrame {return false}
+        if _storage._keyframes != rhs_storage._keyframes {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -668,7 +1072,7 @@ nonisolated extension XaiApi_VideoResponse: SwiftProtobuf.Message, SwiftProtobuf
 
 nonisolated extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GeneratedVideo"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0\u{2}\u{3}duration\0\u{3}respect_moderation\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0\u{2}\u{3}duration\0\u{3}respect_moderation\0\u{3}file_output\0\u{3}storage_error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -679,12 +1083,18 @@ nonisolated extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobu
       case 1: try { try decoder.decodeSingularStringField(value: &self.url) }()
       case 4: try { try decoder.decodeSingularInt32Field(value: &self.duration) }()
       case 5: try { try decoder.decodeSingularBoolField(value: &self.respectModeration) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._fileOutput) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._storageError) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.url.isEmpty {
       try visitor.visitSingularStringField(value: self.url, fieldNumber: 1)
     }
@@ -694,6 +1104,12 @@ nonisolated extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobu
     if self.respectModeration != false {
       try visitor.visitSingularBoolField(value: self.respectModeration, fieldNumber: 5)
     }
+    try { if let v = self._fileOutput {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._storageError {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -701,6 +1117,8 @@ nonisolated extension XaiApi_GeneratedVideo: SwiftProtobuf.Message, SwiftProtobu
     if lhs.url != rhs.url {return false}
     if lhs.duration != rhs.duration {return false}
     if lhs.respectModeration != rhs.respectModeration {return false}
+    if lhs._fileOutput != rhs._fileOutput {return false}
+    if lhs._storageError != rhs._storageError {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -782,7 +1200,7 @@ nonisolated extension XaiApi_VideoError: SwiftProtobuf.Message, SwiftProtobuf._M
 
 nonisolated extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ExtendVideoRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}video\0\u{1}model\0\u{1}duration\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prompt\0\u{1}video\0\u{1}model\0\u{1}duration\0\u{4}\u{2}storage_options\0\u{c}\u{7}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -794,6 +1212,7 @@ nonisolated extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftPro
       case 2: try { try decoder.decodeSingularMessageField(value: &self._video) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.model) }()
       case 4: try { try decoder.decodeSingularInt32Field(value: &self._duration) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._storageOptions) }()
       default: break
       }
     }
@@ -816,6 +1235,9 @@ nonisolated extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftPro
     try { if let v = self._duration {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._storageOptions {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -824,6 +1246,7 @@ nonisolated extension XaiApi_ExtendVideoRequest: SwiftProtobuf.Message, SwiftPro
     if lhs._video != rhs._video {return false}
     if lhs.model != rhs.model {return false}
     if lhs._duration != rhs._duration {return false}
+    if lhs._storageOptions != rhs._storageOptions {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

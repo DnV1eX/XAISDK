@@ -6,7 +6,7 @@
 // Source: xai/api/v1/auth.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -71,9 +71,9 @@ extension XaiApi_Auth {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ApiKey` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func get_api_key_info<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -115,9 +115,9 @@ extension XaiApi_Auth {
         ///   - serializer: A serializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - deserializer: A deserializer for `XaiApi_ApiKey` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func get_api_key_info<Result>(
             request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -152,9 +152,9 @@ extension XaiApi_Auth.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `SwiftProtobuf.Google_Protobuf_Empty` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get_api_key_info<Result>(
         request: GRPCCore.ClientRequest<SwiftProtobuf.Google_Protobuf_Empty>,
@@ -186,9 +186,9 @@ extension XaiApi_Auth.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get_api_key_info<Result>(
         _ message: SwiftProtobuf.Google_Protobuf_Empty,

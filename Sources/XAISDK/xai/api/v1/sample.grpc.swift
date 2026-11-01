@@ -6,7 +6,7 @@
 // Source: xai/api/v1/sample.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -84,9 +84,9 @@ extension XaiApi_Sample {
         ///   - serializer: A serializer for `XaiApi_SampleTextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SampleTextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func sampleText<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -107,9 +107,9 @@ extension XaiApi_Sample {
         ///   - serializer: A serializer for `XaiApi_SampleTextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SampleTextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func sampleTextStreaming<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -151,9 +151,9 @@ extension XaiApi_Sample {
         ///   - serializer: A serializer for `XaiApi_SampleTextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SampleTextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func sampleText<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -185,9 +185,9 @@ extension XaiApi_Sample {
         ///   - serializer: A serializer for `XaiApi_SampleTextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SampleTextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func sampleTextStreaming<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -220,9 +220,9 @@ extension XaiApi_Sample.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_SampleTextRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func sampleText<Result>(
         request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -249,9 +249,9 @@ extension XaiApi_Sample.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_SampleTextRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func sampleTextStreaming<Result>(
         request: GRPCCore.ClientRequest<XaiApi_SampleTextRequest>,
@@ -281,9 +281,9 @@ extension XaiApi_Sample.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func sampleText<Result>(
         _ message: XaiApi_SampleTextRequest,
@@ -314,9 +314,9 @@ extension XaiApi_Sample.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func sampleTextStreaming<Result>(
         _ message: XaiApi_SampleTextRequest,

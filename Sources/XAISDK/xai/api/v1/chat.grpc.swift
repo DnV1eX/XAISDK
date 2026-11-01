@@ -6,7 +6,7 @@
 // Source: xai/api/v1/chat.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -155,9 +155,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -179,9 +179,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionChunk` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getCompletionChunk<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -204,9 +204,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func startDeferredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -227,9 +227,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetDeferredRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetDeferredCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getDeferredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetDeferredRequest>,
@@ -250,9 +250,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetStoredCompletionRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getStoredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetStoredCompletionRequest>,
@@ -273,9 +273,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_DeleteStoredCompletionRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_DeleteStoredCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteStoredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_DeleteStoredCompletionRequest>,
@@ -299,9 +299,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_CompactContextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_CompactContextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func compactContext<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
@@ -344,9 +344,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -379,9 +379,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionChunk` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getCompletionChunk<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -413,9 +413,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetCompletionsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func startDeferredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -447,9 +447,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetDeferredRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetDeferredCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getDeferredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetDeferredRequest>,
@@ -481,9 +481,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_GetStoredCompletionRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetChatCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getStoredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetStoredCompletionRequest>,
@@ -515,9 +515,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_DeleteStoredCompletionRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_DeleteStoredCompletionResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteStoredCompletion<Result>(
             request: GRPCCore.ClientRequest<XaiApi_DeleteStoredCompletionRequest>,
@@ -552,9 +552,9 @@ extension XaiApi_Chat {
         ///   - serializer: A serializer for `XaiApi_CompactContextRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_CompactContextResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func compactContext<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
@@ -590,9 +590,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetCompletionsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getCompletion<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -620,9 +620,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetCompletionsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getCompletionChunk<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -649,9 +649,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetCompletionsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func startDeferredCompletion<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetCompletionsRequest>,
@@ -678,9 +678,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetDeferredRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getDeferredCompletion<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetDeferredRequest>,
@@ -707,9 +707,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetStoredCompletionRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getStoredCompletion<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetStoredCompletionRequest>,
@@ -736,9 +736,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_DeleteStoredCompletionRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteStoredCompletion<Result>(
         request: GRPCCore.ClientRequest<XaiApi_DeleteStoredCompletionRequest>,
@@ -768,9 +768,9 @@ extension XaiApi_Chat.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_CompactContextRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func compactContext<Result>(
         request: GRPCCore.ClientRequest<XaiApi_CompactContextRequest>,
@@ -803,9 +803,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getCompletion<Result>(
         _ message: XaiApi_GetCompletionsRequest,
@@ -837,9 +837,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getCompletionChunk<Result>(
         _ message: XaiApi_GetCompletionsRequest,
@@ -870,9 +870,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func startDeferredCompletion<Result>(
         _ message: XaiApi_GetCompletionsRequest,
@@ -903,9 +903,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getDeferredCompletion<Result>(
         _ message: XaiApi_GetDeferredRequest,
@@ -936,9 +936,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getStoredCompletion<Result>(
         _ message: XaiApi_GetStoredCompletionRequest,
@@ -969,9 +969,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteStoredCompletion<Result>(
         _ message: XaiApi_DeleteStoredCompletionRequest,
@@ -1005,9 +1005,9 @@ extension XaiApi_Chat.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func compactContext<Result>(
         _ message: XaiApi_CompactContextRequest,

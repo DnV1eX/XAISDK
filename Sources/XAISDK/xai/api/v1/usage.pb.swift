@@ -20,6 +20,51 @@ fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobu
   typealias Version = _2
 }
 
+/// Processing tier for a request. Controls scheduling priority and pricing.
+public nonisolated enum XaiApi_ServiceTier: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+
+  /// Unspecified / default behavior.
+  case unspecified // = 0
+
+  /// Default processing tier.
+  case `default` // = 1
+
+  /// Priority processing tier with higher scheduling priority at a higher price.
+  case priority // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .default
+    case 2: self = .priority
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .default: return 1
+    case .priority: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [XaiApi_ServiceTier] = [
+    .unspecified,
+    .default,
+    .priority,
+  ]
+
+}
+
 public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case invalid // = 0
@@ -32,6 +77,7 @@ public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIte
   case mcp // = 7
   case attachmentSearch // = 8
   case imageSearch // = 10
+  case imageGeneration // = 11
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -50,6 +96,7 @@ public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIte
     case 7: self = .mcp
     case 8: self = .attachmentSearch
     case 10: self = .imageSearch
+    case 11: self = .imageGeneration
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -66,6 +113,7 @@ public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIte
     case .mcp: return 7
     case .attachmentSearch: return 8
     case .imageSearch: return 10
+    case .imageGeneration: return 11
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -82,6 +130,7 @@ public nonisolated enum XaiApi_ServerSideTool: SwiftProtobuf.Enum, Swift.CaseIte
     .mcp,
     .attachmentSearch,
     .imageSearch,
+    .imageGeneration,
   ]
 
 }
@@ -167,8 +216,12 @@ public nonisolated struct XaiApi_EmbeddingUsage: Sendable {
 
 fileprivate nonisolated let _protobuf_package = "xai_api"
 
+nonisolated extension XaiApi_ServiceTier: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SERVICE_TIER_UNSPECIFIED\0\u{1}SERVICE_TIER_DEFAULT\0\u{1}SERVICE_TIER_PRIORITY\0")
+}
+
 nonisolated extension XaiApi_ServerSideTool: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SERVER_SIDE_TOOL_INVALID\0\u{1}SERVER_SIDE_TOOL_WEB_SEARCH\0\u{1}SERVER_SIDE_TOOL_X_SEARCH\0\u{1}SERVER_SIDE_TOOL_CODE_EXECUTION\0\u{1}SERVER_SIDE_TOOL_VIEW_IMAGE\0\u{1}SERVER_SIDE_TOOL_VIEW_X_VIDEO\0\u{1}SERVER_SIDE_TOOL_COLLECTIONS_SEARCH\0\u{1}SERVER_SIDE_TOOL_MCP\0\u{1}SERVER_SIDE_TOOL_ATTACHMENT_SEARCH\0\u{2}\u{2}SERVER_SIDE_TOOL_IMAGE_SEARCH\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SERVER_SIDE_TOOL_INVALID\0\u{1}SERVER_SIDE_TOOL_WEB_SEARCH\0\u{1}SERVER_SIDE_TOOL_X_SEARCH\0\u{1}SERVER_SIDE_TOOL_CODE_EXECUTION\0\u{1}SERVER_SIDE_TOOL_VIEW_IMAGE\0\u{1}SERVER_SIDE_TOOL_VIEW_X_VIDEO\0\u{1}SERVER_SIDE_TOOL_COLLECTIONS_SEARCH\0\u{1}SERVER_SIDE_TOOL_MCP\0\u{1}SERVER_SIDE_TOOL_ATTACHMENT_SEARCH\0\u{2}\u{2}SERVER_SIDE_TOOL_IMAGE_SEARCH\0\u{1}SERVER_SIDE_TOOL_IMAGE_GENERATION\0")
 }
 
 nonisolated extension XaiApi_SamplingUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

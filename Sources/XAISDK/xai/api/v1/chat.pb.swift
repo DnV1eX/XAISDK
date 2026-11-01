@@ -25,6 +25,95 @@ fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobu
   typealias Version = _2
 }
 
+/// Content category an output guideline applies to.
+public nonisolated enum XaiApi_GuidelineCategory: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case invalid // = 0
+  case nsfw // = 1
+  case violence // = 2
+  case profanity // = 5
+
+  /// Offensive and defensive security content. Accepts only allow, and only
+  /// for API keys enabled for it.
+  case cyber // = 6
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .invalid
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .invalid
+    case 1: self = .nsfw
+    case 2: self = .violence
+    case 5: self = .profanity
+    case 6: self = .cyber
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .invalid: return 0
+    case .nsfw: return 1
+    case .violence: return 2
+    case .profanity: return 5
+    case .cyber: return 6
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [XaiApi_GuidelineCategory] = [
+    .invalid,
+    .nsfw,
+    .violence,
+    .profanity,
+    .cyber,
+  ]
+
+}
+
+/// How the model should handle a guideline category.
+public nonisolated enum XaiApi_GuidelineBehavior: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case invalid // = 0
+  case decline // = 1
+  case allow // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .invalid
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .invalid
+    case 1: self = .decline
+    case 3: self = .allow
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .invalid: return 0
+    case .decline: return 1
+    case .allow: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [XaiApi_GuidelineBehavior] = [
+    .invalid,
+    .decline,
+    .allow,
+  ]
+
+}
+
 public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
@@ -59,6 +148,33 @@ public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIter
   /// this option is not included by default.
   /// This option is only available for streaming responses.
   case verboseStreaming // = 8
+
+  /// Generated file output from the code execution environment
+  case codeExecutionFilesOutput // = 9
+
+  /// EXPERIMENTAL: This option is experimental and its behavior may change or be
+  /// removed in a future release without a major version bump.
+  ///
+  /// Stream back client-side tool calls incrementally as the model generates
+  /// them, instead of only emitting each tool call once it is complete.
+  /// When included, the stream contains additional `ToolCall` entries in
+  /// `Delta.tool_calls` with `status` set to `TOOL_CALL_STATUS_IN_PROGRESS`.
+  /// Each such entry carries a fragment of the `FunctionCall.name` and/or
+  /// `FunctionCall.arguments` (either may be empty) that the client should
+  /// append to the tool call identified by the entry's `id` and `index`.
+  /// Once generation finishes, a final `ToolCall` with `status` set to
+  /// `TOOL_CALL_STATUS_COMPLETED` is streamed containing the full name and
+  /// arguments, so clients that do not want to accumulate fragments can rely
+  /// on that entry alone.
+  /// This option is only available for streaming responses and is only
+  /// supported by models that support it; it is ignored otherwise.
+  ///
+  /// KNOWN ISSUE: This option is currently broken when the request also uses
+  /// any server-side tool (for example web search, X search, code execution,
+  /// collections search, or MCP). Do not combine this option with server-side
+  /// tools; only use it with requests whose tools are all client-side
+  /// functions.
+  case toolCallStreaming // = 10
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -76,6 +192,8 @@ public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIter
     case 6: self = .mcpCallOutput
     case 7: self = .inlineCitations
     case 8: self = .verboseStreaming
+    case 9: self = .codeExecutionFilesOutput
+    case 10: self = .toolCallStreaming
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -91,6 +209,8 @@ public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIter
     case .mcpCallOutput: return 6
     case .inlineCitations: return 7
     case .verboseStreaming: return 8
+    case .codeExecutionFilesOutput: return 9
+    case .toolCallStreaming: return 10
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -106,6 +226,8 @@ public nonisolated enum XaiApi_IncludeOption: SwiftProtobuf.Enum, Swift.CaseIter
     .mcpCallOutput,
     .inlineCitations,
     .verboseStreaming,
+    .codeExecutionFilesOutput,
+    .toolCallStreaming,
   ]
 
 }
@@ -187,6 +309,7 @@ public nonisolated enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIt
   case effortMedium // = 2
   case effortHigh // = 3
   case effortNone // = 4
+  case effortXhigh // = 5
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -200,6 +323,7 @@ public nonisolated enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIt
     case 2: self = .effortMedium
     case 3: self = .effortHigh
     case 4: self = .effortNone
+    case 5: self = .effortXhigh
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -211,6 +335,7 @@ public nonisolated enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIt
     case .effortMedium: return 2
     case .effortHigh: return 3
     case .effortNone: return 4
+    case .effortXhigh: return 5
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -222,6 +347,7 @@ public nonisolated enum XaiApi_ReasoningEffort: SwiftProtobuf.Enum, Swift.CaseIt
     .effortMedium,
     .effortHigh,
     .effortNone,
+    .effortXhigh,
   ]
 
 }
@@ -402,6 +528,10 @@ public nonisolated enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseItera
   /// Indicates the tool is a server-side attachment_search tool, and client side won't need to execute.
   /// Maps to `attachment_search_call` type in OAI Responses API.
   case attachmentSearchTool // = 7
+
+  /// Indicates the tool is a server-side image_generation tool, and client side won't need to execute.
+  /// Maps to `image_generation_call` type in OAI Responses API.
+  case imageGenerationTool // = 10
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -418,6 +548,7 @@ public nonisolated enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseItera
     case 5: self = .collectionsSearchTool
     case 6: self = .mcpTool
     case 7: self = .attachmentSearchTool
+    case 10: self = .imageGenerationTool
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -432,6 +563,7 @@ public nonisolated enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseItera
     case .collectionsSearchTool: return 5
     case .mcpTool: return 6
     case .attachmentSearchTool: return 7
+    case .imageGenerationTool: return 10
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -446,6 +578,7 @@ public nonisolated enum XaiApi_ToolCallType: SwiftProtobuf.Enum, Swift.CaseItera
     .collectionsSearchTool,
     .mcpTool,
     .attachmentSearchTool,
+    .imageGenerationTool,
   ]
 
 }
@@ -541,6 +674,49 @@ public nonisolated enum XaiApi_SearchMode: SwiftProtobuf.Enum, Swift.CaseIterabl
     .autoSearchMode,
   ]
 
+}
+
+/// A policy guideline. nsfw, violence, and profanity accept decline; cyber
+/// accepts allow.
+public nonisolated struct XaiApi_PolicyGuideline: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var category: XaiApi_GuidelineCategory = .invalid
+
+  public var behavior: XaiApi_GuidelineBehavior = .invalid
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// One output guideline. The set `kind` is the JSON `type`: `policy` is `PolicyGuideline`.
+/// A later kind is another oneof case. A category appears at most once.
+public nonisolated struct XaiApi_Guideline: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var kind: XaiApi_Guideline.OneOf_Kind? = nil
+
+  public var policy: XaiApi_PolicyGuideline {
+    get {
+      if case .policy(let v)? = kind {return v}
+      return XaiApi_PolicyGuideline()
+    }
+    set {kind = .policy(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public nonisolated enum OneOf_Kind: Equatable, Sendable {
+    case policy(XaiApi_PolicyGuideline)
+
+  }
+
+  public init() {}
 }
 
 public nonisolated struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
@@ -736,7 +912,7 @@ public nonisolated struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
   /// Clears the value of `presencePenalty`. Subsequent reads from it will return its default value.
   public mutating func clearPresencePenalty() {_uniqueStorage()._presencePenalty = nil}
 
-  /// Constrains effort on reasoning for reasoning models. Default to `EFFORT_MEDIUM`.
+  /// Constrains effort on reasoning for reasoning models. Defaults vary by model (e.g. `grok-4.5` and `grok-4.6` default to `EFFORT_HIGH`).
   public var reasoningEffort: XaiApi_ReasoningEffort {
     get {_storage._reasoningEffort ?? .invalidEffort}
     set {_uniqueStorage()._reasoningEffort = newValue}
@@ -819,6 +995,35 @@ public nonisolated struct XaiApi_GetCompletionsRequest: @unchecked Sendable {
   public var hasAgentCount: Bool {_storage._agentCount != nil}
   /// Clears the value of `agentCount`. Subsequent reads from it will return its default value.
   public mutating func clearAgentCount() {_uniqueStorage()._agentCount = nil}
+
+  /// Processing tier for this request. Set to SERVICE_TIER_PRIORITY for
+  /// higher scheduling priority at a higher price.
+  public var serviceTier: XaiApi_ServiceTier {
+    get {_storage._serviceTier}
+    set {_uniqueStorage()._serviceTier = newValue}
+  }
+
+  /// Supplied by the API client to identify the end user behind this request.
+  /// A stable string that uniquely identifies each of your users; hash your
+  /// internal user id or username rather than sending an email or name. Stored
+  /// with the request metadata so a usage-policy violation can be attributed
+  /// to that user rather than to the API key.
+  public var safetyIdentifier: String {
+    get {_storage._safetyIdentifier ?? String()}
+    set {_uniqueStorage()._safetyIdentifier = newValue}
+  }
+  /// Returns true if `safetyIdentifier` has been explicitly set.
+  public var hasSafetyIdentifier: Bool {_storage._safetyIdentifier != nil}
+  /// Clears the value of `safetyIdentifier`. Subsequent reads from it will return its default value.
+  public mutating func clearSafetyIdentifier() {_uniqueStorage()._safetyIdentifier = nil}
+
+  /// Output guidelines. Each category may appear once. A request whose
+  /// guidelines cannot be applied, for example on a multi-agent model or with
+  /// `stop`, fails with INVALID_ARGUMENT.
+  public var guidelines: [XaiApi_Guideline] {
+    get {_storage._guidelines}
+    set {_uniqueStorage()._guidelines = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -911,6 +1116,19 @@ public nonisolated struct XaiApi_GetChatCompletionResponse: @unchecked Sendable 
   /// Clears the value of `debugOutput`. Subsequent reads from it will return its default value.
   public mutating func clearDebugOutput() {_uniqueStorage()._debugOutput = nil}
 
+  /// Files generated during the response (e.g., by the code execution tool).
+  /// Only populated when `INCLUDE_OPTION_CODE_EXECUTION_FILES_OUTPUT` is set.
+  public var outputFiles: [XaiApi_OutputFile] {
+    get {_storage._outputFiles}
+    set {_uniqueStorage()._outputFiles = newValue}
+  }
+
+  /// The processing tier that was used for this request.
+  public var serviceTier: XaiApi_ServiceTier {
+    get {_storage._serviceTier}
+    set {_uniqueStorage()._serviceTier = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -993,11 +1211,41 @@ public nonisolated struct XaiApi_GetChatCompletionChunk: @unchecked Sendable {
   /// Clears the value of `debugOutput`. Subsequent reads from it will return its default value.
   public mutating func clearDebugOutput() {_uniqueStorage()._debugOutput = nil}
 
+  /// Files generated during the response (e.g., by the code execution tool).
+  /// Only populated for the final chunk when `INCLUDE_OPTION_CODE_EXECUTION_FILES_OUTPUT` is set.
+  public var outputFiles: [XaiApi_OutputFile] {
+    get {_storage._outputFiles}
+    set {_uniqueStorage()._outputFiles = newValue}
+  }
+
+  /// The processing tier that was used for this request.
+  public var serviceTier: XaiApi_ServiceTier {
+    get {_storage._serviceTier}
+    set {_uniqueStorage()._serviceTier = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+/// A file generated during a response (e.g., by the code execution tool).
+public nonisolated struct XaiApi_OutputFile: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The file ID from the Files API. Use this to download the file.
+  public var fileID: String = String()
+
+  /// The display name of the file.
+  public var name: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
 }
 
 /// Response from GetDeferredCompletion, including the response if the completion
@@ -1609,6 +1857,15 @@ public nonisolated struct XaiApi_Tool: Sendable {
     set {tool = .attachmentSearch(newValue)}
   }
 
+  /// Built in image generation.
+  public var imageGeneration: XaiApi_ImageGeneration {
+    get {
+      if case .imageGeneration(let v)? = tool {return v}
+      return XaiApi_ImageGeneration()
+    }
+    set {tool = .imageGeneration(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public nonisolated enum OneOf_Tool: Equatable, Sendable {
@@ -1626,6 +1883,8 @@ public nonisolated struct XaiApi_Tool: Sendable {
     case mcp(XaiApi_MCP)
     /// Built in attachment search.
     case attachmentSearch(XaiApi_AttachmentSearch)
+    /// Built in image generation.
+    case imageGeneration(XaiApi_ImageGeneration)
 
   }
 
@@ -1869,6 +2128,30 @@ public nonisolated struct XaiApi_CodeExecution: Sendable {
   public init() {}
 }
 
+public nonisolated struct XaiApi_ImageGeneration: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Which image capabilities to expose to the model. One of "auto" (the default;
+  /// both generation and editing), "generate" (text-to-image only), or
+  /// "edit" (image editing only).
+  public var action: String {
+    get {_action ?? String()}
+    set {_action = newValue}
+  }
+  /// Returns true if `action` has been explicitly set.
+  public var hasAction: Bool {self._action != nil}
+  /// Clears the value of `action`. Subsequent reads from it will return its default value.
+  public mutating func clearAction() {self._action = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _action: String? = nil
+}
+
 public nonisolated struct XaiApi_CollectionsSearch: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -2019,6 +2302,22 @@ public nonisolated struct XaiApi_ToolCall: Sendable {
   /// Clears the value of `errorMessage`. Subsequent reads from it will return its default value.
   public mutating func clearErrorMessage() {self._errorMessage = nil}
 
+  /// EXPERIMENTAL: This field is experimental and its behavior may change or be
+  /// removed in a future release without a major version bump.
+  ///
+  /// The index of the tool call within the message's `tool_calls` array.
+  /// Only populated on the incremental `TOOL_CALL_STATUS_IN_PROGRESS` entries
+  /// streamed when `INCLUDE_OPTION_TOOL_CALL_STREAMING` is requested, so that
+  /// clients can accumulate fragments belonging to the same tool call.
+  public var index: Int32 {
+    get {_index ?? 0}
+    set {_index = newValue}
+  }
+  /// Returns true if `index` has been explicitly set.
+  public var hasIndex: Bool {self._index != nil}
+  /// Clears the value of `index`. Subsequent reads from it will return its default value.
+  public mutating func clearIndex() {self._index = nil}
+
   /// Information regarding invoking the tool call.
   public var tool: XaiApi_ToolCall.OneOf_Tool? = nil
 
@@ -2041,6 +2340,7 @@ public nonisolated struct XaiApi_ToolCall: Sendable {
   public init() {}
 
   fileprivate var _errorMessage: String? = nil
+  fileprivate var _index: Int32? = nil
 }
 
 /// Tool call information.
@@ -2410,7 +2710,7 @@ public nonisolated struct XaiApi_RequestSettings: @unchecked Sendable {
   /// Clears the value of `previousResponseID`. Subsequent reads from it will return its default value.
   public mutating func clearPreviousResponseID() {_uniqueStorage()._previousResponseID = nil}
 
-  /// Constrains effort on reasoning for reasoning models. Default to `EFFORT_MEDIUM`.
+  /// Constrains effort on reasoning for reasoning models. Defaults vary by model (e.g. `grok-4.5` and `grok-4.6` default to `EFFORT_HIGH`).
   public var reasoningEffort: XaiApi_ReasoningEffort {
     get {_storage._reasoningEffort ?? .invalidEffort}
     set {_uniqueStorage()._reasoningEffort = newValue}
@@ -2671,8 +2971,16 @@ public nonisolated struct XaiApi_CompactContextResponse: Sendable {
 
 fileprivate nonisolated let _protobuf_package = "xai_api"
 
+nonisolated extension XaiApi_GuidelineCategory: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0GUIDELINE_CATEGORY_INVALID\0\u{1}GUIDELINE_CATEGORY_NSFW\0\u{1}GUIDELINE_CATEGORY_VIOLENCE\0\u{2}\u{3}GUIDELINE_CATEGORY_PROFANITY\0\u{1}GUIDELINE_CATEGORY_CYBER\0")
+}
+
+nonisolated extension XaiApi_GuidelineBehavior: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0GUIDELINE_BEHAVIOR_INVALID\0\u{1}GUIDELINE_BEHAVIOR_DECLINE\0\u{2}\u{2}GUIDELINE_BEHAVIOR_ALLOW\0")
+}
+
 nonisolated extension XaiApi_IncludeOption: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INCLUDE_OPTION_INVALID\0\u{1}INCLUDE_OPTION_WEB_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_X_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_CODE_EXECUTION_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_COLLECTIONS_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_ATTACHMENT_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_MCP_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_INLINE_CITATIONS\0\u{1}INCLUDE_OPTION_VERBOSE_STREAMING\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INCLUDE_OPTION_INVALID\0\u{1}INCLUDE_OPTION_WEB_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_X_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_CODE_EXECUTION_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_COLLECTIONS_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_ATTACHMENT_SEARCH_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_MCP_CALL_OUTPUT\0\u{1}INCLUDE_OPTION_INLINE_CITATIONS\0\u{1}INCLUDE_OPTION_VERBOSE_STREAMING\0\u{1}INCLUDE_OPTION_CODE_EXECUTION_FILES_OUTPUT\0\u{1}INCLUDE_OPTION_TOOL_CALL_STREAMING\0")
 }
 
 nonisolated extension XaiApi_MessageRole: SwiftProtobuf._ProtoNameProviding {
@@ -2680,7 +2988,7 @@ nonisolated extension XaiApi_MessageRole: SwiftProtobuf._ProtoNameProviding {
 }
 
 nonisolated extension XaiApi_ReasoningEffort: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_EFFORT\0\u{1}EFFORT_LOW\0\u{1}EFFORT_MEDIUM\0\u{1}EFFORT_HIGH\0\u{1}EFFORT_NONE\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_EFFORT\0\u{1}EFFORT_LOW\0\u{1}EFFORT_MEDIUM\0\u{1}EFFORT_HIGH\0\u{1}EFFORT_NONE\0\u{1}EFFORT_XHIGH\0")
 }
 
 nonisolated extension XaiApi_AgentCount: SwiftProtobuf._ProtoNameProviding {
@@ -2696,7 +3004,7 @@ nonisolated extension XaiApi_FormatType: SwiftProtobuf._ProtoNameProviding {
 }
 
 nonisolated extension XaiApi_ToolCallType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_CALL_TYPE_INVALID\0\u{1}TOOL_CALL_TYPE_CLIENT_SIDE_TOOL\0\u{1}TOOL_CALL_TYPE_WEB_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_X_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_CODE_EXECUTION_TOOL\0\u{1}TOOL_CALL_TYPE_COLLECTIONS_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_MCP_TOOL\0\u{1}TOOL_CALL_TYPE_ATTACHMENT_SEARCH_TOOL\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0TOOL_CALL_TYPE_INVALID\0\u{1}TOOL_CALL_TYPE_CLIENT_SIDE_TOOL\0\u{1}TOOL_CALL_TYPE_WEB_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_X_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_CODE_EXECUTION_TOOL\0\u{1}TOOL_CALL_TYPE_COLLECTIONS_SEARCH_TOOL\0\u{1}TOOL_CALL_TYPE_MCP_TOOL\0\u{1}TOOL_CALL_TYPE_ATTACHMENT_SEARCH_TOOL\0\u{2}\u{3}TOOL_CALL_TYPE_IMAGE_GENERATION_TOOL\0")
 }
 
 nonisolated extension XaiApi_ToolCallStatus: SwiftProtobuf._ProtoNameProviding {
@@ -2707,9 +3015,90 @@ nonisolated extension XaiApi_SearchMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0INVALID_SEARCH_MODE\0\u{1}OFF_SEARCH_MODE\0\u{1}ON_SEARCH_MODE\0\u{1}AUTO_SEARCH_MODE\0")
 }
 
+nonisolated extension XaiApi_PolicyGuideline: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PolicyGuideline"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}category\0\u{1}behavior\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.category) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.behavior) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.category != .invalid {
+      try visitor.visitSingularEnumField(value: self.category, fieldNumber: 1)
+    }
+    if self.behavior != .invalid {
+      try visitor.visitSingularEnumField(value: self.behavior, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_PolicyGuideline, rhs: XaiApi_PolicyGuideline) -> Bool {
+    if lhs.category != rhs.category {return false}
+    if lhs.behavior != rhs.behavior {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_Guideline: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Guideline"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}policy\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try {
+        var v: XaiApi_PolicyGuideline?
+        var hadOneofValue = false
+        if let current = self.kind {
+          hadOneofValue = true
+          if case .policy(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.kind = .policy(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if case .policy(let v)? = self.kind {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_Guideline, rhs: XaiApi_Guideline) -> Bool {
+    if lhs.kind != rhs.kind {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetCompletionsRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}messages\0\u{1}model\0\u{3}frequency_penalty\0\u{2}\u{2}logprobs\0\u{3}top_logprobs\0\u{3}max_tokens\0\u{1}n\0\u{3}presence_penalty\0\u{3}response_format\0\u{1}seed\0\u{1}stop\0\u{2}\u{2}temperature\0\u{3}top_p\0\u{1}user\0\u{1}tools\0\u{3}tool_choice\0\u{3}reasoning_effort\0\u{3}search_parameters\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{3}max_turns\0\u{1}include\0\u{4}\u{3}agent_count\0\u{c}\u{4}\u{1}")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}messages\0\u{1}model\0\u{3}frequency_penalty\0\u{2}\u{2}logprobs\0\u{3}top_logprobs\0\u{3}max_tokens\0\u{1}n\0\u{3}presence_penalty\0\u{3}response_format\0\u{1}seed\0\u{1}stop\0\u{2}\u{2}temperature\0\u{3}top_p\0\u{1}user\0\u{1}tools\0\u{3}tool_choice\0\u{3}reasoning_effort\0\u{3}search_parameters\0\u{3}parallel_tool_calls\0\u{3}previous_response_id\0\u{3}store_messages\0\u{3}use_encrypted_content\0\u{3}max_turns\0\u{1}include\0\u{4}\u{3}agent_count\0\u{4}\u{2}service_tier\0\u{4}\u{3}safety_identifier\0\u{2}\u{5}guidelines\0\u{c}\u{4}\u{1}")
 
   fileprivate class _StorageClass {
     var _messages: [XaiApi_Message] = []
@@ -2737,6 +3126,9 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
     var _maxTurns: Int32? = nil
     var _include: [XaiApi_IncludeOption] = []
     var _agentCount: XaiApi_AgentCount? = nil
+    var _serviceTier: XaiApi_ServiceTier = .unspecified
+    var _safetyIdentifier: String? = nil
+    var _guidelines: [XaiApi_Guideline] = []
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -2772,6 +3164,9 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
       _maxTurns = source._maxTurns
       _include = source._include
       _agentCount = source._agentCount
+      _serviceTier = source._serviceTier
+      _safetyIdentifier = source._safetyIdentifier
+      _guidelines = source._guidelines
     }
   }
 
@@ -2815,6 +3210,9 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
         case 25: try { try decoder.decodeSingularInt32Field(value: &_storage._maxTurns) }()
         case 26: try { try decoder.decodeRepeatedEnumField(value: &_storage._include) }()
         case 29: try { try decoder.decodeSingularEnumField(value: &_storage._agentCount) }()
+        case 31: try { try decoder.decodeSingularEnumField(value: &_storage._serviceTier) }()
+        case 34: try { try decoder.decodeSingularStringField(value: &_storage._safetyIdentifier) }()
+        case 39: try { try decoder.decodeRepeatedMessageField(value: &_storage._guidelines) }()
         default: break
         }
       }
@@ -2902,6 +3300,15 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
       try { if let v = _storage._agentCount {
         try visitor.visitSingularEnumField(value: v, fieldNumber: 29)
       } }()
+      if _storage._serviceTier != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._serviceTier, fieldNumber: 31)
+      }
+      try { if let v = _storage._safetyIdentifier {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 34)
+      } }()
+      if !_storage._guidelines.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._guidelines, fieldNumber: 39)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -2936,6 +3343,9 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
         if _storage._maxTurns != rhs_storage._maxTurns {return false}
         if _storage._include != rhs_storage._include {return false}
         if _storage._agentCount != rhs_storage._agentCount {return false}
+        if _storage._serviceTier != rhs_storage._serviceTier {return false}
+        if _storage._safetyIdentifier != rhs_storage._safetyIdentifier {return false}
+        if _storage._guidelines != rhs_storage._guidelines {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -2947,7 +3357,7 @@ nonisolated extension XaiApi_GetCompletionsRequest: SwiftProtobuf.Message, Swift
 
 nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetChatCompletionResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{2}\u{3}created\0\u{1}model\0\u{3}system_fingerprint\0\u{2}\u{2}usage\0\u{1}citations\0\u{1}settings\0\u{3}debug_output\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{2}\u{3}created\0\u{1}model\0\u{3}system_fingerprint\0\u{2}\u{2}usage\0\u{1}citations\0\u{1}settings\0\u{3}debug_output\0\u{3}output_files\0\u{4}\u{2}service_tier\0")
 
   fileprivate class _StorageClass {
     var _id: String = String()
@@ -2959,6 +3369,8 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
     var _citations: [String] = []
     var _settings: XaiApi_RequestSettings? = nil
     var _debugOutput: XaiApi_DebugOutput? = nil
+    var _outputFiles: [XaiApi_OutputFile] = []
+    var _serviceTier: XaiApi_ServiceTier = .unspecified
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -2978,6 +3390,8 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
       _citations = source._citations
       _settings = source._settings
       _debugOutput = source._debugOutput
+      _outputFiles = source._outputFiles
+      _serviceTier = source._serviceTier
     }
   }
 
@@ -3005,6 +3419,8 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
         case 10: try { try decoder.decodeRepeatedStringField(value: &_storage._citations) }()
         case 11: try { try decoder.decodeSingularMessageField(value: &_storage._settings) }()
         case 12: try { try decoder.decodeSingularMessageField(value: &_storage._debugOutput) }()
+        case 13: try { try decoder.decodeRepeatedMessageField(value: &_storage._outputFiles) }()
+        case 15: try { try decoder.decodeSingularEnumField(value: &_storage._serviceTier) }()
         default: break
         }
       }
@@ -3044,6 +3460,12 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
       try { if let v = _storage._debugOutput {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
       } }()
+      if !_storage._outputFiles.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._outputFiles, fieldNumber: 13)
+      }
+      if _storage._serviceTier != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._serviceTier, fieldNumber: 15)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -3062,6 +3484,8 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
         if _storage._citations != rhs_storage._citations {return false}
         if _storage._settings != rhs_storage._settings {return false}
         if _storage._debugOutput != rhs_storage._debugOutput {return false}
+        if _storage._outputFiles != rhs_storage._outputFiles {return false}
+        if _storage._serviceTier != rhs_storage._serviceTier {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3073,7 +3497,7 @@ nonisolated extension XaiApi_GetChatCompletionResponse: SwiftProtobuf.Message, S
 
 nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetChatCompletionChunk"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{1}created\0\u{1}model\0\u{3}system_fingerprint\0\u{1}usage\0\u{1}citations\0\u{4}\u{3}debug_output\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}outputs\0\u{1}created\0\u{1}model\0\u{3}system_fingerprint\0\u{1}usage\0\u{1}citations\0\u{4}\u{3}debug_output\0\u{3}output_files\0\u{3}service_tier\0")
 
   fileprivate class _StorageClass {
     var _id: String = String()
@@ -3084,6 +3508,8 @@ nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, Swif
     var _usage: XaiApi_SamplingUsage? = nil
     var _citations: [String] = []
     var _debugOutput: XaiApi_DebugOutput? = nil
+    var _outputFiles: [XaiApi_OutputFile] = []
+    var _serviceTier: XaiApi_ServiceTier = .unspecified
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -3102,6 +3528,8 @@ nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, Swif
       _usage = source._usage
       _citations = source._citations
       _debugOutput = source._debugOutput
+      _outputFiles = source._outputFiles
+      _serviceTier = source._serviceTier
     }
   }
 
@@ -3128,6 +3556,8 @@ nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, Swif
         case 6: try { try decoder.decodeSingularMessageField(value: &_storage._usage) }()
         case 7: try { try decoder.decodeRepeatedStringField(value: &_storage._citations) }()
         case 10: try { try decoder.decodeSingularMessageField(value: &_storage._debugOutput) }()
+        case 11: try { try decoder.decodeRepeatedMessageField(value: &_storage._outputFiles) }()
+        case 12: try { try decoder.decodeSingularEnumField(value: &_storage._serviceTier) }()
         default: break
         }
       }
@@ -3164,6 +3594,12 @@ nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, Swif
       try { if let v = _storage._debugOutput {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
       } }()
+      if !_storage._outputFiles.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._outputFiles, fieldNumber: 11)
+      }
+      if _storage._serviceTier != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._serviceTier, fieldNumber: 12)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -3181,10 +3617,47 @@ nonisolated extension XaiApi_GetChatCompletionChunk: SwiftProtobuf.Message, Swif
         if _storage._usage != rhs_storage._usage {return false}
         if _storage._citations != rhs_storage._citations {return false}
         if _storage._debugOutput != rhs_storage._debugOutput {return false}
+        if _storage._outputFiles != rhs_storage._outputFiles {return false}
+        if _storage._serviceTier != rhs_storage._serviceTier {return false}
         return true
       }
       if !storagesAreEqual {return false}
     }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension XaiApi_OutputFile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OutputFile"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}file_id\0\u{1}name\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fileID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.fileID.isEmpty {
+      try visitor.visitSingularStringField(value: self.fileID, fieldNumber: 1)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_OutputFile, rhs: XaiApi_OutputFile) -> Bool {
+    if lhs.fileID != rhs.fileID {return false}
+    if lhs.name != rhs.name {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -4013,7 +4486,7 @@ nonisolated extension XaiApi_ToolChoice: SwiftProtobuf.Message, SwiftProtobuf._M
 
 nonisolated extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Tool"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}function\0\u{4}\u{2}web_search\0\u{3}x_search\0\u{3}code_execution\0\u{3}collections_search\0\u{1}mcp\0\u{3}attachment_search\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}function\0\u{4}\u{2}web_search\0\u{3}x_search\0\u{3}code_execution\0\u{3}collections_search\0\u{1}mcp\0\u{3}attachment_search\0\u{4}\u{2}image_generation\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -4112,6 +4585,19 @@ nonisolated extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._Message
           self.tool = .attachmentSearch(v)
         }
       }()
+      case 10: try {
+        var v: XaiApi_ImageGeneration?
+        var hadOneofValue = false
+        if let current = self.tool {
+          hadOneofValue = true
+          if case .imageGeneration(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.tool = .imageGeneration(v)
+        }
+      }()
       default: break
       }
     }
@@ -4150,6 +4636,10 @@ nonisolated extension XaiApi_Tool: SwiftProtobuf.Message, SwiftProtobuf._Message
     case .attachmentSearch?: try {
       guard case .attachmentSearch(let v)? = self.tool else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    }()
+    case .imageGeneration?: try {
+      guard case .imageGeneration(let v)? = self.tool else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     }()
     case nil: break
     }
@@ -4403,6 +4893,40 @@ nonisolated extension XaiApi_CodeExecution: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
+nonisolated extension XaiApi_ImageGeneration: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ImageGeneration"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}action\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._action) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._action {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: XaiApi_ImageGeneration, rhs: XaiApi_ImageGeneration) -> Bool {
+    if lhs._action != rhs._action {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 nonisolated extension XaiApi_CollectionsSearch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CollectionsSearch"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_ids\0\u{1}limit\0\u{1}instructions\0\u{3}hybrid_retrieval\0\u{3}semantic_retrieval\0\u{3}keyword_retrieval\0")
@@ -4583,7 +5107,7 @@ nonisolated extension XaiApi_Function: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
 nonisolated extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ToolCall"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}type\0\u{1}status\0\u{3}error_message\0\u{2}\u{6}function\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}type\0\u{1}status\0\u{3}error_message\0\u{1}index\0\u{2}\u{5}function\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -4595,6 +5119,7 @@ nonisolated extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._Mes
       case 2: try { try decoder.decodeSingularEnumField(value: &self.type) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.status) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self._errorMessage) }()
+      case 5: try { try decoder.decodeSingularInt32Field(value: &self._index) }()
       case 10: try {
         var v: XaiApi_FunctionCall?
         var hadOneofValue = false
@@ -4630,6 +5155,9 @@ nonisolated extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try { if let v = self._errorMessage {
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._index {
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 5)
+    } }()
     try { if case .function(let v)? = self.tool {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     } }()
@@ -4641,6 +5169,7 @@ nonisolated extension XaiApi_ToolCall: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if lhs.type != rhs.type {return false}
     if lhs.status != rhs.status {return false}
     if lhs._errorMessage != rhs._errorMessage {return false}
+    if lhs._index != rhs._index {return false}
     if lhs.tool != rhs.tool {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

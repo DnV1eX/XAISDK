@@ -6,7 +6,7 @@
 // Source: xai/api/v1/image.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -70,9 +70,9 @@ extension XaiApi_Image {
         ///   - serializer: A serializer for `XaiApi_GenerateImageRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ImageResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func generateImage<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GenerateImageRequest>,
@@ -114,9 +114,9 @@ extension XaiApi_Image {
         ///   - serializer: A serializer for `XaiApi_GenerateImageRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ImageResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func generateImage<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GenerateImageRequest>,
@@ -151,9 +151,9 @@ extension XaiApi_Image.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GenerateImageRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func generateImage<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GenerateImageRequest>,
@@ -185,9 +185,9 @@ extension XaiApi_Image.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func generateImage<Result>(
         _ message: XaiApi_GenerateImageRequest,

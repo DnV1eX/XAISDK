@@ -6,7 +6,7 @@
 // Source: xai/api/v1/video.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -104,9 +104,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_GenerateVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func generateVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GenerateVideoRequest>,
@@ -130,9 +130,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_ExtendVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func extendVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
@@ -154,9 +154,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_GetDeferredVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetDeferredVideoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getDeferredVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetDeferredVideoRequest>,
@@ -204,9 +204,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_GenerateVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func generateVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GenerateVideoRequest>,
@@ -241,9 +241,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_ExtendVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_StartDeferredResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func extendVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
@@ -276,9 +276,9 @@ extension XaiApi_Video {
         ///   - serializer: A serializer for `XaiApi_GetDeferredVideoRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetDeferredVideoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getDeferredVideo<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetDeferredVideoRequest>,
@@ -319,9 +319,9 @@ extension XaiApi_Video.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GenerateVideoRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func generateVideo<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GenerateVideoRequest>,
@@ -351,9 +351,9 @@ extension XaiApi_Video.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_ExtendVideoRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func extendVideo<Result>(
         request: GRPCCore.ClientRequest<XaiApi_ExtendVideoRequest>,
@@ -381,9 +381,9 @@ extension XaiApi_Video.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetDeferredVideoRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getDeferredVideo<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetDeferredVideoRequest>,
@@ -421,9 +421,9 @@ extension XaiApi_Video.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func generateVideo<Result>(
         _ message: XaiApi_GenerateVideoRequest,
@@ -457,9 +457,9 @@ extension XaiApi_Video.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func extendVideo<Result>(
         _ message: XaiApi_ExtendVideoRequest,
@@ -491,9 +491,9 @@ extension XaiApi_Video.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getDeferredVideo<Result>(
         _ message: XaiApi_GetDeferredVideoRequest,

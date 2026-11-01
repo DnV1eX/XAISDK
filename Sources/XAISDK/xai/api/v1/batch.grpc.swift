@@ -6,7 +6,7 @@
 // Source: xai/api/v1/batch.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -169,9 +169,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_CreateBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func createBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CreateBatchRequest>,
@@ -192,9 +192,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_GetBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetBatchRequest>,
@@ -215,9 +215,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchesRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listBatches<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchesRequest>,
@@ -238,9 +238,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_CancelBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func cancelBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CancelBatchRequest>,
@@ -261,9 +261,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_AddBatchRequestsRequest` messages.
         ///   - deserializer: A deserializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func addBatchRequests<Result>(
             request: GRPCCore.ClientRequest<XaiApi_AddBatchRequestsRequest>,
@@ -284,9 +284,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchRequestMetadataRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchRequestMetadataResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listBatchRequestMetadata<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchRequestMetadataRequest>,
@@ -307,9 +307,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchResultsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchResultsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listBatchResults<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchResultsRequest>,
@@ -330,9 +330,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_GetBatchRequestResultRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetBatchRequestResultResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func getBatchRequestResult<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetBatchRequestResultRequest>,
@@ -374,9 +374,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_CreateBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func createBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CreateBatchRequest>,
@@ -408,9 +408,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_GetBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetBatchRequest>,
@@ -442,9 +442,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchesRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listBatches<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchesRequest>,
@@ -476,9 +476,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_CancelBatchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_Batch` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func cancelBatch<Result>(
             request: GRPCCore.ClientRequest<XaiApi_CancelBatchRequest>,
@@ -510,9 +510,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_AddBatchRequestsRequest` messages.
         ///   - deserializer: A deserializer for `SwiftProtobuf.Google_Protobuf_Empty` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func addBatchRequests<Result>(
             request: GRPCCore.ClientRequest<XaiApi_AddBatchRequestsRequest>,
@@ -544,9 +544,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchRequestMetadataRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchRequestMetadataResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listBatchRequestMetadata<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchRequestMetadataRequest>,
@@ -578,9 +578,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_ListBatchResultsRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_ListBatchResultsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listBatchResults<Result>(
             request: GRPCCore.ClientRequest<XaiApi_ListBatchResultsRequest>,
@@ -612,9 +612,9 @@ extension XaiApi_BatchMgmt {
         ///   - serializer: A serializer for `XaiApi_GetBatchRequestResultRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_GetBatchRequestResultResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func getBatchRequestResult<Result>(
             request: GRPCCore.ClientRequest<XaiApi_GetBatchRequestResultRequest>,
@@ -649,9 +649,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_CreateBatchRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createBatch<Result>(
         request: GRPCCore.ClientRequest<XaiApi_CreateBatchRequest>,
@@ -678,9 +678,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetBatchRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBatch<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetBatchRequest>,
@@ -707,9 +707,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_ListBatchesRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatches<Result>(
         request: GRPCCore.ClientRequest<XaiApi_ListBatchesRequest>,
@@ -736,9 +736,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_CancelBatchRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func cancelBatch<Result>(
         request: GRPCCore.ClientRequest<XaiApi_CancelBatchRequest>,
@@ -765,9 +765,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_AddBatchRequestsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func addBatchRequests<Result>(
         request: GRPCCore.ClientRequest<XaiApi_AddBatchRequestsRequest>,
@@ -794,9 +794,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_ListBatchRequestMetadataRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatchRequestMetadata<Result>(
         request: GRPCCore.ClientRequest<XaiApi_ListBatchRequestMetadataRequest>,
@@ -823,9 +823,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_ListBatchResultsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatchResults<Result>(
         request: GRPCCore.ClientRequest<XaiApi_ListBatchResultsRequest>,
@@ -852,9 +852,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_GetBatchRequestResultRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBatchRequestResult<Result>(
         request: GRPCCore.ClientRequest<XaiApi_GetBatchRequestResultRequest>,
@@ -886,9 +886,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createBatch<Result>(
         _ message: XaiApi_CreateBatchRequest,
@@ -919,9 +919,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBatch<Result>(
         _ message: XaiApi_GetBatchRequest,
@@ -952,9 +952,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatches<Result>(
         _ message: XaiApi_ListBatchesRequest,
@@ -985,9 +985,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func cancelBatch<Result>(
         _ message: XaiApi_CancelBatchRequest,
@@ -1018,9 +1018,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func addBatchRequests<Result>(
         _ message: XaiApi_AddBatchRequestsRequest,
@@ -1051,9 +1051,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatchRequestMetadata<Result>(
         _ message: XaiApi_ListBatchRequestMetadataRequest,
@@ -1084,9 +1084,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listBatchResults<Result>(
         _ message: XaiApi_ListBatchResultsRequest,
@@ -1117,9 +1117,9 @@ extension XaiApi_BatchMgmt.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func getBatchRequestResult<Result>(
         _ message: XaiApi_GetBatchRequestResultRequest,

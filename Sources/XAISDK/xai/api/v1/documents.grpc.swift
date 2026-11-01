@@ -6,7 +6,7 @@
 // Source: xai/api/v1/documents.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -62,9 +62,9 @@ extension XaiApi_Documents {
         ///   - serializer: A serializer for `XaiApi_SearchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SearchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func search<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SearchRequest>,
@@ -98,9 +98,9 @@ extension XaiApi_Documents {
         ///   - serializer: A serializer for `XaiApi_SearchRequest` messages.
         ///   - deserializer: A deserializer for `XaiApi_SearchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func search<Result>(
             request: GRPCCore.ClientRequest<XaiApi_SearchRequest>,
@@ -131,9 +131,9 @@ extension XaiApi_Documents.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `XaiApi_SearchRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func search<Result>(
         request: GRPCCore.ClientRequest<XaiApi_SearchRequest>,
@@ -161,9 +161,9 @@ extension XaiApi_Documents.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func search<Result>(
         _ message: XaiApi_SearchRequest,
