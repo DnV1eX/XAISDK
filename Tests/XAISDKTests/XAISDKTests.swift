@@ -9,10 +9,15 @@
 //  you may not use this file except in compliance with the License.
 //
 
+import Foundation
 import Testing
 import XAISDK
 import GRPCCore
 import GRPCInProcessTransport
+import SwiftProtobuf
+
+/// API key for live tests. Absent skips those tests.
+private let xaiAPIKey = ProcessInfo.processInfo.environment["XAI_API_KEY"]
 
 /// Verifies that the host for xAI services is correctly configured.
 @Test func hostValue() {
@@ -92,4 +97,30 @@ import GRPCInProcessTransport
     try await Task.sleep(nanoseconds: 10_000_000)
     
     try await clientInstance.close(connectionTask)
+}
+
+/// Checks listed models against `Model`. Video models are absent from the list calls.
+@Test(.enabled(if: xaiAPIKey != nil, "Set XAI_API_KEY to run this test"))
+func liveListModels() async throws {
+    let apiKey = try #require(xaiAPIKey)
+    let names = try await withClient(apiKey: apiKey) { grpcClient in
+        let models = XaiApi_Models.Client(wrapping: grpcClient)
+        let language = try await models.listLanguageModels(Google_Protobuf_Empty())
+        let embedding = try await models.listEmbeddingModels(Google_Protobuf_Empty())
+        let image = try await models.listImageGenerationModels(Google_Protobuf_Empty())
+        return language.models.map(\.name) + embedding.models.map(\.name) + image.models.map(\.name)
+    }
+    #expect(Set(names) == [
+        Model.grok_4_20_0309NonReasoning,
+        Model.grok_4_20_0309Reasoning,
+        Model.grok_4_20MultiAgent_0309,
+        Model.grok_4_3,
+        Model.grok_4_5,
+        Model.grok_4_6,
+        Model.grok_4_7,
+        Model.grokBuild_0_1,
+        Model.grokImagineImage,
+        Model.grokImagineImage_2_0,
+        Model.grokImagineImageQuality,
+    ])
 }

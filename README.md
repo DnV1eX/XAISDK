@@ -59,7 +59,7 @@ var message2 = XaiApi_Message()
 message2.content = [content2]
 message2.role = .roleUser
 getCompletionsRequest.messages = [message1, message2]
-getCompletionsRequest.model = "grok-4.20-beta-latest-non-reasoning"
+getCompletionsRequest.model = Model.grok_4_7
 do {
     let getChatCompletionResponse = try await chatClient.getCompletion(getCompletionsRequest)
     print(getChatCompletionResponse.outputs.first?.message.content ?? "No response content")
@@ -85,7 +85,7 @@ do {
         let imageClient = XaiApi_Image.Client(wrapping: client)
         var generateImageRequest = XaiApi_GenerateImageRequest()
         generateImageRequest.prompt = "A collage of London landmarks in a stenciled street‑art style"
-        generateImageRequest.model = "grok-imagine-image"
+        generateImageRequest.model = Model.grokImagineImage_2_0
         generateImageRequest.format = .imgFormatURL
         return try await imageClient.generateImage(generateImageRequest)
     }

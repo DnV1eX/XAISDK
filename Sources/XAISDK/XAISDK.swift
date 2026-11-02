@@ -188,3 +188,21 @@ extension GRPCClient {
         try await connectionTask?.value
     }
 }
+
+/// Names of models available from the xAI API.
+public enum Model {
+    public static let grok_4_20_0309NonReasoning = "grok-4.20-0309-non-reasoning"
+    public static let grok_4_20_0309Reasoning = "grok-4.20-0309-reasoning"
+    public static let grok_4_20MultiAgent_0309 = "grok-4.20-multi-agent-0309"
+    public static let grok_4_3 = "grok-4.3"
+    public static let grok_4_5 = "grok-4.5"
+    public static let grok_4_6 = "grok-4.6"
+    public static let grok_4_7 = "grok-4.7"
+    public static let grokBuild_0_1 = "grok-build-0.1"
+    public static let grokImagineImage = "grok-imagine-image"
+    public static let grokImagineImage_2_0 = "grok-imagine-image-2.0"
+    public static let grokImagineImageQuality = "grok-imagine-image-quality"
+    public static let grokImagineVideo = "grok-imagine-video"
+    public static let grokImagineVideo_1_5 = "grok-imagine-video-1.5"
+    public static let grokImagineVideo_1_5Lite = "grok-imagine-video-1.5-lite"
+}
