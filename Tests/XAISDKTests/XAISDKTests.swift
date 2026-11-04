@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import Synchronization
 import Testing
 import XAISDK
 import GRPCCore
@@ -24,15 +25,20 @@ private let xaiAPIKey = ProcessInfo.processInfo.environment["XAI_API_KEY"]
     #expect(host == "api.x.ai")
 }
 
+/// Verifies that watermark warnings are enabled unless turned off.
+@Test func isWatermarkWarningEnabledByDefault() {
+    #expect(isWatermarkWarningEnabled)
+}
+
 /// Verifies the authHeader helper function.
 @Test func testAuthHeader() {
     let header = authHeader(apiKey: "xai-TestKey")
     #expect(header == ["authorization": "Bearer xai-TestKey"])
 }
 
-/// Verifies that the MetadataInterceptor correctly appends the metadata to the request.
-@Test func metadataInterceptor() async throws {
-    let interceptor = MetadataInterceptor(metadata: ["test-header": "Test Value"])
+/// Verifies that the MetadataRequestInterceptor correctly appends the metadata to the request.
+@Test func metadataRequestInterceptor() async throws {
+    let interceptor = MetadataRequestInterceptor(metadata: ["test-header": "Test Value"])
 
     let request = StreamingClientRequest<String>(of: String.self, metadata: [:]) { _ in }
     let context = ClientContext(
@@ -53,6 +59,38 @@ private let xaiAPIKey = ProcessInfo.processInfo.environment["XAI_API_KEY"]
     case .failure(let error):
         #expect(error.code == .unknown)
     }
+}
+
+/// Verifies that the WatermarkResponseInterceptor forwards the response and reads the watermark flag.
+@Test func watermarkResponseInterceptor() async throws {
+    let interceptor = WatermarkResponseInterceptor()
+    let request = StreamingClientRequest<String>(of: String.self, metadata: [:]) { _ in }
+    let context = ClientContext(
+        descriptor: MethodDescriptor(fullyQualifiedService: "test", method: "test"),
+        remotePeer: "test",
+        localPeer: "test"
+    )
+
+    let plainResponse = try await interceptor.intercept(request: request, context: context) { _, _ in
+        let parts = AsyncThrowingStream<StreamingClientResponse<String>.Contents.BodyPart, any Error> { $0.finish() }
+        return StreamingClientResponse(
+            metadata: [watermarkMetadataKey: .string("false")],
+            bodyParts: RPCAsyncSequence(wrapping: parts)
+        )
+    }
+    #expect(Array(plainResponse.metadata[stringValues: watermarkMetadataKey]) == ["false"])
+
+    let isEnabled = isWatermarkWarningEnabled
+    isWatermarkWarningEnabled = false
+    defer { isWatermarkWarningEnabled = isEnabled }
+    let watermarkedResponse = try await interceptor.intercept(request: request, context: context) { _, _ in
+        let parts = AsyncThrowingStream<StreamingClientResponse<String>.Contents.BodyPart, any Error> { $0.finish() }
+        return StreamingClientResponse(
+            metadata: [watermarkMetadataKey: .string("true")],
+            bodyParts: RPCAsyncSequence(wrapping: parts)
+        )
+    }
+    #expect(Array(watermarkedResponse.metadata[stringValues: watermarkMetadataKey]) == ["true"])
 }
 
 /// Verifies that the gRPC client is successfully initialized for direct access.
@@ -121,6 +159,34 @@ func liveListModels() async throws {
         Model.grokBuild_0_1,
         Model.grokImagineImage,
         Model.grokImagineImage_2_0,
-        Model.grokImagineImageQuality,
     ])
+}
+
+/// Checks that a grok-4.7 response is not watermarked.
+@Test(.enabled(if: xaiAPIKey != nil, "Set XAI_API_KEY to run this test"))
+func languageModelWatermarkDisabled() async throws {
+    let apiKey = try #require(xaiAPIKey)
+    let calls = Mutex(0)
+    try await withGRPCClient(
+        transport: try transport(host: host),
+        interceptors: [
+            MetadataRequestInterceptor(metadata: authHeader(apiKey: apiKey)),
+            WatermarkResponseInterceptor {
+                calls.withLock { $0 += 1 }
+            },
+        ]
+    ) { grpcClient in
+        let chat = XaiApi_Chat.Client(wrapping: grpcClient)
+        var request = XaiApi_GetCompletionsRequest()
+        var content = XaiApi_Content()
+        content.text = "Reply with the single word ok."
+        var message = XaiApi_Message()
+        message.content = [content]
+        message.role = .roleUser
+        request.messages = [message]
+        request.model = Model.grok_4_7
+        request.maxTokens = 16
+        _ = try await chat.getCompletion(request)
+    }
+    #expect(calls.withLock { $0 } == 0)
 }

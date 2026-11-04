@@ -9,7 +9,9 @@
 //  you may not use this file except in compliance with the License.
 //
 
+import Foundation
 import GRPCCore
+import Synchronization
 #if canImport(Network)
 import GRPCNIOTransportHTTP2TransportServices
 /// The default transport type for the current platform.
@@ -22,6 +24,19 @@ public typealias DefaultTransport = HTTP2ClientTransport.Posix
 
 /// The host for all xAI services.
 public let host = "api.x.ai"
+
+/// Response header set to `true` when the output was watermarked.
+public let watermarkMetadataKey = "x-watermark"
+
+private let _isWatermarkWarningEnabled = Mutex(true)
+
+/// Enables a warning when a response is watermarked.
+///
+/// The default is `true`. Set this to `false` to hide the warnings.
+public var isWatermarkWarningEnabled: Bool {
+    get { _isWatermarkWarningEnabled.withLock { $0 } }
+    set { _isWatermarkWarningEnabled.withLock { $0 = newValue } }
+}
 
 /// Helper function to create an authorization header dictionary.
 ///
@@ -43,8 +58,8 @@ public func transport(host: String) throws -> DefaultTransport {
 #endif
 }
 
-/// Interceptor to add metadata to the request headers.
-public struct MetadataInterceptor: ClientInterceptor {
+/// Adds metadata to the request headers.
+public struct MetadataRequestInterceptor: ClientInterceptor {
     public let metadata: [String: String]
 
     /// Initializes the interceptor with the provided metadata.
@@ -74,6 +89,43 @@ public struct MetadataInterceptor: ClientInterceptor {
     }
 }
 
+/// Warns when response headers include the watermark flag.
+public struct WatermarkResponseInterceptor: ClientInterceptor {
+    /// Called when a response is watermarked.
+    public let onReadWatermark: @Sendable () -> Void
+
+    /// Creates an interceptor that calls `onReadWatermark` when a response is watermarked.
+    ///
+    /// - Parameter onReadWatermark: A closure called when the watermark flag is `true`. The default writes a warning to standard error.
+    public init(onReadWatermark: @escaping @Sendable () -> Void = {
+        guard isWatermarkWarningEnabled else { return }
+        let line = "warning: xAI watermarked this response. Disable watermarking at https://console.x.ai/team/default/settings/team or hide warnings with isWatermarkWarningEnabled = false.\n"
+        try? FileHandle.standardError.write(contentsOf: Data(line.utf8))
+    }) {
+        self.onReadWatermark = onReadWatermark
+    }
+
+    /// Intercepts the response to read the watermark flag and warn when it is set.
+    ///
+    /// - Parameters:
+    ///   - request: The outgoing client request.
+    ///   - context: The client context.
+    ///   - next: The closure to pass the request to the next interceptor in the pipeline.
+    /// - Returns: The response from the server.
+    public func intercept<Input: Sendable, Output: Sendable>(
+        request: StreamingClientRequest<Input>,
+        context: ClientContext,
+        next: (StreamingClientRequest<Input>, ClientContext) async throws -> StreamingClientResponse<Output>
+    ) async throws -> StreamingClientResponse<Output> {
+        let response = try await next(request, context)
+        let isWatermarked = response.metadata[stringValues: watermarkMetadataKey].contains { $0.lowercased() == "true" }
+        if isWatermarked {
+            onReadWatermark()
+        }
+        return response
+    }
+}
+
 /// Returns a gRPC client for xAI services through a proxy.
 ///
 /// - Parameters:
@@ -88,7 +140,10 @@ public func client<Transport: ClientTransport>(
 ) throws -> GRPCClient<Transport> {
     GRPCClient(
         transport: try transport(proxy),
-        interceptors: [MetadataInterceptor(metadata: metadata)]
+        interceptors: [
+            MetadataRequestInterceptor(metadata: metadata),
+            WatermarkResponseInterceptor(),
+        ]
     )
 }
 
@@ -121,7 +176,10 @@ public func withClient<Result: Sendable, Transport: ClientTransport>(
 ) async throws -> Result {
     try await withGRPCClient(
         transport: try transport(proxy),
-        interceptors: [MetadataInterceptor(metadata: metadata)],
+        interceptors: [
+            MetadataRequestInterceptor(metadata: metadata),
+            WatermarkResponseInterceptor(),
+        ],
         handleClient: body
     )
 }
@@ -198,6 +256,8 @@ public enum Model {
     public static let grok_4_5 = "grok-4.5"
     public static let grok_4_6 = "grok-4.6"
     public static let grok_4_7 = "grok-4.7"
+    public static let grok_4_8 = "grok-4.8"
+    public static let grok_4_9 = "grok-4.9"
     public static let grokBuild_0_1 = "grok-build-0.1"
     public static let grokImagineImage = "grok-imagine-image"
     public static let grokImagineImage_2_0 = "grok-imagine-image-2.0"

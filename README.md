@@ -2,7 +2,28 @@
 
 The xAI Swift SDK is a gRPC-based Swift library for interacting with xAI's APIs. It provides a native, high-performance interface to interact with xAI APIs from Swift code, allowing you to easily generate text, images, videos, and utilize other xAI services directly within your Apple ecosystem applications, as well as in Swift client and server applications on other platforms.
 
-For more details on the underlying API, see the [xAI gRPC API Reference](https://docs.x.ai/developers/grpc-api-reference).
+For more details on the underlying API, see the [xAI protobuf definitions](https://github.com/xai-org/xai-proto).
+
+## Supported Platforms
+
+The SDK requires **Swift 6.1** or later.
+
+**Apple Platforms (using Network framework transport):**
+- macOS 15.0+
+- iOS 18.0+
+- watchOS 11.0+
+- tvOS 18.0+
+- visionOS 2.0+
+
+> [!TIP]
+> If you need to support earlier platform versions, you can build the SDK by changing the major versions of the gRPC dependencies in `Package.swift` from `2.0.0` down to `1.0.0` (and adjusting the code to match the `grpc-swift` v1 API).
+
+**Non-Apple Platforms (using POSIX transport):**
+- Linux
+- Windows
+- Android
+- WASI
+- OpenBSD
 
 ## Installation
 
@@ -117,26 +138,17 @@ guard let xaiClient = try? client(proxy: proxyHost, metadata: ["x-app-attest": a
 // Start the client, use it as normal, and then close it. Alternatively, use `withClient(proxy:metadata:)`.
 ```
 
-## Supported Platforms
+## Output Watermarking
 
-The SDK requires **Swift 6.1** or later.
+Text output from supported Grok models can carry an invisible watermark. A watermarked response includes the `x-watermark: true` header. `client` and `withClient` write a warning to standard error when they receive that header.
 
-**Apple Platforms (using Network framework transport):**
-- macOS 15.0+
-- iOS 18.0+
-- watchOS 11.0+
-- tvOS 18.0+
-- visionOS 2.0+
+Team admins turn watermarking off per model in the [xAI Console](https://console.x.ai/team/default/settings/team). The setting applies to every API key on the team. Details are in the [Output Watermarking](https://docs.x.ai/developers/advanced-api-usage/watermarking) guide.
 
-> [!TIP]
-> If you need to support earlier platform versions, you can build the SDK by changing the major versions of the gRPC dependencies in `Package.swift` from `2.0.0` down to `1.0.0` (and adjusting the code to match the `grpc-swift` v1 API).
+Hide the SDK warning with:
 
-**Non-Apple Platforms (using POSIX transport):**
-- Linux
-- Windows
-- Android
-- WASI
-- OpenBSD
+```swift
+isWatermarkWarningEnabled = false
+```
 
 ## Advanced: Updating the SDK
 
